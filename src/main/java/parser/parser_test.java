@@ -8,18 +8,18 @@ public class parser_test {
     public static void main(String[] args) throws SQLSyntaxErrorException {
         API api = new API("root", "test");
 //        api.parse("CREATE TABLE Persons(Id_P int NOT NULL,LastName varchar(255) NOT NULL,FirstName varchar(255),Address varchar(255),City varchar(255),CHECK (Id_P>0))");
-        api.parse("CREATE TABLE IF NOT EXISTS `runoob_tbl`(\n" +
-                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
-                "   `runoob_title` VARCHAR(100) NOT NULL,\n" +
-                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
-                "   `submission_date` DATE,\n" +
-                "   PRIMARY KEY ( `runoob_id` ),\n" +
-                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id)\n" +
-                ")");
-//        api.parse("CREATE DATABASE 'TEST3558'");
+//        api.parse("CREATE TABLE IF NOT EXISTS `runoob_tbl`(\n" +
+//                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
+//                "   `runoob_title` VARCHAR(100) NOT NULL,\n" +
+//                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
+//                "   `submission_date` DATE,\n" +
+//                "   PRIMARY KEY ( `runoob_id` ),\n" +
+//                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id)\n" +
+//                ")");
+//        api.parse("CREATE DATABASE 'TEST35528'");
 //        api.parse("DROP DATABASE 'TEST223'");
 //        api.parse("update test set status='P' where id=20");
-//        api.parse("insert into test (id,status,name,ce,acc) values (29,'P','lll','sxsx','Arferwg')");
+        api.parse("insert into test (id,status,name,ce,acc) values (29,'P','lll','sxsx','Arferwg')");
 
 
 
