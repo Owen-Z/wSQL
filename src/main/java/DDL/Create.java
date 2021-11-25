@@ -1,2 +1,5 @@
-package DDL;public class Create {
+package DDL;
+
+public class Create {
+
 }

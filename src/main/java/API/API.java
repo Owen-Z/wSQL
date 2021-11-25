@@ -138,8 +138,8 @@ public class API {
                         os.close();
 
                         // 创建并存储该数据库的表信息
-                        File file = new File("src/data/tables/" + storeDBName + ".tb");
-                        file.createNewFile();
+                        File file = new File("src/data/" + storeDBName);
+                        file.mkdir();
                     }catch (FileNotFoundException e){
                         System.out.println(e);
                     } catch (IOException e) {
