@@ -185,10 +185,14 @@ public class API {
                 // 用以存储的表名 e.g. test
                 String storeTableName = tableName.substring(1, tableName.length() - 1);
 
+//                CreateTable createTable = new CreateTable(storeTableName);
 
                 List<SQLTableElement> elements = sqlCreateTableStatement.getTableElementList();
 
                 SQLTableElement element = elements.get(5);
+                if(element instanceof SQLColumnDefinition){
+
+                }
 
                 // 普通约束
                 System.out.println(((SQLColumnDefinition)elements.get(0)).getNameAsString());   // row name
@@ -216,6 +220,33 @@ public class API {
             }
 
 
+            // 插入数据指令
+            if(sqlStatement instanceof SQLInsertStatement){
+                // 转换
+                SQLInsertStatement insertStatement = (SQLInsertStatement) sqlStatement;
+
+                InsertTable insertTable = new InsertTable(insertStatement.getTableName().getSimpleName());
+
+                // 获取列名
+                List<SQLExpr> columns = insertStatement.getColumns();
+                List<String> columnsName = new ArrayList<>(columns.size());
+                for(SQLExpr column : columns){
+                    columnsName.add(((SQLIdentifierExpr) column).getName());
+                }
+
+                // 获取值
+                List<SQLInsertStatement.ValuesClause> valuesList = insertStatement.getValuesList();
+                List<String> dataList = new ArrayList<>();
+                for (SQLInsertStatement.ValuesClause valuesClause : valuesList) {
+                    List<SQLExpr> values = valuesClause.getValues();
+                    for (SQLExpr value : values) {
+                        dataList.add(getValue(value).toString());
+                    }
+                }
+
+                System.out.println(dataList.get(0));
+
+            }
 
             if (sqlStatement instanceof SQLServerInsertStatement) {
                 // 转换

@@ -1,6 +1,4 @@
-com\DBMS\proto\DBMS$Table$Column$Constraint.class
-com\DBMS\proto\DBMS$Table$Column$Constraint$1.class
-com\DBMS\proto\DBMS$Table$Column$ConstraintOrBuilder.class
+DDL\Create.class
 com\DBMS\proto\DBMS$Table$ColumnOrBuilder.class
 com\DBMS\proto\DBMS$TableOrBuilder.class
 com\DBMS\proto\DBMS$Table$Column.class
@@ -12,3 +10,7 @@ com\DBMS\proto\DBMS.class
 com\DBMS\proto\DBMS$Table$1.class
 com\DBMS\proto\DBMS$Table$Column$1.class
 com\DBMS\proto\DBMS$Table$Column$Constraint$Builder.class
+com\DBMS\proto\DBMS$Table$Column$Constraint.class
+com\DBMS\proto\DBMS$Table$Column$Constraint$1.class
+com\DBMS\proto\DBMS$Table$Column$ConstraintOrBuilder.class
+Test\Test$databaseTest.class
