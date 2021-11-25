@@ -140,7 +140,6 @@ public class API {
                         // 创建并存储该数据库的表信息
                         File file = new File("src/data/" + storeDBName);
                         file.mkdir();
-                        file.createNewFile();
                     }catch (FileNotFoundException e){
                         System.out.println(e);
                     } catch (IOException e) {
@@ -186,7 +185,7 @@ public class API {
                 // 用以存储的表名 e.g. test
                 String storeTableName = tableName.substring(1, tableName.length() - 1);
 
-                CreateTable createTable = new CreateTable(storeTableName);
+//                CreateTable createTable = new CreateTable(storeTableName);
 
                 List<SQLTableElement> elements = sqlCreateTableStatement.getTableElementList();
 

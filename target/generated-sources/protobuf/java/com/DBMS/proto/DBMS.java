@@ -188,10 +188,19 @@ public final class DBMS {
 
       /**
        * <pre>
+       *字段长度
+       * </pre>
+       *
+       * <code>optional int32 typeLength = 3;</code>
+       */
+      int getTypeLength();
+
+      /**
+       * <pre>
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       java.util.List<java.lang.String>
           getValList();
@@ -200,7 +209,7 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       int getValCount();
       /**
@@ -208,7 +217,7 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       java.lang.String getVal(int index);
       /**
@@ -216,31 +225,31 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       com.google.protobuf.ByteString
           getValBytes(int index);
 
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> 
           getConstraintList();
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index);
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       int getConstraintCount();
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
           getConstraintOrBuilderList();
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
           int index);
@@ -259,6 +268,7 @@ public final class DBMS {
       private Column() {
         columnName_ = "";
         type_ = "";
+        typeLength_ = 0;
         val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         constraint_ = java.util.Collections.emptyList();
       }
@@ -300,19 +310,24 @@ public final class DBMS {
                 type_ = s;
                 break;
               }
-              case 26: {
+              case 24: {
+
+                typeLength_ = input.readInt32();
+                break;
+              }
+              case 34: {
                 java.lang.String s = input.readStringRequireUtf8();
-                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                   val_ = new com.google.protobuf.LazyStringArrayList();
-                  mutable_bitField0_ |= 0x00000004;
+                  mutable_bitField0_ |= 0x00000008;
                 }
                 val_.add(s);
                 break;
               }
-              case 34: {
-                if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              case 42: {
+                if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                   constraint_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Table.Column.Constraint>();
-                  mutable_bitField0_ |= 0x00000008;
+                  mutable_bitField0_ |= 0x00000010;
                 }
                 constraint_.add(
                     input.readMessage(com.DBMS.proto.DBMS.Table.Column.Constraint.parser(), extensionRegistry));
@@ -326,10 +341,10 @@ public final class DBMS {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
-          if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
             val_ = val_.getUnmodifiableView();
           }
-          if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
             constraint_ = java.util.Collections.unmodifiableList(constraint_);
           }
           makeExtensionsImmutable();
@@ -1080,14 +1095,27 @@ public final class DBMS {
         }
       }
 
-      public static final int VAL_FIELD_NUMBER = 3;
+      public static final int TYPELENGTH_FIELD_NUMBER = 3;
+      private int typeLength_;
+      /**
+       * <pre>
+       *字段长度
+       * </pre>
+       *
+       * <code>optional int32 typeLength = 3;</code>
+       */
+      public int getTypeLength() {
+        return typeLength_;
+      }
+
+      public static final int VAL_FIELD_NUMBER = 4;
       private com.google.protobuf.LazyStringList val_;
       /**
        * <pre>
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       public com.google.protobuf.ProtocolStringList
           getValList() {
@@ -1098,7 +1126,7 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       public int getValCount() {
         return val_.size();
@@ -1108,7 +1136,7 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       public java.lang.String getVal(int index) {
         return val_.get(index);
@@ -1118,42 +1146,42 @@ public final class DBMS {
        *存储的值
        * </pre>
        *
-       * <code>repeated string val = 3;</code>
+       * <code>repeated string val = 4;</code>
        */
       public com.google.protobuf.ByteString
           getValBytes(int index) {
         return val_.getByteString(index);
       }
 
-      public static final int CONSTRAINT_FIELD_NUMBER = 4;
+      public static final int CONSTRAINT_FIELD_NUMBER = 5;
       private java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> constraint_;
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> getConstraintList() {
         return constraint_;
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       public java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
           getConstraintOrBuilderList() {
         return constraint_;
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       public int getConstraintCount() {
         return constraint_.size();
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       public com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index) {
         return constraint_.get(index);
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
        */
       public com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
           int index) {
@@ -1178,11 +1206,14 @@ public final class DBMS {
         if (!getTypeBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, type_);
         }
+        if (typeLength_ != 0) {
+          output.writeInt32(3, typeLength_);
+        }
         for (int i = 0; i < val_.size(); i++) {
-          com.google.protobuf.GeneratedMessageV3.writeString(output, 3, val_.getRaw(i));
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 4, val_.getRaw(i));
         }
         for (int i = 0; i < constraint_.size(); i++) {
-          output.writeMessage(4, constraint_.get(i));
+          output.writeMessage(5, constraint_.get(i));
         }
       }
 
@@ -1197,6 +1228,10 @@ public final class DBMS {
         if (!getTypeBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, type_);
         }
+        if (typeLength_ != 0) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, typeLength_);
+        }
         {
           int dataSize = 0;
           for (int i = 0; i < val_.size(); i++) {
@@ -1207,7 +1242,7 @@ public final class DBMS {
         }
         for (int i = 0; i < constraint_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(4, constraint_.get(i));
+            .computeMessageSize(5, constraint_.get(i));
         }
         memoizedSize = size;
         return size;
@@ -1229,6 +1264,8 @@ public final class DBMS {
             .equals(other.getColumnName());
         result = result && getType()
             .equals(other.getType());
+        result = result && (getTypeLength()
+            == other.getTypeLength());
         result = result && getValList()
             .equals(other.getValList());
         result = result && getConstraintList()
@@ -1247,6 +1284,8 @@ public final class DBMS {
         hash = (53 * hash) + getColumnName().hashCode();
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType().hashCode();
+        hash = (37 * hash) + TYPELENGTH_FIELD_NUMBER;
+        hash = (53 * hash) + getTypeLength();
         if (getValCount() > 0) {
           hash = (37 * hash) + VAL_FIELD_NUMBER;
           hash = (53 * hash) + getValList().hashCode();
@@ -1378,11 +1417,13 @@ public final class DBMS {
 
           type_ = "";
 
+          typeLength_ = 0;
+
           val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
           if (constraintBuilder_ == null) {
             constraint_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             constraintBuilder_.clear();
           }
@@ -1412,15 +1453,16 @@ public final class DBMS {
           int to_bitField0_ = 0;
           result.columnName_ = columnName_;
           result.type_ = type_;
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          result.typeLength_ = typeLength_;
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             val_ = val_.getUnmodifiableView();
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.val_ = val_;
           if (constraintBuilder_ == null) {
-            if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
               constraint_ = java.util.Collections.unmodifiableList(constraint_);
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000010);
             }
             result.constraint_ = constraint_;
           } else {
@@ -1476,10 +1518,13 @@ public final class DBMS {
             type_ = other.type_;
             onChanged();
           }
+          if (other.getTypeLength() != 0) {
+            setTypeLength(other.getTypeLength());
+          }
           if (!other.val_.isEmpty()) {
             if (val_.isEmpty()) {
               val_ = other.val_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureValIsMutable();
               val_.addAll(other.val_);
@@ -1490,7 +1535,7 @@ public final class DBMS {
             if (!other.constraint_.isEmpty()) {
               if (constraint_.isEmpty()) {
                 constraint_ = other.constraint_;
-                bitField0_ = (bitField0_ & ~0x00000008);
+                bitField0_ = (bitField0_ & ~0x00000010);
               } else {
                 ensureConstraintIsMutable();
                 constraint_.addAll(other.constraint_);
@@ -1503,7 +1548,7 @@ public final class DBMS {
                 constraintBuilder_.dispose();
                 constraintBuilder_ = null;
                 constraint_ = other.constraint_;
-                bitField0_ = (bitField0_ & ~0x00000008);
+                bitField0_ = (bitField0_ & ~0x00000010);
                 constraintBuilder_ = 
                   com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                      getConstraintFieldBuilder() : null;
@@ -1717,11 +1762,49 @@ public final class DBMS {
           return this;
         }
 
+        private int typeLength_ ;
+        /**
+         * <pre>
+         *字段长度
+         * </pre>
+         *
+         * <code>optional int32 typeLength = 3;</code>
+         */
+        public int getTypeLength() {
+          return typeLength_;
+        }
+        /**
+         * <pre>
+         *字段长度
+         * </pre>
+         *
+         * <code>optional int32 typeLength = 3;</code>
+         */
+        public Builder setTypeLength(int value) {
+          
+          typeLength_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *字段长度
+         * </pre>
+         *
+         * <code>optional int32 typeLength = 3;</code>
+         */
+        public Builder clearTypeLength() {
+          
+          typeLength_ = 0;
+          onChanged();
+          return this;
+        }
+
         private com.google.protobuf.LazyStringList val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         private void ensureValIsMutable() {
-          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (!((bitField0_ & 0x00000008) == 0x00000008)) {
             val_ = new com.google.protobuf.LazyStringArrayList(val_);
-            bitField0_ |= 0x00000004;
+            bitField0_ |= 0x00000008;
            }
         }
         /**
@@ -1729,7 +1812,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public com.google.protobuf.ProtocolStringList
             getValList() {
@@ -1740,7 +1823,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public int getValCount() {
           return val_.size();
@@ -1750,7 +1833,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public java.lang.String getVal(int index) {
           return val_.get(index);
@@ -1760,7 +1843,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public com.google.protobuf.ByteString
             getValBytes(int index) {
@@ -1771,7 +1854,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public Builder setVal(
             int index, java.lang.String value) {
@@ -1788,7 +1871,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public Builder addVal(
             java.lang.String value) {
@@ -1805,7 +1888,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public Builder addAllVal(
             java.lang.Iterable<java.lang.String> values) {
@@ -1820,11 +1903,11 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public Builder clearVal() {
           val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
           return this;
         }
@@ -1833,7 +1916,7 @@ public final class DBMS {
          *存储的值
          * </pre>
          *
-         * <code>repeated string val = 3;</code>
+         * <code>repeated string val = 4;</code>
          */
         public Builder addValBytes(
             com.google.protobuf.ByteString value) {
@@ -1850,9 +1933,9 @@ public final class DBMS {
         private java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> constraint_ =
           java.util.Collections.emptyList();
         private void ensureConstraintIsMutable() {
-          if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
             constraint_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Table.Column.Constraint>(constraint_);
-            bitField0_ |= 0x00000008;
+            bitField0_ |= 0x00000010;
            }
         }
 
@@ -1860,7 +1943,7 @@ public final class DBMS {
             com.DBMS.proto.DBMS.Table.Column.Constraint, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder, com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> constraintBuilder_;
 
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> getConstraintList() {
           if (constraintBuilder_ == null) {
@@ -1870,7 +1953,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public int getConstraintCount() {
           if (constraintBuilder_ == null) {
@@ -1880,7 +1963,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index) {
           if (constraintBuilder_ == null) {
@@ -1890,7 +1973,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder setConstraint(
             int index, com.DBMS.proto.DBMS.Table.Column.Constraint value) {
@@ -1907,7 +1990,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder setConstraint(
             int index, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
@@ -1921,7 +2004,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder addConstraint(com.DBMS.proto.DBMS.Table.Column.Constraint value) {
           if (constraintBuilder_ == null) {
@@ -1937,7 +2020,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder addConstraint(
             int index, com.DBMS.proto.DBMS.Table.Column.Constraint value) {
@@ -1954,7 +2037,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder addConstraint(
             com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
@@ -1968,7 +2051,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder addConstraint(
             int index, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
@@ -1982,7 +2065,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder addAllConstraint(
             java.lang.Iterable<? extends com.DBMS.proto.DBMS.Table.Column.Constraint> values) {
@@ -1997,12 +2080,12 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder clearConstraint() {
           if (constraintBuilder_ == null) {
             constraint_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
             onChanged();
           } else {
             constraintBuilder_.clear();
@@ -2010,7 +2093,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public Builder removeConstraint(int index) {
           if (constraintBuilder_ == null) {
@@ -2023,14 +2106,14 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder getConstraintBuilder(
             int index) {
           return getConstraintFieldBuilder().getBuilder(index);
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
             int index) {
@@ -2040,7 +2123,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
              getConstraintOrBuilderList() {
@@ -2051,14 +2134,14 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder addConstraintBuilder() {
           return getConstraintFieldBuilder().addBuilder(
               com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance());
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder addConstraintBuilder(
             int index) {
@@ -2066,7 +2149,7 @@ public final class DBMS {
               index, com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance());
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 4;</code>
+         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
          */
         public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint.Builder> 
              getConstraintBuilderList() {
@@ -2079,7 +2162,7 @@ public final class DBMS {
             constraintBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                 com.DBMS.proto.DBMS.Table.Column.Constraint, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder, com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder>(
                     constraint_,
-                    ((bitField0_ & 0x00000008) == 0x00000008),
+                    ((bitField0_ & 0x00000010) == 0x00000010),
                     getParentForChildren(),
                     isClean());
             constraint_ = null;
@@ -2946,13 +3029,14 @@ public final class DBMS {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nDBMS.proto\"\331\001\n\005Table\022\021\n\ttableName\030\001 \001(" +
-      "\t\022\035\n\006column\030\002 \003(\0132\r.Table.Column\032\235\001\n\006Col" +
-      "umn\022\022\n\ncolumnName\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\013\n" +
-      "\003val\030\003 \003(\t\022,\n\nconstraint\030\004 \003(\0132\030.Table.C" +
-      "olumn.Constraint\0326\n\nConstraint\022\026\n\016constr" +
-      "aintName\030\001 \001(\t\022\020\n\010describe\030\002 \001(\tB\030\n\016com." +
-      "DBMS.protoB\004DBMSP\000b\006proto3"
+      "\n\nDBMS.proto\"\355\001\n\005Table\022\021\n\ttableName\030\001 \001(" +
+      "\t\022\035\n\006column\030\002 \003(\0132\r.Table.Column\032\261\001\n\006Col" +
+      "umn\022\022\n\ncolumnName\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\022\n" +
+      "\ntypeLength\030\003 \001(\005\022\013\n\003val\030\004 \003(\t\022,\n\nconstr" +
+      "aint\030\005 \003(\0132\030.Table.Column.Constraint\0326\n\n" +
+      "Constraint\022\026\n\016constraintName\030\001 \001(\t\022\020\n\010de" +
+      "scribe\030\002 \001(\tB\030\n\016com.DBMS.protoB\004DBMSP\000b\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2977,7 +3061,7 @@ public final class DBMS {
     internal_static_Table_Column_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Table_Column_descriptor,
-        new java.lang.String[] { "ColumnName", "Type", "Val", "Constraint", });
+        new java.lang.String[] { "ColumnName", "Type", "TypeLength", "Val", "Constraint", });
     internal_static_Table_Column_Constraint_descriptor =
       internal_static_Table_Column_descriptor.getNestedTypes().get(0);
     internal_static_Table_Column_Constraint_fieldAccessorTable = new
