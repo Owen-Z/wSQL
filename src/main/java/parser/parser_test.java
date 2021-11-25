@@ -19,7 +19,7 @@ public class parser_test {
 //        api.parse("CREATE DATABASE 'TEST35528'");
 //        api.parse("DROP DATABASE 'TEST223'");
 //        api.parse("update test set status='P' where id=20");
-        api.parse("insert into test (id,status,name,ce,acc) values (29,'P','lll','sxsx','Arferwg')");
+//        api.parse("insert into test (id,status,name,ce,acc) values (29,'P','lll','sxsx','Arferwg')");
 
 
 

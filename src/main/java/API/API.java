@@ -249,6 +249,12 @@ public class API {
 
             }
 
+
+            if(sqlStatement instanceof SQLSelectStatement){
+
+            }
+
+
             if (sqlStatement instanceof SQLServerInsertStatement) {
                 // 转换
                 SQLServerInsertStatement insertStatement = (SQLServerInsertStatement) sqlStatement;
