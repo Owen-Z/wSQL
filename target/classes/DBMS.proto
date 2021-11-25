@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_package = "com.DBMS.proto";
+option java_outer_classname = "DBMS";
+option java_multiple_files = false;
+
+//表的结构形式
+message Table{
+  //列的结构形式
+  string tableName = 1;
+  message Column{
+    //列名
+    string columnName = 1;
+    //数据类型
+    string type = 2;
+    //存储的值
+    repeated string val = 3;
+    //约束条件
+    message Constraint{
+      string constraintName = 1;
+      string describe = 2;
+    }
+    repeated Constraint constraint = 4;
+  }
+  repeated Column column = 2;
+}
