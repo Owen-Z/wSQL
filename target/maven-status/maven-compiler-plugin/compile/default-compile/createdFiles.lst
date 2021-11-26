@@ -1,4 +1,3 @@
-DDL\Create.class
 com\DBMS\proto\DBMS$Table$ColumnOrBuilder.class
 com\DBMS\proto\DBMS$TableOrBuilder.class
 com\DBMS\proto\DBMS$Table$Column.class
