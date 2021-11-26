@@ -24,7 +24,7 @@ public class API {
 
     public API(String un, String dbn){
         userName = un;
-        dbn = dbName;
+        dbName = dbn;
     }
 
     public String getDbName() {
