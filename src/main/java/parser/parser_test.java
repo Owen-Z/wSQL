@@ -9,8 +9,8 @@ public class parser_test {
         API api = new API("root", "test");
 //        api.parse("CREATE TABLE Persons(Id_P int NOT NULL,LastName varchar(255) NOT NULL,FirstName varchar(255),Address varchar(255),City varchar(255),CHECK (Id_P>0))");
 //        api.parse("CREATE TABLE IF NOT EXISTS `runoob_tbl`(\n" +
-//                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
-//                "   `runoob_title` VARCHAR(100) NOT NULL,\n" +
+//                "   `runoob_id` INTEGER UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good' check (id > 10),\n" +
+//                "   `runoob_title` VARCHAR(100) ,\n" +
 //                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
 //                "   `submission_date` DATE,\n" +
 //                "   PRIMARY KEY ( `runoob_id` ),\n" +
@@ -20,7 +20,10 @@ public class parser_test {
 //        api.parse("DROP DATABASE 'TEST223'");
 //        api.parse("update test set status='P' where id=20");
 //        api.parse("insert into test (id,status,name,ce,acc) values (29,'P','lll','sxsx','Arferwg')");
-
+//        api.parse("select s.sname FROM student s,\n" +
+//                "(SELECT sno, avg(grade) avg FROM sc GROUP BY sno) a\n" +
+//                "WHERE s.sno = a.sno AND avg = ( SELECT MAX(av) FROM ( SELECT avg( grade) av FROM sc GROUP BY sno) b)\n");
+        api.parse("select runoob_tbl from student  where (id >= 20 AND h < 8)");
 
 
 

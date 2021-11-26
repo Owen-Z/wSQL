@@ -197,21 +197,24 @@ public class API {
                 // 普通约束
                 System.out.println(((SQLColumnDefinition)elements.get(0)).getNameAsString());   // row name
                 System.out.println(((SQLColumnDefinition)elements.get(0)).getDataType());   // row data type
+                ((SQLColumnDefinition)elements.get(0)).isAutoIncrement();
                 System.out.println(((SQLColumnDefinition)elements.get(0)).getDefaultExpr());    // default
                 System.out.println(((SQLColumnDefinition)elements.get(0)).getConstraints());    // constraints
+                SQLColumnCheck check = (SQLColumnCheck) ((SQLColumnDefinition)elements.get(0)).getConstraints().get(2);
+                System.out.println(check.getExpr());
 
 
 
-                System.out.println(sqlCreateTableStatement.getTableElementList());
+//                System.out.println(sqlCreateTableStatement.getTableElementList());
 
 
 
 //                System.out.println(((SQLColumnDefinition) element).getName());
-                System.out.println(((MysqlForeignKey)element).getReferencedTableName());
-                System.out.println(((MysqlForeignKey)element).getReferencedColumns());
-                MySqlSchemaStatVisitor visitor = new MySqlSchemaStatVisitor();
-                ((MysqlForeignKey)element).accept(visitor);
-                System.out.println(visitor.getColumns());
+//                System.out.println(((MysqlForeignKey)element).getReferencedTableName());
+//                System.out.println(((MysqlForeignKey)element).getReferencedColumns());
+//                MySqlSchemaStatVisitor visitor = new MySqlSchemaStatVisitor();
+//                ((MysqlForeignKey)element).accept(visitor);
+//                System.out.println(visitor.getColumns());
 //                System.out.println(((MysqlForeignKey)element).getText());
 //                System.out.println(((MySqlPrimaryKey)element).getName());
 //                MySqlSchemaStatVisitor visitor = new MySqlSchemaStatVisitor();
@@ -250,8 +253,65 @@ public class API {
 
 
             if(sqlStatement instanceof SQLSelectStatement){
+                // 转换
+                SQLSelectStatement sqlSelectStatement = (SQLSelectStatement) sqlStatement;
+//                System.out.println(sqlSelectStatement);
+
+                sqlSelectStatement.getSelect();
+//                System.out.println(sqlSelectStatement.getSelect());
+//                System.out.println(sqlSelectStatement.getSelect().getQueryBlock()); // whole query command
+
+
+                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getWhere().getClass());
+                SQLBinaryOpExpr expr = (SQLBinaryOpExpr) sqlSelectStatement.getSelect().getQueryBlock().getWhere();
+                System.out.println(expr);
+
+
+                /*
+                    首先判断是否为普通表 instanceof SQLExprTableSource
+                    否则是SQLJoinTableSource 有左值，右值
+                    设置原表名和表名的hashmap
+                 */
+                SQLJoinTableSource from = (SQLJoinTableSource) sqlSelectStatement.getSelect().getQueryBlock().getFrom();
+                String[] names = from.toString().split(",");
+                HashMap<String, String > name_RName = new HashMap<>();
+                for(int i = names.length - 1; i > 1; i--){
+                   String str = from.getRight().getAlias();
+                   if(str != null){
+                       name_RName.put(names[i], str);
+                   }else{
+                       name_RName.put(names[i], names[i]);
+                   }
+                   from = (SQLJoinTableSource) from.getLeft();
+                }
+                String rstr = from.getRight().getAlias();
+                String lstr = from.getLeft().getAlias();
+                if(rstr != null){
+                    name_RName.put(names[1], rstr);
+                }else{
+                    name_RName.put(names[1], names[1]);
+                }
+                if(lstr != null){
+                    name_RName.put(names[0], lstr);
+                }else{
+                    name_RName.put(names[0], names[0]);
+                }
+
+
+
+
+//                System.out.println(from.getRight().getAlias());  //获取别名
+
+
+//                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getGroupBy());
+//                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getOrderBy());
+//                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getLimit());
+
+
 
             }
+
+
 
 
             if (sqlStatement instanceof SQLServerInsertStatement) {
