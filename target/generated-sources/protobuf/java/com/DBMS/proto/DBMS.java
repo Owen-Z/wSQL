@@ -191,9 +191,18 @@ public final class DBMS {
        *字段长度
        * </pre>
        *
-       * <code>optional int32 typeLength = 3;</code>
+       * <code>optional string typeLength = 3;</code>
        */
-      int getTypeLength();
+      java.lang.String getTypeLength();
+      /**
+       * <pre>
+       *字段长度
+       * </pre>
+       *
+       * <code>optional string typeLength = 3;</code>
+       */
+      com.google.protobuf.ByteString
+          getTypeLengthBytes();
 
       /**
        * <pre>
@@ -268,7 +277,7 @@ public final class DBMS {
       private Column() {
         columnName_ = "";
         type_ = "";
-        typeLength_ = 0;
+        typeLength_ = "";
         val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         constraint_ = java.util.Collections.emptyList();
       }
@@ -310,9 +319,10 @@ public final class DBMS {
                 type_ = s;
                 break;
               }
-              case 24: {
+              case 26: {
+                java.lang.String s = input.readStringRequireUtf8();
 
-                typeLength_ = input.readInt32();
+                typeLength_ = s;
                 break;
               }
               case 34: {
@@ -1096,16 +1106,45 @@ public final class DBMS {
       }
 
       public static final int TYPELENGTH_FIELD_NUMBER = 3;
-      private int typeLength_;
+      private volatile java.lang.Object typeLength_;
       /**
        * <pre>
        *字段长度
        * </pre>
        *
-       * <code>optional int32 typeLength = 3;</code>
+       * <code>optional string typeLength = 3;</code>
        */
-      public int getTypeLength() {
-        return typeLength_;
+      public java.lang.String getTypeLength() {
+        java.lang.Object ref = typeLength_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          typeLength_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       *字段长度
+       * </pre>
+       *
+       * <code>optional string typeLength = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTypeLengthBytes() {
+        java.lang.Object ref = typeLength_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          typeLength_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
 
       public static final int VAL_FIELD_NUMBER = 4;
@@ -1206,8 +1245,8 @@ public final class DBMS {
         if (!getTypeBytes().isEmpty()) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 2, type_);
         }
-        if (typeLength_ != 0) {
-          output.writeInt32(3, typeLength_);
+        if (!getTypeLengthBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 3, typeLength_);
         }
         for (int i = 0; i < val_.size(); i++) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 4, val_.getRaw(i));
@@ -1228,9 +1267,8 @@ public final class DBMS {
         if (!getTypeBytes().isEmpty()) {
           size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, type_);
         }
-        if (typeLength_ != 0) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(3, typeLength_);
+        if (!getTypeLengthBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, typeLength_);
         }
         {
           int dataSize = 0;
@@ -1264,8 +1302,8 @@ public final class DBMS {
             .equals(other.getColumnName());
         result = result && getType()
             .equals(other.getType());
-        result = result && (getTypeLength()
-            == other.getTypeLength());
+        result = result && getTypeLength()
+            .equals(other.getTypeLength());
         result = result && getValList()
             .equals(other.getValList());
         result = result && getConstraintList()
@@ -1285,7 +1323,7 @@ public final class DBMS {
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType().hashCode();
         hash = (37 * hash) + TYPELENGTH_FIELD_NUMBER;
-        hash = (53 * hash) + getTypeLength();
+        hash = (53 * hash) + getTypeLength().hashCode();
         if (getValCount() > 0) {
           hash = (37 * hash) + VAL_FIELD_NUMBER;
           hash = (53 * hash) + getValList().hashCode();
@@ -1417,7 +1455,7 @@ public final class DBMS {
 
           type_ = "";
 
-          typeLength_ = 0;
+          typeLength_ = "";
 
           val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000008);
@@ -1518,8 +1556,9 @@ public final class DBMS {
             type_ = other.type_;
             onChanged();
           }
-          if (other.getTypeLength() != 0) {
-            setTypeLength(other.getTypeLength());
+          if (!other.getTypeLength().isEmpty()) {
+            typeLength_ = other.typeLength_;
+            onChanged();
           }
           if (!other.val_.isEmpty()) {
             if (val_.isEmpty()) {
@@ -1762,26 +1801,59 @@ public final class DBMS {
           return this;
         }
 
-        private int typeLength_ ;
+        private java.lang.Object typeLength_ = "";
         /**
          * <pre>
          *字段长度
          * </pre>
          *
-         * <code>optional int32 typeLength = 3;</code>
+         * <code>optional string typeLength = 3;</code>
          */
-        public int getTypeLength() {
-          return typeLength_;
+        public java.lang.String getTypeLength() {
+          java.lang.Object ref = typeLength_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            typeLength_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
         }
         /**
          * <pre>
          *字段长度
          * </pre>
          *
-         * <code>optional int32 typeLength = 3;</code>
+         * <code>optional string typeLength = 3;</code>
          */
-        public Builder setTypeLength(int value) {
-          
+        public com.google.protobuf.ByteString
+            getTypeLengthBytes() {
+          java.lang.Object ref = typeLength_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            typeLength_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *字段长度
+         * </pre>
+         *
+         * <code>optional string typeLength = 3;</code>
+         */
+        public Builder setTypeLength(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
           typeLength_ = value;
           onChanged();
           return this;
@@ -1791,11 +1863,29 @@ public final class DBMS {
          *字段长度
          * </pre>
          *
-         * <code>optional int32 typeLength = 3;</code>
+         * <code>optional string typeLength = 3;</code>
          */
         public Builder clearTypeLength() {
           
-          typeLength_ = 0;
+          typeLength_ = getDefaultInstance().getTypeLength();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *字段长度
+         * </pre>
+         *
+         * <code>optional string typeLength = 3;</code>
+         */
+        public Builder setTypeLengthBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          typeLength_ = value;
           onChanged();
           return this;
         }
@@ -3032,7 +3122,7 @@ public final class DBMS {
       "\n\nDBMS.proto\"\355\001\n\005Table\022\021\n\ttableName\030\001 \001(" +
       "\t\022\035\n\006column\030\002 \003(\0132\r.Table.Column\032\261\001\n\006Col" +
       "umn\022\022\n\ncolumnName\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\022\n" +
-      "\ntypeLength\030\003 \001(\005\022\013\n\003val\030\004 \003(\t\022,\n\nconstr" +
+      "\ntypeLength\030\003 \001(\t\022\013\n\003val\030\004 \003(\t\022,\n\nconstr" +
       "aint\030\005 \003(\0132\030.Table.Column.Constraint\0326\n\n" +
       "Constraint\022\026\n\016constraintName\030\001 \001(\t\022\020\n\010de" +
       "scribe\030\002 \001(\tB\030\n\016com.DBMS.protoB\004DBMSP\000b\006" +
