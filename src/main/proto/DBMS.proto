@@ -16,12 +16,22 @@ message Table{
     string typeLength = 3;
     //存储的值
     repeated string val = 4;
-    //约束条件
-    message Constraint{
-      string constraintName = 1;
-      string describe = 2;
-    }
-    repeated Constraint constraint = 5;
+    //主键
+    string primary = 5;
+    //外键
+    string foreign = 6;
+    //非空
+    string notNull = 7;
+    //唯一
+    string unique = 8;
+    //默认
+    string default = 9;
+    //自增
+    string identity = 10;
+    //约束
+    string check = 11;
+    //备注
+    string comment = 12;
   }
   repeated Column column = 2;
 }
@@ -36,3 +46,24 @@ message Database{
   }
   repeated DB db = 1;
 }
+
+message TBMessage{
+  message TB{
+    string TBName = 1;
+    string createDate = 2;
+  }
+  repeated TB tb = 1;
+}
+
+message Index{
+  message IX{
+    string name = 1;
+    message Map{
+      string key = 1;
+      repeated int32 val = 2;
+    }
+    repeated Map map = 2;
+  }
+  repeated IX ix = 1;
+}
+

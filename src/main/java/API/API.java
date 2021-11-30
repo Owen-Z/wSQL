@@ -1,6 +1,7 @@
 package API;
 import com.Database.DatabaseCreate;
 import com.Database.DatabaseDelete;
+import com.Table.TableCreate;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.*;
 import com.alibaba.druid.sql.ast.expr.*;
@@ -153,11 +154,14 @@ public class API {
                 String storeTableName = tableName.substring(1, tableName.length() - 1);
 
                 //实例化创建表
-                CreateTable createTable = new CreateTable(storeTableName, "MYSQLITE");
+                TableCreate tableCreate = new TableCreate("MYSQLITE",storeTableName);
+                if (tableCreate.TBCheck()){
+                    System.out.println("表已经存在");
+                    return;
+                }
 
                 List<SQLTableElement> elements = sqlCreateTableStatement.getTableElementList();
 
-                SQLTableElement element;
                 for (int i = 0; i < elements.size(); i++) {
                     if (elements.get(i) instanceof SQLColumnDefinition) {
                         HashMap<String, String> map = new HashMap<>();
@@ -167,38 +171,20 @@ public class API {
                         //2.type
                         String type = ((SQLColumnDefinition) elements.get(i)).getDataType().toString();
                         map.put("type", type);
-                        //3.length
-                        String length = "";
-                        if (type.equals("INT")) {
-                            length = "32";
-                        } else if (type.equals("INT UNSIGNED")) {
-                            length = "32";
-                        } else if (type.equals("INTEGER")) {
-                            length = "32";
-                        } else if (type.equals("BOOL")) {
-                            length = "8";
-                        } else if (type.equals("DOUBLE")) {
-                            length = "16";
-                        } else if (type.equals("DATE")) {
-                            length = "108";
-                        } else {
-                            length = type.substring(8, type.length() - 1);
-                        }
-                        map.put("length", length);
-                        //4.def
+                        //3.def
                         String def = "null";
                         if (((SQLColumnDefinition) elements.get(i)).getDefaultExpr() != null) {
                             def = ((SQLColumnDefinition) elements.get(i)).getDefaultExpr().toString();
                         }
                         map.put("def", def);
-                        //5.comment
+                        //4.comment
                         String comment = "null";
                         if (((SQLColumnDefinition) elements.get(i)).getComment() != null) {
                             comment = ((SQLColumnDefinition) elements.get(i)).getDefaultExpr().toString();
                         }
                         map.put("comment", comment);
-                        //6.auto
-                        String auto = "";
+                        //5.auto
+                        String auto = "false";
                         if (((SQLColumnDefinition) elements.get(i)).isAutoIncrement()) {
                             auto = "true";
                         }
@@ -210,47 +196,73 @@ public class API {
                         String notNUll = "false";
                         String check = "null";
                         String foreignKey = "false";
+                        String unique = "false";
                         for (SQLColumnConstraint cons : list) {
                             if (cons instanceof SQLNotNullConstraint) {
                                 notNUll = "true";
                             }
-                            if (cons instanceof MySqlPrimaryKey) {
+                            if (cons instanceof SQLColumnPrimaryKey) {
                                 primaryKey = "true";
                             }
                             if (cons instanceof SQLColumnCheck) {
                                 check = ((SQLColumnCheck) cons).getExpr().toString();
+                            }
+                            if (cons instanceof SQLColumnUniqueKey) {
+                                unique = "true";
                             }
                         }
                         map.put("notNUll", notNUll);
                         map.put("primaryKey", primaryKey);
                         map.put("check", check);
                         map.put("foreignKey", foreignKey);
-                        System.out.println(i + "name:" + name);
-                        System.out.println(i + "type:" + type);
-                        System.out.println(i + "length:" + length);
-                        System.out.println(i + "def:" + def);
-                        System.out.println(i + "comment:" + comment);
-                        System.out.println(i + "auto:" + auto);
-                        System.out.println(i + "primaryKey:" + primaryKey);
-                        System.out.println(i + "notNUll:" + notNUll);
-                        System.out.println(i + "check:" + check);
-                        createTable.addColumn(map);
+                        map.put("unique", unique);
+//                        System.out.println(i + "name:" + name);
+//                        System.out.println(i + "type:" + type);
+//                        System.out.println(i + "def:" + def);
+//                        System.out.println(i + "comment:" + comment);
+//                        System.out.println(i + "auto:" + auto);
+//                        System.out.println(i + "primaryKey:" + primaryKey);
+//                        System.out.println(i + "notNUll:" + notNUll);
+//                        System.out.println(i + "check:" + check);
+//                        System.out.println(i + "unique:" + unique);
+//                        System.out.println(i + "foreignKey:" + foreignKey);
+                        tableCreate.TBCreateColumn(map);
                     } else if (elements.get(i) instanceof MySqlPrimaryKey) {
                         MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                         elements.get(i).accept(visitor1);
                         String[] str = visitor1.getColumns().toString().split("\\[|\\.|\\]");
-                        System.out.println(str[2]);
-                        createTable.setPrimaryKey(str[2]);
+//                        System.out.println(str[2]);
+                        if(tableCreate.setPrimaryKey(str[2])){
+                            System.out.println("主键设置成功");
+                        }else{
+                            System.out.println("主键已经存在");
+                        }
                     } else if (elements.get(i) instanceof MysqlForeignKey) {
                         MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                         elements.get(i).accept(visitor1);
-                        String[] str = visitor1.getColumns().toString().split("\\[|\\.|\\]");
-                        String[] str1 = str[2].split(",");
-                        System.out.println(str1[0]);
-                        createTable.setForeignKey(str1[0]);
+                        String str = visitor1.getColumns().toString();
+                        String result = str.substring(1,str.length()-1);
+                        String[] s = result.split(" ");
+                        String[] s1 = s[0].split("\\.|\\,");
+                        String[] s2 = s[1].split("\\.");
+//                        System.out.println(s1[1]);
+//                        System.out.println(s2[0]);
+//                        System.out.println(s2[1]);
+                        int result1 = tableCreate.setForeign(s1[1],s2[0],s2[1]);
+                        if(result1 == 0){
+                            System.out.println("字段不存在");
+                        }else if(result1 == 1){
+                            System.out.println("外键不存在");
+                        }else if(result1 == 2){
+                            System.out.println("字段类型不匹配");
+                        }else if(result1 == 3){
+                            System.out.println("字段类型不适合");
+                        }else if(result1 == 4){
+                            System.out.println("外键设置成功");
+                        }
                     }
                 }
-                createTable.create();
+                tableCreate.create();
                 // 普通约束
 //                System.out.println(sqlCreateTableStatement.getTableElementList());
 
@@ -264,7 +276,6 @@ public class API {
 //                element.accept(visitor1);
 //                String[] str = visitor1.getColumns().toString().split("\\[|\\.|\\]");
 //                System.out.println(str[2]);
-
 
             }
 

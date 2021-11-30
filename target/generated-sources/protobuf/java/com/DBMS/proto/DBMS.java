@@ -240,28 +240,148 @@ public final class DBMS {
           getValBytes(int index);
 
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *主键
+       * </pre>
+       *
+       * <code>optional string primary = 5;</code>
        */
-      java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> 
-          getConstraintList();
+      java.lang.String getPrimary();
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *主键
+       * </pre>
+       *
+       * <code>optional string primary = 5;</code>
        */
-      com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index);
+      com.google.protobuf.ByteString
+          getPrimaryBytes();
+
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *外键
+       * </pre>
+       *
+       * <code>optional string foreign = 6;</code>
        */
-      int getConstraintCount();
+      java.lang.String getForeign();
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *外键
+       * </pre>
+       *
+       * <code>optional string foreign = 6;</code>
        */
-      java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
-          getConstraintOrBuilderList();
+      com.google.protobuf.ByteString
+          getForeignBytes();
+
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *非空
+       * </pre>
+       *
+       * <code>optional string notNull = 7;</code>
        */
-      com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
-          int index);
+      java.lang.String getNotNull();
+      /**
+       * <pre>
+       *非空
+       * </pre>
+       *
+       * <code>optional string notNull = 7;</code>
+       */
+      com.google.protobuf.ByteString
+          getNotNullBytes();
+
+      /**
+       * <pre>
+       *唯一
+       * </pre>
+       *
+       * <code>optional string unique = 8;</code>
+       */
+      java.lang.String getUnique();
+      /**
+       * <pre>
+       *唯一
+       * </pre>
+       *
+       * <code>optional string unique = 8;</code>
+       */
+      com.google.protobuf.ByteString
+          getUniqueBytes();
+
+      /**
+       * <pre>
+       *默认
+       * </pre>
+       *
+       * <code>optional string default = 9;</code>
+       */
+      java.lang.String getDefault();
+      /**
+       * <pre>
+       *默认
+       * </pre>
+       *
+       * <code>optional string default = 9;</code>
+       */
+      com.google.protobuf.ByteString
+          getDefaultBytes();
+
+      /**
+       * <pre>
+       *自增
+       * </pre>
+       *
+       * <code>optional string identity = 10;</code>
+       */
+      java.lang.String getIdentity();
+      /**
+       * <pre>
+       *自增
+       * </pre>
+       *
+       * <code>optional string identity = 10;</code>
+       */
+      com.google.protobuf.ByteString
+          getIdentityBytes();
+
+      /**
+       * <pre>
+       *约束
+       * </pre>
+       *
+       * <code>optional string check = 11;</code>
+       */
+      java.lang.String getCheck();
+      /**
+       * <pre>
+       *约束
+       * </pre>
+       *
+       * <code>optional string check = 11;</code>
+       */
+      com.google.protobuf.ByteString
+          getCheckBytes();
+
+      /**
+       * <pre>
+       *备注
+       * </pre>
+       *
+       * <code>optional string comment = 12;</code>
+       */
+      java.lang.String getComment();
+      /**
+       * <pre>
+       *备注
+       * </pre>
+       *
+       * <code>optional string comment = 12;</code>
+       */
+      com.google.protobuf.ByteString
+          getCommentBytes();
     }
     /**
      * Protobuf type {@code Table.Column}
@@ -279,7 +399,14 @@ public final class DBMS {
         type_ = "";
         typeLength_ = "";
         val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        constraint_ = java.util.Collections.emptyList();
+        primary_ = "";
+        foreign_ = "";
+        notNull_ = "";
+        unique_ = "";
+        default_ = "";
+        identity_ = "";
+        check_ = "";
+        comment_ = "";
       }
 
       @java.lang.Override
@@ -335,12 +462,51 @@ public final class DBMS {
                 break;
               }
               case 42: {
-                if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                  constraint_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Table.Column.Constraint>();
-                  mutable_bitField0_ |= 0x00000010;
-                }
-                constraint_.add(
-                    input.readMessage(com.DBMS.proto.DBMS.Table.Column.Constraint.parser(), extensionRegistry));
+                java.lang.String s = input.readStringRequireUtf8();
+
+                primary_ = s;
+                break;
+              }
+              case 50: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                foreign_ = s;
+                break;
+              }
+              case 58: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                notNull_ = s;
+                break;
+              }
+              case 66: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                unique_ = s;
+                break;
+              }
+              case 74: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                default_ = s;
+                break;
+              }
+              case 82: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                identity_ = s;
+                break;
+              }
+              case 90: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                check_ = s;
+                break;
+              }
+              case 98: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                comment_ = s;
                 break;
               }
             }
@@ -353,9 +519,6 @@ public final class DBMS {
         } finally {
           if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
             val_ = val_.getUnmodifiableView();
-          }
-          if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-            constraint_ = java.util.Collections.unmodifiableList(constraint_);
           }
           makeExtensionsImmutable();
         }
@@ -370,654 +533,6 @@ public final class DBMS {
         return com.DBMS.proto.DBMS.internal_static_Table_Column_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.DBMS.proto.DBMS.Table.Column.class, com.DBMS.proto.DBMS.Table.Column.Builder.class);
-      }
-
-      public interface ConstraintOrBuilder extends
-          // @@protoc_insertion_point(interface_extends:Table.Column.Constraint)
-          com.google.protobuf.MessageOrBuilder {
-
-        /**
-         * <code>optional string constraintName = 1;</code>
-         */
-        java.lang.String getConstraintName();
-        /**
-         * <code>optional string constraintName = 1;</code>
-         */
-        com.google.protobuf.ByteString
-            getConstraintNameBytes();
-
-        /**
-         * <code>optional string describe = 2;</code>
-         */
-        java.lang.String getDescribe();
-        /**
-         * <code>optional string describe = 2;</code>
-         */
-        com.google.protobuf.ByteString
-            getDescribeBytes();
-      }
-      /**
-       * <pre>
-       *约束条件
-       * </pre>
-       *
-       * Protobuf type {@code Table.Column.Constraint}
-       */
-      public  static final class Constraint extends
-          com.google.protobuf.GeneratedMessageV3 implements
-          // @@protoc_insertion_point(message_implements:Table.Column.Constraint)
-          ConstraintOrBuilder {
-        // Use Constraint.newBuilder() to construct.
-        private Constraint(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-          super(builder);
-        }
-        private Constraint() {
-          constraintName_ = "";
-          describe_ = "";
-        }
-
-        @java.lang.Override
-        public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-        }
-        private Constraint(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          this();
-          int mutable_bitField0_ = 0;
-          try {
-            boolean done = false;
-            while (!done) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  done = true;
-                  break;
-                default: {
-                  if (!input.skipField(tag)) {
-                    done = true;
-                  }
-                  break;
-                }
-                case 10: {
-                  java.lang.String s = input.readStringRequireUtf8();
-
-                  constraintName_ = s;
-                  break;
-                }
-                case 18: {
-                  java.lang.String s = input.readStringRequireUtf8();
-
-                  describe_ = s;
-                  break;
-                }
-              }
-            }
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            throw e.setUnfinishedMessage(this);
-          } catch (java.io.IOException e) {
-            throw new com.google.protobuf.InvalidProtocolBufferException(
-                e).setUnfinishedMessage(this);
-          } finally {
-            makeExtensionsImmutable();
-          }
-        }
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.DBMS.proto.DBMS.internal_static_Table_Column_Constraint_descriptor;
-        }
-
-        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.DBMS.proto.DBMS.internal_static_Table_Column_Constraint_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  com.DBMS.proto.DBMS.Table.Column.Constraint.class, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder.class);
-        }
-
-        public static final int CONSTRAINTNAME_FIELD_NUMBER = 1;
-        private volatile java.lang.Object constraintName_;
-        /**
-         * <code>optional string constraintName = 1;</code>
-         */
-        public java.lang.String getConstraintName() {
-          java.lang.Object ref = constraintName_;
-          if (ref instanceof java.lang.String) {
-            return (java.lang.String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            constraintName_ = s;
-            return s;
-          }
-        }
-        /**
-         * <code>optional string constraintName = 1;</code>
-         */
-        public com.google.protobuf.ByteString
-            getConstraintNameBytes() {
-          java.lang.Object ref = constraintName_;
-          if (ref instanceof java.lang.String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            constraintName_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-
-        public static final int DESCRIBE_FIELD_NUMBER = 2;
-        private volatile java.lang.Object describe_;
-        /**
-         * <code>optional string describe = 2;</code>
-         */
-        public java.lang.String getDescribe() {
-          java.lang.Object ref = describe_;
-          if (ref instanceof java.lang.String) {
-            return (java.lang.String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            describe_ = s;
-            return s;
-          }
-        }
-        /**
-         * <code>optional string describe = 2;</code>
-         */
-        public com.google.protobuf.ByteString
-            getDescribeBytes() {
-          java.lang.Object ref = describe_;
-          if (ref instanceof java.lang.String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            describe_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized == 1) return true;
-          if (isInitialized == 0) return false;
-
-          memoizedIsInitialized = 1;
-          return true;
-        }
-
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          if (!getConstraintNameBytes().isEmpty()) {
-            com.google.protobuf.GeneratedMessageV3.writeString(output, 1, constraintName_);
-          }
-          if (!getDescribeBytes().isEmpty()) {
-            com.google.protobuf.GeneratedMessageV3.writeString(output, 2, describe_);
-          }
-        }
-
-        public int getSerializedSize() {
-          int size = memoizedSize;
-          if (size != -1) return size;
-
-          size = 0;
-          if (!getConstraintNameBytes().isEmpty()) {
-            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, constraintName_);
-          }
-          if (!getDescribeBytes().isEmpty()) {
-            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, describe_);
-          }
-          memoizedSize = size;
-          return size;
-        }
-
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        public boolean equals(final java.lang.Object obj) {
-          if (obj == this) {
-           return true;
-          }
-          if (!(obj instanceof com.DBMS.proto.DBMS.Table.Column.Constraint)) {
-            return super.equals(obj);
-          }
-          com.DBMS.proto.DBMS.Table.Column.Constraint other = (com.DBMS.proto.DBMS.Table.Column.Constraint) obj;
-
-          boolean result = true;
-          result = result && getConstraintName()
-              .equals(other.getConstraintName());
-          result = result && getDescribe()
-              .equals(other.getDescribe());
-          return result;
-        }
-
-        @java.lang.Override
-        public int hashCode() {
-          if (memoizedHashCode != 0) {
-            return memoizedHashCode;
-          }
-          int hash = 41;
-          hash = (19 * hash) + getDescriptorForType().hashCode();
-          hash = (37 * hash) + CONSTRAINTNAME_FIELD_NUMBER;
-          hash = (53 * hash) + getConstraintName().hashCode();
-          hash = (37 * hash) + DESCRIBE_FIELD_NUMBER;
-          hash = (53 * hash) + getDescribe().hashCode();
-          hash = (29 * hash) + unknownFields.hashCode();
-          memoizedHashCode = hash;
-          return hash;
-        }
-
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return PARSER.parseFrom(data);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return PARSER.parseFrom(data, extensionRegistry);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return PARSER.parseFrom(data);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return PARSER.parseFrom(data, extensionRegistry);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseWithIOException(PARSER, input);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseDelimitedWithIOException(PARSER, input);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseWithIOException(PARSER, input);
-        }
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return com.google.protobuf.GeneratedMessageV3
-              .parseWithIOException(PARSER, input, extensionRegistry);
-        }
-
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder() {
-          return DEFAULT_INSTANCE.toBuilder();
-        }
-        public static Builder newBuilder(com.DBMS.proto.DBMS.Table.Column.Constraint prototype) {
-          return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() {
-          return this == DEFAULT_INSTANCE
-              ? new Builder() : new Builder().mergeFrom(this);
-        }
-
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        /**
-         * <pre>
-         *约束条件
-         * </pre>
-         *
-         * Protobuf type {@code Table.Column.Constraint}
-         */
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:Table.Column.Constraint)
-            com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.DBMS.proto.DBMS.internal_static_Table_Column_Constraint_descriptor;
-          }
-
-          protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.DBMS.proto.DBMS.internal_static_Table_Column_Constraint_fieldAccessorTable
-                .ensureFieldAccessorsInitialized(
-                    com.DBMS.proto.DBMS.Table.Column.Constraint.class, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder.class);
-          }
-
-          // Construct using com.DBMS.proto.DBMS.Table.Column.Constraint.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-
-          private Builder(
-              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessageV3
-                    .alwaysUseFieldBuilders) {
-            }
-          }
-          public Builder clear() {
-            super.clear();
-            constraintName_ = "";
-
-            describe_ = "";
-
-            return this;
-          }
-
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.DBMS.proto.DBMS.internal_static_Table_Column_Constraint_descriptor;
-          }
-
-          public com.DBMS.proto.DBMS.Table.Column.Constraint getDefaultInstanceForType() {
-            return com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance();
-          }
-
-          public com.DBMS.proto.DBMS.Table.Column.Constraint build() {
-            com.DBMS.proto.DBMS.Table.Column.Constraint result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-
-          public com.DBMS.proto.DBMS.Table.Column.Constraint buildPartial() {
-            com.DBMS.proto.DBMS.Table.Column.Constraint result = new com.DBMS.proto.DBMS.Table.Column.Constraint(this);
-            result.constraintName_ = constraintName_;
-            result.describe_ = describe_;
-            onBuilt();
-            return result;
-          }
-
-          public Builder clone() {
-            return (Builder) super.clone();
-          }
-          public Builder setField(
-              com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
-            return (Builder) super.setField(field, value);
-          }
-          public Builder clearField(
-              com.google.protobuf.Descriptors.FieldDescriptor field) {
-            return (Builder) super.clearField(field);
-          }
-          public Builder clearOneof(
-              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-            return (Builder) super.clearOneof(oneof);
-          }
-          public Builder setRepeatedField(
-              com.google.protobuf.Descriptors.FieldDescriptor field,
-              int index, Object value) {
-            return (Builder) super.setRepeatedField(field, index, value);
-          }
-          public Builder addRepeatedField(
-              com.google.protobuf.Descriptors.FieldDescriptor field,
-              Object value) {
-            return (Builder) super.addRepeatedField(field, value);
-          }
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.DBMS.proto.DBMS.Table.Column.Constraint) {
-              return mergeFrom((com.DBMS.proto.DBMS.Table.Column.Constraint)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-
-          public Builder mergeFrom(com.DBMS.proto.DBMS.Table.Column.Constraint other) {
-            if (other == com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance()) return this;
-            if (!other.getConstraintName().isEmpty()) {
-              constraintName_ = other.constraintName_;
-              onChanged();
-            }
-            if (!other.getDescribe().isEmpty()) {
-              describe_ = other.describe_;
-              onChanged();
-            }
-            onChanged();
-            return this;
-          }
-
-          public final boolean isInitialized() {
-            return true;
-          }
-
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.DBMS.proto.DBMS.Table.Column.Constraint parsedMessage = null;
-            try {
-              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-              parsedMessage = (com.DBMS.proto.DBMS.Table.Column.Constraint) e.getUnfinishedMessage();
-              throw e.unwrapIOException();
-            } finally {
-              if (parsedMessage != null) {
-                mergeFrom(parsedMessage);
-              }
-            }
-            return this;
-          }
-
-          private java.lang.Object constraintName_ = "";
-          /**
-           * <code>optional string constraintName = 1;</code>
-           */
-          public java.lang.String getConstraintName() {
-            java.lang.Object ref = constraintName_;
-            if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              constraintName_ = s;
-              return s;
-            } else {
-              return (java.lang.String) ref;
-            }
-          }
-          /**
-           * <code>optional string constraintName = 1;</code>
-           */
-          public com.google.protobuf.ByteString
-              getConstraintNameBytes() {
-            java.lang.Object ref = constraintName_;
-            if (ref instanceof String) {
-              com.google.protobuf.ByteString b = 
-                  com.google.protobuf.ByteString.copyFromUtf8(
-                      (java.lang.String) ref);
-              constraintName_ = b;
-              return b;
-            } else {
-              return (com.google.protobuf.ByteString) ref;
-            }
-          }
-          /**
-           * <code>optional string constraintName = 1;</code>
-           */
-          public Builder setConstraintName(
-              java.lang.String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  
-            constraintName_ = value;
-            onChanged();
-            return this;
-          }
-          /**
-           * <code>optional string constraintName = 1;</code>
-           */
-          public Builder clearConstraintName() {
-            
-            constraintName_ = getDefaultInstance().getConstraintName();
-            onChanged();
-            return this;
-          }
-          /**
-           * <code>optional string constraintName = 1;</code>
-           */
-          public Builder setConstraintNameBytes(
-              com.google.protobuf.ByteString value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-            
-            constraintName_ = value;
-            onChanged();
-            return this;
-          }
-
-          private java.lang.Object describe_ = "";
-          /**
-           * <code>optional string describe = 2;</code>
-           */
-          public java.lang.String getDescribe() {
-            java.lang.Object ref = describe_;
-            if (!(ref instanceof java.lang.String)) {
-              com.google.protobuf.ByteString bs =
-                  (com.google.protobuf.ByteString) ref;
-              java.lang.String s = bs.toStringUtf8();
-              describe_ = s;
-              return s;
-            } else {
-              return (java.lang.String) ref;
-            }
-          }
-          /**
-           * <code>optional string describe = 2;</code>
-           */
-          public com.google.protobuf.ByteString
-              getDescribeBytes() {
-            java.lang.Object ref = describe_;
-            if (ref instanceof String) {
-              com.google.protobuf.ByteString b = 
-                  com.google.protobuf.ByteString.copyFromUtf8(
-                      (java.lang.String) ref);
-              describe_ = b;
-              return b;
-            } else {
-              return (com.google.protobuf.ByteString) ref;
-            }
-          }
-          /**
-           * <code>optional string describe = 2;</code>
-           */
-          public Builder setDescribe(
-              java.lang.String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  
-            describe_ = value;
-            onChanged();
-            return this;
-          }
-          /**
-           * <code>optional string describe = 2;</code>
-           */
-          public Builder clearDescribe() {
-            
-            describe_ = getDefaultInstance().getDescribe();
-            onChanged();
-            return this;
-          }
-          /**
-           * <code>optional string describe = 2;</code>
-           */
-          public Builder setDescribeBytes(
-              com.google.protobuf.ByteString value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-            
-            describe_ = value;
-            onChanged();
-            return this;
-          }
-          public final Builder setUnknownFields(
-              final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
-          }
-
-          public final Builder mergeUnknownFields(
-              final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return this;
-          }
-
-
-          // @@protoc_insertion_point(builder_scope:Table.Column.Constraint)
-        }
-
-        // @@protoc_insertion_point(class_scope:Table.Column.Constraint)
-        private static final com.DBMS.proto.DBMS.Table.Column.Constraint DEFAULT_INSTANCE;
-        static {
-          DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.Table.Column.Constraint();
-        }
-
-        public static com.DBMS.proto.DBMS.Table.Column.Constraint getDefaultInstance() {
-          return DEFAULT_INSTANCE;
-        }
-
-        private static final com.google.protobuf.Parser<Constraint>
-            PARSER = new com.google.protobuf.AbstractParser<Constraint>() {
-          public Constraint parsePartialFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws com.google.protobuf.InvalidProtocolBufferException {
-              return new Constraint(input, extensionRegistry);
-          }
-        };
-
-        public static com.google.protobuf.Parser<Constraint> parser() {
-          return PARSER;
-        }
-
-        @java.lang.Override
-        public com.google.protobuf.Parser<Constraint> getParserForType() {
-          return PARSER;
-        }
-
-        public com.DBMS.proto.DBMS.Table.Column.Constraint getDefaultInstanceForType() {
-          return DEFAULT_INSTANCE;
-        }
-
       }
 
       private int bitField0_;
@@ -1192,39 +707,340 @@ public final class DBMS {
         return val_.getByteString(index);
       }
 
-      public static final int CONSTRAINT_FIELD_NUMBER = 5;
-      private java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> constraint_;
+      public static final int PRIMARY_FIELD_NUMBER = 5;
+      private volatile java.lang.Object primary_;
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *主键
+       * </pre>
+       *
+       * <code>optional string primary = 5;</code>
        */
-      public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> getConstraintList() {
-        return constraint_;
+      public java.lang.String getPrimary() {
+        java.lang.Object ref = primary_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          primary_ = s;
+          return s;
+        }
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *主键
+       * </pre>
+       *
+       * <code>optional string primary = 5;</code>
        */
-      public java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
-          getConstraintOrBuilderList() {
-        return constraint_;
+      public com.google.protobuf.ByteString
+          getPrimaryBytes() {
+        java.lang.Object ref = primary_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          primary_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int FOREIGN_FIELD_NUMBER = 6;
+      private volatile java.lang.Object foreign_;
+      /**
+       * <pre>
+       *外键
+       * </pre>
+       *
+       * <code>optional string foreign = 6;</code>
+       */
+      public java.lang.String getForeign() {
+        java.lang.Object ref = foreign_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          foreign_ = s;
+          return s;
+        }
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *外键
+       * </pre>
+       *
+       * <code>optional string foreign = 6;</code>
        */
-      public int getConstraintCount() {
-        return constraint_.size();
+      public com.google.protobuf.ByteString
+          getForeignBytes() {
+        java.lang.Object ref = foreign_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          foreign_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int NOTNULL_FIELD_NUMBER = 7;
+      private volatile java.lang.Object notNull_;
+      /**
+       * <pre>
+       *非空
+       * </pre>
+       *
+       * <code>optional string notNull = 7;</code>
+       */
+      public java.lang.String getNotNull() {
+        java.lang.Object ref = notNull_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          notNull_ = s;
+          return s;
+        }
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *非空
+       * </pre>
+       *
+       * <code>optional string notNull = 7;</code>
        */
-      public com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index) {
-        return constraint_.get(index);
+      public com.google.protobuf.ByteString
+          getNotNullBytes() {
+        java.lang.Object ref = notNull_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          notNull_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int UNIQUE_FIELD_NUMBER = 8;
+      private volatile java.lang.Object unique_;
+      /**
+       * <pre>
+       *唯一
+       * </pre>
+       *
+       * <code>optional string unique = 8;</code>
+       */
+      public java.lang.String getUnique() {
+        java.lang.Object ref = unique_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          unique_ = s;
+          return s;
+        }
       }
       /**
-       * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+       * <pre>
+       *唯一
+       * </pre>
+       *
+       * <code>optional string unique = 8;</code>
        */
-      public com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
-          int index) {
-        return constraint_.get(index);
+      public com.google.protobuf.ByteString
+          getUniqueBytes() {
+        java.lang.Object ref = unique_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          unique_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int DEFAULT_FIELD_NUMBER = 9;
+      private volatile java.lang.Object default_;
+      /**
+       * <pre>
+       *默认
+       * </pre>
+       *
+       * <code>optional string default = 9;</code>
+       */
+      public java.lang.String getDefault() {
+        java.lang.Object ref = default_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          default_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       *默认
+       * </pre>
+       *
+       * <code>optional string default = 9;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDefaultBytes() {
+        java.lang.Object ref = default_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          default_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int IDENTITY_FIELD_NUMBER = 10;
+      private volatile java.lang.Object identity_;
+      /**
+       * <pre>
+       *自增
+       * </pre>
+       *
+       * <code>optional string identity = 10;</code>
+       */
+      public java.lang.String getIdentity() {
+        java.lang.Object ref = identity_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          identity_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       *自增
+       * </pre>
+       *
+       * <code>optional string identity = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdentityBytes() {
+        java.lang.Object ref = identity_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          identity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int CHECK_FIELD_NUMBER = 11;
+      private volatile java.lang.Object check_;
+      /**
+       * <pre>
+       *约束
+       * </pre>
+       *
+       * <code>optional string check = 11;</code>
+       */
+      public java.lang.String getCheck() {
+        java.lang.Object ref = check_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          check_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       *约束
+       * </pre>
+       *
+       * <code>optional string check = 11;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCheckBytes() {
+        java.lang.Object ref = check_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          check_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int COMMENT_FIELD_NUMBER = 12;
+      private volatile java.lang.Object comment_;
+      /**
+       * <pre>
+       *备注
+       * </pre>
+       *
+       * <code>optional string comment = 12;</code>
+       */
+      public java.lang.String getComment() {
+        java.lang.Object ref = comment_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          comment_ = s;
+          return s;
+        }
+      }
+      /**
+       * <pre>
+       *备注
+       * </pre>
+       *
+       * <code>optional string comment = 12;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCommentBytes() {
+        java.lang.Object ref = comment_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          comment_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
 
       private byte memoizedIsInitialized = -1;
@@ -1251,8 +1067,29 @@ public final class DBMS {
         for (int i = 0; i < val_.size(); i++) {
           com.google.protobuf.GeneratedMessageV3.writeString(output, 4, val_.getRaw(i));
         }
-        for (int i = 0; i < constraint_.size(); i++) {
-          output.writeMessage(5, constraint_.get(i));
+        if (!getPrimaryBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 5, primary_);
+        }
+        if (!getForeignBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 6, foreign_);
+        }
+        if (!getNotNullBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 7, notNull_);
+        }
+        if (!getUniqueBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 8, unique_);
+        }
+        if (!getDefaultBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 9, default_);
+        }
+        if (!getIdentityBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 10, identity_);
+        }
+        if (!getCheckBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 11, check_);
+        }
+        if (!getCommentBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 12, comment_);
         }
       }
 
@@ -1278,9 +1115,29 @@ public final class DBMS {
           size += dataSize;
           size += 1 * getValList().size();
         }
-        for (int i = 0; i < constraint_.size(); i++) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(5, constraint_.get(i));
+        if (!getPrimaryBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, primary_);
+        }
+        if (!getForeignBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, foreign_);
+        }
+        if (!getNotNullBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, notNull_);
+        }
+        if (!getUniqueBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, unique_);
+        }
+        if (!getDefaultBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, default_);
+        }
+        if (!getIdentityBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, identity_);
+        }
+        if (!getCheckBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, check_);
+        }
+        if (!getCommentBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, comment_);
         }
         memoizedSize = size;
         return size;
@@ -1306,8 +1163,22 @@ public final class DBMS {
             .equals(other.getTypeLength());
         result = result && getValList()
             .equals(other.getValList());
-        result = result && getConstraintList()
-            .equals(other.getConstraintList());
+        result = result && getPrimary()
+            .equals(other.getPrimary());
+        result = result && getForeign()
+            .equals(other.getForeign());
+        result = result && getNotNull()
+            .equals(other.getNotNull());
+        result = result && getUnique()
+            .equals(other.getUnique());
+        result = result && getDefault()
+            .equals(other.getDefault());
+        result = result && getIdentity()
+            .equals(other.getIdentity());
+        result = result && getCheck()
+            .equals(other.getCheck());
+        result = result && getComment()
+            .equals(other.getComment());
         return result;
       }
 
@@ -1328,10 +1199,22 @@ public final class DBMS {
           hash = (37 * hash) + VAL_FIELD_NUMBER;
           hash = (53 * hash) + getValList().hashCode();
         }
-        if (getConstraintCount() > 0) {
-          hash = (37 * hash) + CONSTRAINT_FIELD_NUMBER;
-          hash = (53 * hash) + getConstraintList().hashCode();
-        }
+        hash = (37 * hash) + PRIMARY_FIELD_NUMBER;
+        hash = (53 * hash) + getPrimary().hashCode();
+        hash = (37 * hash) + FOREIGN_FIELD_NUMBER;
+        hash = (53 * hash) + getForeign().hashCode();
+        hash = (37 * hash) + NOTNULL_FIELD_NUMBER;
+        hash = (53 * hash) + getNotNull().hashCode();
+        hash = (37 * hash) + UNIQUE_FIELD_NUMBER;
+        hash = (53 * hash) + getUnique().hashCode();
+        hash = (37 * hash) + DEFAULT_FIELD_NUMBER;
+        hash = (53 * hash) + getDefault().hashCode();
+        hash = (37 * hash) + IDENTITY_FIELD_NUMBER;
+        hash = (53 * hash) + getIdentity().hashCode();
+        hash = (37 * hash) + CHECK_FIELD_NUMBER;
+        hash = (53 * hash) + getCheck().hashCode();
+        hash = (37 * hash) + COMMENT_FIELD_NUMBER;
+        hash = (53 * hash) + getComment().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -1446,7 +1329,6 @@ public final class DBMS {
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessageV3
                   .alwaysUseFieldBuilders) {
-            getConstraintFieldBuilder();
           }
         }
         public Builder clear() {
@@ -1459,12 +1341,22 @@ public final class DBMS {
 
           val_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000008);
-          if (constraintBuilder_ == null) {
-            constraint_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
-          } else {
-            constraintBuilder_.clear();
-          }
+          primary_ = "";
+
+          foreign_ = "";
+
+          notNull_ = "";
+
+          unique_ = "";
+
+          default_ = "";
+
+          identity_ = "";
+
+          check_ = "";
+
+          comment_ = "";
+
           return this;
         }
 
@@ -1497,15 +1389,14 @@ public final class DBMS {
             bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.val_ = val_;
-          if (constraintBuilder_ == null) {
-            if (((bitField0_ & 0x00000010) == 0x00000010)) {
-              constraint_ = java.util.Collections.unmodifiableList(constraint_);
-              bitField0_ = (bitField0_ & ~0x00000010);
-            }
-            result.constraint_ = constraint_;
-          } else {
-            result.constraint_ = constraintBuilder_.build();
-          }
+          result.primary_ = primary_;
+          result.foreign_ = foreign_;
+          result.notNull_ = notNull_;
+          result.unique_ = unique_;
+          result.default_ = default_;
+          result.identity_ = identity_;
+          result.check_ = check_;
+          result.comment_ = comment_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -1570,31 +1461,37 @@ public final class DBMS {
             }
             onChanged();
           }
-          if (constraintBuilder_ == null) {
-            if (!other.constraint_.isEmpty()) {
-              if (constraint_.isEmpty()) {
-                constraint_ = other.constraint_;
-                bitField0_ = (bitField0_ & ~0x00000010);
-              } else {
-                ensureConstraintIsMutable();
-                constraint_.addAll(other.constraint_);
-              }
-              onChanged();
-            }
-          } else {
-            if (!other.constraint_.isEmpty()) {
-              if (constraintBuilder_.isEmpty()) {
-                constraintBuilder_.dispose();
-                constraintBuilder_ = null;
-                constraint_ = other.constraint_;
-                bitField0_ = (bitField0_ & ~0x00000010);
-                constraintBuilder_ = 
-                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                     getConstraintFieldBuilder() : null;
-              } else {
-                constraintBuilder_.addAllMessages(other.constraint_);
-              }
-            }
+          if (!other.getPrimary().isEmpty()) {
+            primary_ = other.primary_;
+            onChanged();
+          }
+          if (!other.getForeign().isEmpty()) {
+            foreign_ = other.foreign_;
+            onChanged();
+          }
+          if (!other.getNotNull().isEmpty()) {
+            notNull_ = other.notNull_;
+            onChanged();
+          }
+          if (!other.getUnique().isEmpty()) {
+            unique_ = other.unique_;
+            onChanged();
+          }
+          if (!other.getDefault().isEmpty()) {
+            default_ = other.default_;
+            onChanged();
+          }
+          if (!other.getIdentity().isEmpty()) {
+            identity_ = other.identity_;
+            onChanged();
+          }
+          if (!other.getCheck().isEmpty()) {
+            check_ = other.check_;
+            onChanged();
+          }
+          if (!other.getComment().isEmpty()) {
+            comment_ = other.comment_;
+            onChanged();
           }
           onChanged();
           return this;
@@ -2020,244 +1917,716 @@ public final class DBMS {
           return this;
         }
 
-        private java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> constraint_ =
-          java.util.Collections.emptyList();
-        private void ensureConstraintIsMutable() {
-          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-            constraint_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Table.Column.Constraint>(constraint_);
-            bitField0_ |= 0x00000010;
-           }
+        private java.lang.Object primary_ = "";
+        /**
+         * <pre>
+         *主键
+         * </pre>
+         *
+         * <code>optional string primary = 5;</code>
+         */
+        public java.lang.String getPrimary() {
+          java.lang.Object ref = primary_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            primary_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         *主键
+         * </pre>
+         *
+         * <code>optional string primary = 5;</code>
+         */
+        public com.google.protobuf.ByteString
+            getPrimaryBytes() {
+          java.lang.Object ref = primary_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            primary_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *主键
+         * </pre>
+         *
+         * <code>optional string primary = 5;</code>
+         */
+        public Builder setPrimary(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          primary_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *主键
+         * </pre>
+         *
+         * <code>optional string primary = 5;</code>
+         */
+        public Builder clearPrimary() {
+          
+          primary_ = getDefaultInstance().getPrimary();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *主键
+         * </pre>
+         *
+         * <code>optional string primary = 5;</code>
+         */
+        public Builder setPrimaryBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          primary_ = value;
+          onChanged();
+          return this;
         }
 
-        private com.google.protobuf.RepeatedFieldBuilderV3<
-            com.DBMS.proto.DBMS.Table.Column.Constraint, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder, com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> constraintBuilder_;
+        private java.lang.Object foreign_ = "";
+        /**
+         * <pre>
+         *外键
+         * </pre>
+         *
+         * <code>optional string foreign = 6;</code>
+         */
+        public java.lang.String getForeign() {
+          java.lang.Object ref = foreign_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            foreign_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <pre>
+         *外键
+         * </pre>
+         *
+         * <code>optional string foreign = 6;</code>
+         */
+        public com.google.protobuf.ByteString
+            getForeignBytes() {
+          java.lang.Object ref = foreign_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            foreign_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *外键
+         * </pre>
+         *
+         * <code>optional string foreign = 6;</code>
+         */
+        public Builder setForeign(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          foreign_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *外键
+         * </pre>
+         *
+         * <code>optional string foreign = 6;</code>
+         */
+        public Builder clearForeign() {
+          
+          foreign_ = getDefaultInstance().getForeign();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *外键
+         * </pre>
+         *
+         * <code>optional string foreign = 6;</code>
+         */
+        public Builder setForeignBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          foreign_ = value;
+          onChanged();
+          return this;
+        }
 
+        private java.lang.Object notNull_ = "";
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *非空
+         * </pre>
+         *
+         * <code>optional string notNull = 7;</code>
          */
-        public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint> getConstraintList() {
-          if (constraintBuilder_ == null) {
-            return java.util.Collections.unmodifiableList(constraint_);
+        public java.lang.String getNotNull() {
+          java.lang.Object ref = notNull_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            notNull_ = s;
+            return s;
           } else {
-            return constraintBuilder_.getMessageList();
+            return (java.lang.String) ref;
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *非空
+         * </pre>
+         *
+         * <code>optional string notNull = 7;</code>
          */
-        public int getConstraintCount() {
-          if (constraintBuilder_ == null) {
-            return constraint_.size();
+        public com.google.protobuf.ByteString
+            getNotNullBytes() {
+          java.lang.Object ref = notNull_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            notNull_ = b;
+            return b;
           } else {
-            return constraintBuilder_.getCount();
+            return (com.google.protobuf.ByteString) ref;
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *非空
+         * </pre>
+         *
+         * <code>optional string notNull = 7;</code>
          */
-        public com.DBMS.proto.DBMS.Table.Column.Constraint getConstraint(int index) {
-          if (constraintBuilder_ == null) {
-            return constraint_.get(index);
-          } else {
-            return constraintBuilder_.getMessage(index);
-          }
-        }
-        /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
-         */
-        public Builder setConstraint(
-            int index, com.DBMS.proto.DBMS.Table.Column.Constraint value) {
-          if (constraintBuilder_ == null) {
-            if (value == null) {
-              throw new NullPointerException();
-            }
-            ensureConstraintIsMutable();
-            constraint_.set(index, value);
-            onChanged();
-          } else {
-            constraintBuilder_.setMessage(index, value);
-          }
+        public Builder setNotNull(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          notNull_ = value;
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *非空
+         * </pre>
+         *
+         * <code>optional string notNull = 7;</code>
          */
-        public Builder setConstraint(
-            int index, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
-          if (constraintBuilder_ == null) {
-            ensureConstraintIsMutable();
-            constraint_.set(index, builderForValue.build());
-            onChanged();
-          } else {
-            constraintBuilder_.setMessage(index, builderForValue.build());
-          }
+        public Builder clearNotNull() {
+          
+          notNull_ = getDefaultInstance().getNotNull();
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *非空
+         * </pre>
+         *
+         * <code>optional string notNull = 7;</code>
          */
-        public Builder addConstraint(com.DBMS.proto.DBMS.Table.Column.Constraint value) {
-          if (constraintBuilder_ == null) {
-            if (value == null) {
-              throw new NullPointerException();
-            }
-            ensureConstraintIsMutable();
-            constraint_.add(value);
-            onChanged();
+        public Builder setNotNullBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          notNull_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object unique_ = "";
+        /**
+         * <pre>
+         *唯一
+         * </pre>
+         *
+         * <code>optional string unique = 8;</code>
+         */
+        public java.lang.String getUnique() {
+          java.lang.Object ref = unique_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            unique_ = s;
+            return s;
           } else {
-            constraintBuilder_.addMessage(value);
+            return (java.lang.String) ref;
           }
+        }
+        /**
+         * <pre>
+         *唯一
+         * </pre>
+         *
+         * <code>optional string unique = 8;</code>
+         */
+        public com.google.protobuf.ByteString
+            getUniqueBytes() {
+          java.lang.Object ref = unique_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            unique_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *唯一
+         * </pre>
+         *
+         * <code>optional string unique = 8;</code>
+         */
+        public Builder setUnique(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          unique_ = value;
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *唯一
+         * </pre>
+         *
+         * <code>optional string unique = 8;</code>
          */
-        public Builder addConstraint(
-            int index, com.DBMS.proto.DBMS.Table.Column.Constraint value) {
-          if (constraintBuilder_ == null) {
-            if (value == null) {
-              throw new NullPointerException();
-            }
-            ensureConstraintIsMutable();
-            constraint_.add(index, value);
-            onChanged();
-          } else {
-            constraintBuilder_.addMessage(index, value);
-          }
+        public Builder clearUnique() {
+          
+          unique_ = getDefaultInstance().getUnique();
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *唯一
+         * </pre>
+         *
+         * <code>optional string unique = 8;</code>
          */
-        public Builder addConstraint(
-            com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
-          if (constraintBuilder_ == null) {
-            ensureConstraintIsMutable();
-            constraint_.add(builderForValue.build());
-            onChanged();
+        public Builder setUniqueBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          unique_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object default_ = "";
+        /**
+         * <pre>
+         *默认
+         * </pre>
+         *
+         * <code>optional string default = 9;</code>
+         */
+        public java.lang.String getDefault() {
+          java.lang.Object ref = default_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            default_ = s;
+            return s;
           } else {
-            constraintBuilder_.addMessage(builderForValue.build());
+            return (java.lang.String) ref;
           }
+        }
+        /**
+         * <pre>
+         *默认
+         * </pre>
+         *
+         * <code>optional string default = 9;</code>
+         */
+        public com.google.protobuf.ByteString
+            getDefaultBytes() {
+          java.lang.Object ref = default_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            default_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *默认
+         * </pre>
+         *
+         * <code>optional string default = 9;</code>
+         */
+        public Builder setDefault(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          default_ = value;
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *默认
+         * </pre>
+         *
+         * <code>optional string default = 9;</code>
          */
-        public Builder addConstraint(
-            int index, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder builderForValue) {
-          if (constraintBuilder_ == null) {
-            ensureConstraintIsMutable();
-            constraint_.add(index, builderForValue.build());
-            onChanged();
-          } else {
-            constraintBuilder_.addMessage(index, builderForValue.build());
-          }
+        public Builder clearDefault() {
+          
+          default_ = getDefaultInstance().getDefault();
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *默认
+         * </pre>
+         *
+         * <code>optional string default = 9;</code>
          */
-        public Builder addAllConstraint(
-            java.lang.Iterable<? extends com.DBMS.proto.DBMS.Table.Column.Constraint> values) {
-          if (constraintBuilder_ == null) {
-            ensureConstraintIsMutable();
-            com.google.protobuf.AbstractMessageLite.Builder.addAll(
-                values, constraint_);
-            onChanged();
+        public Builder setDefaultBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          default_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object identity_ = "";
+        /**
+         * <pre>
+         *自增
+         * </pre>
+         *
+         * <code>optional string identity = 10;</code>
+         */
+        public java.lang.String getIdentity() {
+          java.lang.Object ref = identity_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            identity_ = s;
+            return s;
           } else {
-            constraintBuilder_.addAllMessages(values);
+            return (java.lang.String) ref;
           }
+        }
+        /**
+         * <pre>
+         *自增
+         * </pre>
+         *
+         * <code>optional string identity = 10;</code>
+         */
+        public com.google.protobuf.ByteString
+            getIdentityBytes() {
+          java.lang.Object ref = identity_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            identity_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *自增
+         * </pre>
+         *
+         * <code>optional string identity = 10;</code>
+         */
+        public Builder setIdentity(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          identity_ = value;
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *自增
+         * </pre>
+         *
+         * <code>optional string identity = 10;</code>
          */
-        public Builder clearConstraint() {
-          if (constraintBuilder_ == null) {
-            constraint_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
-            onChanged();
-          } else {
-            constraintBuilder_.clear();
-          }
+        public Builder clearIdentity() {
+          
+          identity_ = getDefaultInstance().getIdentity();
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *自增
+         * </pre>
+         *
+         * <code>optional string identity = 10;</code>
          */
-        public Builder removeConstraint(int index) {
-          if (constraintBuilder_ == null) {
-            ensureConstraintIsMutable();
-            constraint_.remove(index);
-            onChanged();
+        public Builder setIdentityBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          identity_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object check_ = "";
+        /**
+         * <pre>
+         *约束
+         * </pre>
+         *
+         * <code>optional string check = 11;</code>
+         */
+        public java.lang.String getCheck() {
+          java.lang.Object ref = check_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            check_ = s;
+            return s;
           } else {
-            constraintBuilder_.remove(index);
+            return (java.lang.String) ref;
           }
+        }
+        /**
+         * <pre>
+         *约束
+         * </pre>
+         *
+         * <code>optional string check = 11;</code>
+         */
+        public com.google.protobuf.ByteString
+            getCheckBytes() {
+          java.lang.Object ref = check_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            check_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <pre>
+         *约束
+         * </pre>
+         *
+         * <code>optional string check = 11;</code>
+         */
+        public Builder setCheck(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          check_ = value;
+          onChanged();
           return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *约束
+         * </pre>
+         *
+         * <code>optional string check = 11;</code>
          */
-        public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder getConstraintBuilder(
-            int index) {
-          return getConstraintFieldBuilder().getBuilder(index);
+        public Builder clearCheck() {
+          
+          check_ = getDefaultInstance().getCheck();
+          onChanged();
+          return this;
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *约束
+         * </pre>
+         *
+         * <code>optional string check = 11;</code>
          */
-        public com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder getConstraintOrBuilder(
-            int index) {
-          if (constraintBuilder_ == null) {
-            return constraint_.get(index);  } else {
-            return constraintBuilder_.getMessageOrBuilder(index);
-          }
+        public Builder setCheckBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          check_ = value;
+          onChanged();
+          return this;
         }
+
+        private java.lang.Object comment_ = "";
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *备注
+         * </pre>
+         *
+         * <code>optional string comment = 12;</code>
          */
-        public java.util.List<? extends com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
-             getConstraintOrBuilderList() {
-          if (constraintBuilder_ != null) {
-            return constraintBuilder_.getMessageOrBuilderList();
+        public java.lang.String getComment() {
+          java.lang.Object ref = comment_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            comment_ = s;
+            return s;
           } else {
-            return java.util.Collections.unmodifiableList(constraint_);
+            return (java.lang.String) ref;
           }
         }
         /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
+         * <pre>
+         *备注
+         * </pre>
+         *
+         * <code>optional string comment = 12;</code>
          */
-        public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder addConstraintBuilder() {
-          return getConstraintFieldBuilder().addBuilder(
-              com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance());
-        }
-        /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
-         */
-        public com.DBMS.proto.DBMS.Table.Column.Constraint.Builder addConstraintBuilder(
-            int index) {
-          return getConstraintFieldBuilder().addBuilder(
-              index, com.DBMS.proto.DBMS.Table.Column.Constraint.getDefaultInstance());
-        }
-        /**
-         * <code>repeated .Table.Column.Constraint constraint = 5;</code>
-         */
-        public java.util.List<com.DBMS.proto.DBMS.Table.Column.Constraint.Builder> 
-             getConstraintBuilderList() {
-          return getConstraintFieldBuilder().getBuilderList();
-        }
-        private com.google.protobuf.RepeatedFieldBuilderV3<
-            com.DBMS.proto.DBMS.Table.Column.Constraint, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder, com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder> 
-            getConstraintFieldBuilder() {
-          if (constraintBuilder_ == null) {
-            constraintBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-                com.DBMS.proto.DBMS.Table.Column.Constraint, com.DBMS.proto.DBMS.Table.Column.Constraint.Builder, com.DBMS.proto.DBMS.Table.Column.ConstraintOrBuilder>(
-                    constraint_,
-                    ((bitField0_ & 0x00000010) == 0x00000010),
-                    getParentForChildren(),
-                    isClean());
-            constraint_ = null;
+        public com.google.protobuf.ByteString
+            getCommentBytes() {
+          java.lang.Object ref = comment_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            comment_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
           }
-          return constraintBuilder_;
+        }
+        /**
+         * <pre>
+         *备注
+         * </pre>
+         *
+         * <code>optional string comment = 12;</code>
+         */
+        public Builder setComment(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          comment_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *备注
+         * </pre>
+         *
+         * <code>optional string comment = 12;</code>
+         */
+        public Builder clearComment() {
+          
+          comment_ = getDefaultInstance().getComment();
+          onChanged();
+          return this;
+        }
+        /**
+         * <pre>
+         *备注
+         * </pre>
+         *
+         * <code>optional string comment = 12;</code>
+         */
+        public Builder setCommentBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          comment_ = value;
+          onChanged();
+          return this;
         }
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4744,6 +5113,3671 @@ public final class DBMS {
 
   }
 
+  public interface TBMessageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:TBMessage)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    java.util.List<com.DBMS.proto.DBMS.TBMessage.TB> 
+        getTbList();
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    com.DBMS.proto.DBMS.TBMessage.TB getTb(int index);
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    int getTbCount();
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    java.util.List<? extends com.DBMS.proto.DBMS.TBMessage.TBOrBuilder> 
+        getTbOrBuilderList();
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    com.DBMS.proto.DBMS.TBMessage.TBOrBuilder getTbOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code TBMessage}
+   */
+  public  static final class TBMessage extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:TBMessage)
+      TBMessageOrBuilder {
+    // Use TBMessage.newBuilder() to construct.
+    private TBMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TBMessage() {
+      tb_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private TBMessage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                tb_ = new java.util.ArrayList<com.DBMS.proto.DBMS.TBMessage.TB>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              tb_.add(
+                  input.readMessage(com.DBMS.proto.DBMS.TBMessage.TB.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          tb_ = java.util.Collections.unmodifiableList(tb_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.DBMS.proto.DBMS.internal_static_TBMessage_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.DBMS.proto.DBMS.internal_static_TBMessage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.DBMS.proto.DBMS.TBMessage.class, com.DBMS.proto.DBMS.TBMessage.Builder.class);
+    }
+
+    public interface TBOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:TBMessage.TB)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional string TBName = 1;</code>
+       */
+      java.lang.String getTBName();
+      /**
+       * <code>optional string TBName = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getTBNameBytes();
+
+      /**
+       * <code>optional string createDate = 2;</code>
+       */
+      java.lang.String getCreateDate();
+      /**
+       * <code>optional string createDate = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getCreateDateBytes();
+    }
+    /**
+     * Protobuf type {@code TBMessage.TB}
+     */
+    public  static final class TB extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:TBMessage.TB)
+        TBOrBuilder {
+      // Use TB.newBuilder() to construct.
+      private TB(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private TB() {
+        tBName_ = "";
+        createDate_ = "";
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private TB(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                tBName_ = s;
+                break;
+              }
+              case 18: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                createDate_ = s;
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.DBMS.proto.DBMS.internal_static_TBMessage_TB_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.DBMS.proto.DBMS.internal_static_TBMessage_TB_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.DBMS.proto.DBMS.TBMessage.TB.class, com.DBMS.proto.DBMS.TBMessage.TB.Builder.class);
+      }
+
+      public static final int TBNAME_FIELD_NUMBER = 1;
+      private volatile java.lang.Object tBName_;
+      /**
+       * <code>optional string TBName = 1;</code>
+       */
+      public java.lang.String getTBName() {
+        java.lang.Object ref = tBName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tBName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string TBName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTBNameBytes() {
+        java.lang.Object ref = tBName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tBName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int CREATEDATE_FIELD_NUMBER = 2;
+      private volatile java.lang.Object createDate_;
+      /**
+       * <code>optional string createDate = 2;</code>
+       */
+      public java.lang.String getCreateDate() {
+        java.lang.Object ref = createDate_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          createDate_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string createDate = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCreateDateBytes() {
+        java.lang.Object ref = createDate_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          createDate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getTBNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tBName_);
+        }
+        if (!getCreateDateBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, createDate_);
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getTBNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tBName_);
+        }
+        if (!getCreateDateBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, createDate_);
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.DBMS.proto.DBMS.TBMessage.TB)) {
+          return super.equals(obj);
+        }
+        com.DBMS.proto.DBMS.TBMessage.TB other = (com.DBMS.proto.DBMS.TBMessage.TB) obj;
+
+        boolean result = true;
+        result = result && getTBName()
+            .equals(other.getTBName());
+        result = result && getCreateDate()
+            .equals(other.getCreateDate());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + TBNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getTBName().hashCode();
+        hash = (37 * hash) + CREATEDATE_FIELD_NUMBER;
+        hash = (53 * hash) + getCreateDate().hashCode();
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.TBMessage.TB parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.DBMS.proto.DBMS.TBMessage.TB prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code TBMessage.TB}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:TBMessage.TB)
+          com.DBMS.proto.DBMS.TBMessage.TBOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.DBMS.proto.DBMS.internal_static_TBMessage_TB_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.DBMS.proto.DBMS.internal_static_TBMessage_TB_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.DBMS.proto.DBMS.TBMessage.TB.class, com.DBMS.proto.DBMS.TBMessage.TB.Builder.class);
+        }
+
+        // Construct using com.DBMS.proto.DBMS.TBMessage.TB.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          tBName_ = "";
+
+          createDate_ = "";
+
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.DBMS.proto.DBMS.internal_static_TBMessage_TB_descriptor;
+        }
+
+        public com.DBMS.proto.DBMS.TBMessage.TB getDefaultInstanceForType() {
+          return com.DBMS.proto.DBMS.TBMessage.TB.getDefaultInstance();
+        }
+
+        public com.DBMS.proto.DBMS.TBMessage.TB build() {
+          com.DBMS.proto.DBMS.TBMessage.TB result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.DBMS.proto.DBMS.TBMessage.TB buildPartial() {
+          com.DBMS.proto.DBMS.TBMessage.TB result = new com.DBMS.proto.DBMS.TBMessage.TB(this);
+          result.tBName_ = tBName_;
+          result.createDate_ = createDate_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.DBMS.proto.DBMS.TBMessage.TB) {
+            return mergeFrom((com.DBMS.proto.DBMS.TBMessage.TB)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.DBMS.proto.DBMS.TBMessage.TB other) {
+          if (other == com.DBMS.proto.DBMS.TBMessage.TB.getDefaultInstance()) return this;
+          if (!other.getTBName().isEmpty()) {
+            tBName_ = other.tBName_;
+            onChanged();
+          }
+          if (!other.getCreateDate().isEmpty()) {
+            createDate_ = other.createDate_;
+            onChanged();
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.DBMS.proto.DBMS.TBMessage.TB parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.DBMS.proto.DBMS.TBMessage.TB) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private java.lang.Object tBName_ = "";
+        /**
+         * <code>optional string TBName = 1;</code>
+         */
+        public java.lang.String getTBName() {
+          java.lang.Object ref = tBName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            tBName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string TBName = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getTBNameBytes() {
+          java.lang.Object ref = tBName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            tBName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string TBName = 1;</code>
+         */
+        public Builder setTBName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          tBName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string TBName = 1;</code>
+         */
+        public Builder clearTBName() {
+          
+          tBName_ = getDefaultInstance().getTBName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string TBName = 1;</code>
+         */
+        public Builder setTBNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          tBName_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object createDate_ = "";
+        /**
+         * <code>optional string createDate = 2;</code>
+         */
+        public java.lang.String getCreateDate() {
+          java.lang.Object ref = createDate_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            createDate_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string createDate = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getCreateDateBytes() {
+          java.lang.Object ref = createDate_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            createDate_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string createDate = 2;</code>
+         */
+        public Builder setCreateDate(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          createDate_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string createDate = 2;</code>
+         */
+        public Builder clearCreateDate() {
+          
+          createDate_ = getDefaultInstance().getCreateDate();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string createDate = 2;</code>
+         */
+        public Builder setCreateDateBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          createDate_ = value;
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:TBMessage.TB)
+      }
+
+      // @@protoc_insertion_point(class_scope:TBMessage.TB)
+      private static final com.DBMS.proto.DBMS.TBMessage.TB DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.TBMessage.TB();
+      }
+
+      public static com.DBMS.proto.DBMS.TBMessage.TB getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<TB>
+          PARSER = new com.google.protobuf.AbstractParser<TB>() {
+        public TB parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new TB(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<TB> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<TB> getParserForType() {
+        return PARSER;
+      }
+
+      public com.DBMS.proto.DBMS.TBMessage.TB getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    public static final int TB_FIELD_NUMBER = 1;
+    private java.util.List<com.DBMS.proto.DBMS.TBMessage.TB> tb_;
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    public java.util.List<com.DBMS.proto.DBMS.TBMessage.TB> getTbList() {
+      return tb_;
+    }
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    public java.util.List<? extends com.DBMS.proto.DBMS.TBMessage.TBOrBuilder> 
+        getTbOrBuilderList() {
+      return tb_;
+    }
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    public int getTbCount() {
+      return tb_.size();
+    }
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    public com.DBMS.proto.DBMS.TBMessage.TB getTb(int index) {
+      return tb_.get(index);
+    }
+    /**
+     * <code>repeated .TBMessage.TB tb = 1;</code>
+     */
+    public com.DBMS.proto.DBMS.TBMessage.TBOrBuilder getTbOrBuilder(
+        int index) {
+      return tb_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < tb_.size(); i++) {
+        output.writeMessage(1, tb_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < tb_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, tb_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.DBMS.proto.DBMS.TBMessage)) {
+        return super.equals(obj);
+      }
+      com.DBMS.proto.DBMS.TBMessage other = (com.DBMS.proto.DBMS.TBMessage) obj;
+
+      boolean result = true;
+      result = result && getTbList()
+          .equals(other.getTbList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getTbCount() > 0) {
+        hash = (37 * hash) + TB_FIELD_NUMBER;
+        hash = (53 * hash) + getTbList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.TBMessage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.DBMS.proto.DBMS.TBMessage prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TBMessage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:TBMessage)
+        com.DBMS.proto.DBMS.TBMessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.DBMS.proto.DBMS.internal_static_TBMessage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.DBMS.proto.DBMS.internal_static_TBMessage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.DBMS.proto.DBMS.TBMessage.class, com.DBMS.proto.DBMS.TBMessage.Builder.class);
+      }
+
+      // Construct using com.DBMS.proto.DBMS.TBMessage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getTbFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (tbBuilder_ == null) {
+          tb_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          tbBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.DBMS.proto.DBMS.internal_static_TBMessage_descriptor;
+      }
+
+      public com.DBMS.proto.DBMS.TBMessage getDefaultInstanceForType() {
+        return com.DBMS.proto.DBMS.TBMessage.getDefaultInstance();
+      }
+
+      public com.DBMS.proto.DBMS.TBMessage build() {
+        com.DBMS.proto.DBMS.TBMessage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.DBMS.proto.DBMS.TBMessage buildPartial() {
+        com.DBMS.proto.DBMS.TBMessage result = new com.DBMS.proto.DBMS.TBMessage(this);
+        int from_bitField0_ = bitField0_;
+        if (tbBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            tb_ = java.util.Collections.unmodifiableList(tb_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.tb_ = tb_;
+        } else {
+          result.tb_ = tbBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.DBMS.proto.DBMS.TBMessage) {
+          return mergeFrom((com.DBMS.proto.DBMS.TBMessage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.DBMS.proto.DBMS.TBMessage other) {
+        if (other == com.DBMS.proto.DBMS.TBMessage.getDefaultInstance()) return this;
+        if (tbBuilder_ == null) {
+          if (!other.tb_.isEmpty()) {
+            if (tb_.isEmpty()) {
+              tb_ = other.tb_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureTbIsMutable();
+              tb_.addAll(other.tb_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.tb_.isEmpty()) {
+            if (tbBuilder_.isEmpty()) {
+              tbBuilder_.dispose();
+              tbBuilder_ = null;
+              tb_ = other.tb_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              tbBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getTbFieldBuilder() : null;
+            } else {
+              tbBuilder_.addAllMessages(other.tb_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.DBMS.proto.DBMS.TBMessage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.DBMS.proto.DBMS.TBMessage) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.DBMS.proto.DBMS.TBMessage.TB> tb_ =
+        java.util.Collections.emptyList();
+      private void ensureTbIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          tb_ = new java.util.ArrayList<com.DBMS.proto.DBMS.TBMessage.TB>(tb_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.DBMS.proto.DBMS.TBMessage.TB, com.DBMS.proto.DBMS.TBMessage.TB.Builder, com.DBMS.proto.DBMS.TBMessage.TBOrBuilder> tbBuilder_;
+
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public java.util.List<com.DBMS.proto.DBMS.TBMessage.TB> getTbList() {
+        if (tbBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(tb_);
+        } else {
+          return tbBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public int getTbCount() {
+        if (tbBuilder_ == null) {
+          return tb_.size();
+        } else {
+          return tbBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.TBMessage.TB getTb(int index) {
+        if (tbBuilder_ == null) {
+          return tb_.get(index);
+        } else {
+          return tbBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder setTb(
+          int index, com.DBMS.proto.DBMS.TBMessage.TB value) {
+        if (tbBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTbIsMutable();
+          tb_.set(index, value);
+          onChanged();
+        } else {
+          tbBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder setTb(
+          int index, com.DBMS.proto.DBMS.TBMessage.TB.Builder builderForValue) {
+        if (tbBuilder_ == null) {
+          ensureTbIsMutable();
+          tb_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          tbBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder addTb(com.DBMS.proto.DBMS.TBMessage.TB value) {
+        if (tbBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTbIsMutable();
+          tb_.add(value);
+          onChanged();
+        } else {
+          tbBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder addTb(
+          int index, com.DBMS.proto.DBMS.TBMessage.TB value) {
+        if (tbBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureTbIsMutable();
+          tb_.add(index, value);
+          onChanged();
+        } else {
+          tbBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder addTb(
+          com.DBMS.proto.DBMS.TBMessage.TB.Builder builderForValue) {
+        if (tbBuilder_ == null) {
+          ensureTbIsMutable();
+          tb_.add(builderForValue.build());
+          onChanged();
+        } else {
+          tbBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder addTb(
+          int index, com.DBMS.proto.DBMS.TBMessage.TB.Builder builderForValue) {
+        if (tbBuilder_ == null) {
+          ensureTbIsMutable();
+          tb_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          tbBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder addAllTb(
+          java.lang.Iterable<? extends com.DBMS.proto.DBMS.TBMessage.TB> values) {
+        if (tbBuilder_ == null) {
+          ensureTbIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, tb_);
+          onChanged();
+        } else {
+          tbBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder clearTb() {
+        if (tbBuilder_ == null) {
+          tb_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          tbBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public Builder removeTb(int index) {
+        if (tbBuilder_ == null) {
+          ensureTbIsMutable();
+          tb_.remove(index);
+          onChanged();
+        } else {
+          tbBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.TBMessage.TB.Builder getTbBuilder(
+          int index) {
+        return getTbFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.TBMessage.TBOrBuilder getTbOrBuilder(
+          int index) {
+        if (tbBuilder_ == null) {
+          return tb_.get(index);  } else {
+          return tbBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public java.util.List<? extends com.DBMS.proto.DBMS.TBMessage.TBOrBuilder> 
+           getTbOrBuilderList() {
+        if (tbBuilder_ != null) {
+          return tbBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(tb_);
+        }
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.TBMessage.TB.Builder addTbBuilder() {
+        return getTbFieldBuilder().addBuilder(
+            com.DBMS.proto.DBMS.TBMessage.TB.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.TBMessage.TB.Builder addTbBuilder(
+          int index) {
+        return getTbFieldBuilder().addBuilder(
+            index, com.DBMS.proto.DBMS.TBMessage.TB.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .TBMessage.TB tb = 1;</code>
+       */
+      public java.util.List<com.DBMS.proto.DBMS.TBMessage.TB.Builder> 
+           getTbBuilderList() {
+        return getTbFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.DBMS.proto.DBMS.TBMessage.TB, com.DBMS.proto.DBMS.TBMessage.TB.Builder, com.DBMS.proto.DBMS.TBMessage.TBOrBuilder> 
+          getTbFieldBuilder() {
+        if (tbBuilder_ == null) {
+          tbBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.DBMS.proto.DBMS.TBMessage.TB, com.DBMS.proto.DBMS.TBMessage.TB.Builder, com.DBMS.proto.DBMS.TBMessage.TBOrBuilder>(
+                  tb_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          tb_ = null;
+        }
+        return tbBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:TBMessage)
+    }
+
+    // @@protoc_insertion_point(class_scope:TBMessage)
+    private static final com.DBMS.proto.DBMS.TBMessage DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.TBMessage();
+    }
+
+    public static com.DBMS.proto.DBMS.TBMessage getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TBMessage>
+        PARSER = new com.google.protobuf.AbstractParser<TBMessage>() {
+      public TBMessage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TBMessage(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TBMessage> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TBMessage> getParserForType() {
+      return PARSER;
+    }
+
+    public com.DBMS.proto.DBMS.TBMessage getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface IndexOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Index)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    java.util.List<com.DBMS.proto.DBMS.Index.IX> 
+        getIxList();
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    com.DBMS.proto.DBMS.Index.IX getIx(int index);
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    int getIxCount();
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    java.util.List<? extends com.DBMS.proto.DBMS.Index.IXOrBuilder> 
+        getIxOrBuilderList();
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    com.DBMS.proto.DBMS.Index.IXOrBuilder getIxOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code Index}
+   */
+  public  static final class Index extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Index)
+      IndexOrBuilder {
+    // Use Index.newBuilder() to construct.
+    private Index(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Index() {
+      ix_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Index(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                ix_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              ix_.add(
+                  input.readMessage(com.DBMS.proto.DBMS.Index.IX.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          ix_ = java.util.Collections.unmodifiableList(ix_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.DBMS.proto.DBMS.internal_static_Index_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.DBMS.proto.DBMS.internal_static_Index_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.DBMS.proto.DBMS.Index.class, com.DBMS.proto.DBMS.Index.Builder.class);
+    }
+
+    public interface IXOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:Index.IX)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      java.lang.String getName();
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getNameBytes();
+
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> 
+          getMapList();
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      com.DBMS.proto.DBMS.Index.IX.Map getMap(int index);
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      int getMapCount();
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
+          getMapOrBuilderList();
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
+          int index);
+    }
+    /**
+     * Protobuf type {@code Index.IX}
+     */
+    public  static final class IX extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:Index.IX)
+        IXOrBuilder {
+      // Use IX.newBuilder() to construct.
+      private IX(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private IX() {
+        name_ = "";
+        map_ = java.util.Collections.emptyList();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private IX(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                name_ = s;
+                break;
+              }
+              case 18: {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  map_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX.Map>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                map_.add(
+                    input.readMessage(com.DBMS.proto.DBMS.Index.IX.Map.parser(), extensionRegistry));
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            map_ = java.util.Collections.unmodifiableList(map_);
+          }
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.DBMS.proto.DBMS.internal_static_Index_IX_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.DBMS.proto.DBMS.internal_static_Index_IX_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.DBMS.proto.DBMS.Index.IX.class, com.DBMS.proto.DBMS.Index.IX.Builder.class);
+      }
+
+      public interface MapOrBuilder extends
+          // @@protoc_insertion_point(interface_extends:Index.IX.Map)
+          com.google.protobuf.MessageOrBuilder {
+
+        /**
+         * <code>optional string key = 1;</code>
+         */
+        java.lang.String getKey();
+        /**
+         * <code>optional string key = 1;</code>
+         */
+        com.google.protobuf.ByteString
+            getKeyBytes();
+
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        java.util.List<java.lang.Integer> getValList();
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        int getValCount();
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        int getVal(int index);
+      }
+      /**
+       * Protobuf type {@code Index.IX.Map}
+       */
+      public  static final class Map extends
+          com.google.protobuf.GeneratedMessageV3 implements
+          // @@protoc_insertion_point(message_implements:Index.IX.Map)
+          MapOrBuilder {
+        // Use Map.newBuilder() to construct.
+        private Map(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+          super(builder);
+        }
+        private Map() {
+          key_ = "";
+          val_ = java.util.Collections.emptyList();
+        }
+
+        @java.lang.Override
+        public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+          return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+        }
+        private Map(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          this();
+          int mutable_bitField0_ = 0;
+          try {
+            boolean done = false;
+            while (!done) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  done = true;
+                  break;
+                default: {
+                  if (!input.skipField(tag)) {
+                    done = true;
+                  }
+                  break;
+                }
+                case 10: {
+                  java.lang.String s = input.readStringRequireUtf8();
+
+                  key_ = s;
+                  break;
+                }
+                case 16: {
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                    val_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  val_.add(input.readInt32());
+                  break;
+                }
+                case 18: {
+                  int length = input.readRawVarint32();
+                  int limit = input.pushLimit(length);
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                    val_ = new java.util.ArrayList<java.lang.Integer>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  while (input.getBytesUntilLimit() > 0) {
+                    val_.add(input.readInt32());
+                  }
+                  input.popLimit(limit);
+                  break;
+                }
+              }
+            }
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+          } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                e).setUnfinishedMessage(this);
+          } finally {
+            if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              val_ = java.util.Collections.unmodifiableList(val_);
+            }
+            makeExtensionsImmutable();
+          }
+        }
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.DBMS.proto.DBMS.internal_static_Index_IX_Map_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.DBMS.proto.DBMS.internal_static_Index_IX_Map_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.DBMS.proto.DBMS.Index.IX.Map.class, com.DBMS.proto.DBMS.Index.IX.Map.Builder.class);
+        }
+
+        private int bitField0_;
+        public static final int KEY_FIELD_NUMBER = 1;
+        private volatile java.lang.Object key_;
+        /**
+         * <code>optional string key = 1;</code>
+         */
+        public java.lang.String getKey() {
+          java.lang.Object ref = key_;
+          if (ref instanceof java.lang.String) {
+            return (java.lang.String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            key_ = s;
+            return s;
+          }
+        }
+        /**
+         * <code>optional string key = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getKeyBytes() {
+          java.lang.Object ref = key_;
+          if (ref instanceof java.lang.String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            key_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+
+        public static final int VAL_FIELD_NUMBER = 2;
+        private java.util.List<java.lang.Integer> val_;
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getValList() {
+          return val_;
+        }
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        public int getValCount() {
+          return val_.size();
+        }
+        /**
+         * <code>repeated int32 val = 2;</code>
+         */
+        public int getVal(int index) {
+          return val_.get(index);
+        }
+        private int valMemoizedSerializedSize = -1;
+
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized == 1) return true;
+          if (isInitialized == 0) return false;
+
+          memoizedIsInitialized = 1;
+          return true;
+        }
+
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (!getKeyBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
+          }
+          if (getValList().size() > 0) {
+            output.writeUInt32NoTag(18);
+            output.writeUInt32NoTag(valMemoizedSerializedSize);
+          }
+          for (int i = 0; i < val_.size(); i++) {
+            output.writeInt32NoTag(val_.get(i));
+          }
+        }
+
+        public int getSerializedSize() {
+          int size = memoizedSize;
+          if (size != -1) return size;
+
+          size = 0;
+          if (!getKeyBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
+          }
+          {
+            int dataSize = 0;
+            for (int i = 0; i < val_.size(); i++) {
+              dataSize += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(val_.get(i));
+            }
+            size += dataSize;
+            if (!getValList().isEmpty()) {
+              size += 1;
+              size += com.google.protobuf.CodedOutputStream
+                  .computeInt32SizeNoTag(dataSize);
+            }
+            valMemoizedSerializedSize = dataSize;
+          }
+          memoizedSize = size;
+          return size;
+        }
+
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        public boolean equals(final java.lang.Object obj) {
+          if (obj == this) {
+           return true;
+          }
+          if (!(obj instanceof com.DBMS.proto.DBMS.Index.IX.Map)) {
+            return super.equals(obj);
+          }
+          com.DBMS.proto.DBMS.Index.IX.Map other = (com.DBMS.proto.DBMS.Index.IX.Map) obj;
+
+          boolean result = true;
+          result = result && getKey()
+              .equals(other.getKey());
+          result = result && getValList()
+              .equals(other.getValList());
+          return result;
+        }
+
+        @java.lang.Override
+        public int hashCode() {
+          if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+          }
+          int hash = 41;
+          hash = (19 * hash) + getDescriptorForType().hashCode();
+          hash = (37 * hash) + KEY_FIELD_NUMBER;
+          hash = (53 * hash) + getKey().hashCode();
+          if (getValCount() > 0) {
+            hash = (37 * hash) + VAL_FIELD_NUMBER;
+            hash = (53 * hash) + getValList().hashCode();
+          }
+          hash = (29 * hash) + unknownFields.hashCode();
+          memoizedHashCode = hash;
+          return hash;
+        }
+
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return PARSER.parseFrom(data, extensionRegistry);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input);
+        }
+        public static com.DBMS.proto.DBMS.Index.IX.Map parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return com.google.protobuf.GeneratedMessageV3
+              .parseWithIOException(PARSER, input, extensionRegistry);
+        }
+
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder() {
+          return DEFAULT_INSTANCE.toBuilder();
+        }
+        public static Builder newBuilder(com.DBMS.proto.DBMS.Index.IX.Map prototype) {
+          return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() {
+          return this == DEFAULT_INSTANCE
+              ? new Builder() : new Builder().mergeFrom(this);
+        }
+
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        /**
+         * Protobuf type {@code Index.IX.Map}
+         */
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:Index.IX.Map)
+            com.DBMS.proto.DBMS.Index.IX.MapOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.DBMS.proto.DBMS.internal_static_Index_IX_Map_descriptor;
+          }
+
+          protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.DBMS.proto.DBMS.internal_static_Index_IX_Map_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                    com.DBMS.proto.DBMS.Index.IX.Map.class, com.DBMS.proto.DBMS.Index.IX.Map.Builder.class);
+          }
+
+          // Construct using com.DBMS.proto.DBMS.Index.IX.Map.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+
+          private Builder(
+              com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessageV3
+                    .alwaysUseFieldBuilders) {
+            }
+          }
+          public Builder clear() {
+            super.clear();
+            key_ = "";
+
+            val_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.DBMS.proto.DBMS.internal_static_Index_IX_Map_descriptor;
+          }
+
+          public com.DBMS.proto.DBMS.Index.IX.Map getDefaultInstanceForType() {
+            return com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance();
+          }
+
+          public com.DBMS.proto.DBMS.Index.IX.Map build() {
+            com.DBMS.proto.DBMS.Index.IX.Map result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+
+          public com.DBMS.proto.DBMS.Index.IX.Map buildPartial() {
+            com.DBMS.proto.DBMS.Index.IX.Map result = new com.DBMS.proto.DBMS.Index.IX.Map(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            result.key_ = key_;
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              val_ = java.util.Collections.unmodifiableList(val_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.val_ = val_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+
+          public Builder clone() {
+            return (Builder) super.clone();
+          }
+          public Builder setField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
+            return (Builder) super.setField(field, value);
+          }
+          public Builder clearField(
+              com.google.protobuf.Descriptors.FieldDescriptor field) {
+            return (Builder) super.clearField(field);
+          }
+          public Builder clearOneof(
+              com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+            return (Builder) super.clearOneof(oneof);
+          }
+          public Builder setRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              int index, Object value) {
+            return (Builder) super.setRepeatedField(field, index, value);
+          }
+          public Builder addRepeatedField(
+              com.google.protobuf.Descriptors.FieldDescriptor field,
+              Object value) {
+            return (Builder) super.addRepeatedField(field, value);
+          }
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.DBMS.proto.DBMS.Index.IX.Map) {
+              return mergeFrom((com.DBMS.proto.DBMS.Index.IX.Map)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+
+          public Builder mergeFrom(com.DBMS.proto.DBMS.Index.IX.Map other) {
+            if (other == com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance()) return this;
+            if (!other.getKey().isEmpty()) {
+              key_ = other.key_;
+              onChanged();
+            }
+            if (!other.val_.isEmpty()) {
+              if (val_.isEmpty()) {
+                val_ = other.val_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureValIsMutable();
+                val_.addAll(other.val_);
+              }
+              onChanged();
+            }
+            onChanged();
+            return this;
+          }
+
+          public final boolean isInitialized() {
+            return true;
+          }
+
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.DBMS.proto.DBMS.Index.IX.Map parsedMessage = null;
+            try {
+              parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+              parsedMessage = (com.DBMS.proto.DBMS.Index.IX.Map) e.getUnfinishedMessage();
+              throw e.unwrapIOException();
+            } finally {
+              if (parsedMessage != null) {
+                mergeFrom(parsedMessage);
+              }
+            }
+            return this;
+          }
+          private int bitField0_;
+
+          private java.lang.Object key_ = "";
+          /**
+           * <code>optional string key = 1;</code>
+           */
+          public java.lang.String getKey() {
+            java.lang.Object ref = key_;
+            if (!(ref instanceof java.lang.String)) {
+              com.google.protobuf.ByteString bs =
+                  (com.google.protobuf.ByteString) ref;
+              java.lang.String s = bs.toStringUtf8();
+              key_ = s;
+              return s;
+            } else {
+              return (java.lang.String) ref;
+            }
+          }
+          /**
+           * <code>optional string key = 1;</code>
+           */
+          public com.google.protobuf.ByteString
+              getKeyBytes() {
+            java.lang.Object ref = key_;
+            if (ref instanceof String) {
+              com.google.protobuf.ByteString b = 
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                      (java.lang.String) ref);
+              key_ = b;
+              return b;
+            } else {
+              return (com.google.protobuf.ByteString) ref;
+            }
+          }
+          /**
+           * <code>optional string key = 1;</code>
+           */
+          public Builder setKey(
+              java.lang.String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  
+            key_ = value;
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional string key = 1;</code>
+           */
+          public Builder clearKey() {
+            
+            key_ = getDefaultInstance().getKey();
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>optional string key = 1;</code>
+           */
+          public Builder setKeyBytes(
+              com.google.protobuf.ByteString value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+            
+            key_ = value;
+            onChanged();
+            return this;
+          }
+
+          private java.util.List<java.lang.Integer> val_ = java.util.Collections.emptyList();
+          private void ensureValIsMutable() {
+            if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+              val_ = new java.util.ArrayList<java.lang.Integer>(val_);
+              bitField0_ |= 0x00000002;
+             }
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public java.util.List<java.lang.Integer>
+              getValList() {
+            return java.util.Collections.unmodifiableList(val_);
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public int getValCount() {
+            return val_.size();
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public int getVal(int index) {
+            return val_.get(index);
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public Builder setVal(
+              int index, int value) {
+            ensureValIsMutable();
+            val_.set(index, value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public Builder addVal(int value) {
+            ensureValIsMutable();
+            val_.add(value);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public Builder addAllVal(
+              java.lang.Iterable<? extends java.lang.Integer> values) {
+            ensureValIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, val_);
+            onChanged();
+            return this;
+          }
+          /**
+           * <code>repeated int32 val = 2;</code>
+           */
+          public Builder clearVal() {
+            val_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+            return this;
+          }
+          public final Builder setUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return this;
+          }
+
+          public final Builder mergeUnknownFields(
+              final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return this;
+          }
+
+
+          // @@protoc_insertion_point(builder_scope:Index.IX.Map)
+        }
+
+        // @@protoc_insertion_point(class_scope:Index.IX.Map)
+        private static final com.DBMS.proto.DBMS.Index.IX.Map DEFAULT_INSTANCE;
+        static {
+          DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.Index.IX.Map();
+        }
+
+        public static com.DBMS.proto.DBMS.Index.IX.Map getDefaultInstance() {
+          return DEFAULT_INSTANCE;
+        }
+
+        private static final com.google.protobuf.Parser<Map>
+            PARSER = new com.google.protobuf.AbstractParser<Map>() {
+          public Map parsePartialFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
+              return new Map(input, extensionRegistry);
+          }
+        };
+
+        public static com.google.protobuf.Parser<Map> parser() {
+          return PARSER;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Parser<Map> getParserForType() {
+          return PARSER;
+        }
+
+        public com.DBMS.proto.DBMS.Index.IX.Map getDefaultInstanceForType() {
+          return DEFAULT_INSTANCE;
+        }
+
+      }
+
+      private int bitField0_;
+      public static final int NAME_FIELD_NUMBER = 1;
+      private volatile java.lang.Object name_;
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int MAP_FIELD_NUMBER = 2;
+      private java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> map_;
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> getMapList() {
+        return map_;
+      }
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      public java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
+          getMapOrBuilderList() {
+        return map_;
+      }
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      public int getMapCount() {
+        return map_.size();
+      }
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX.Map getMap(int index) {
+        return map_.get(index);
+      }
+      /**
+       * <code>repeated .Index.IX.Map map = 2;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
+          int index) {
+        return map_.get(index);
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!getNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+        }
+        for (int i = 0; i < map_.size(); i++) {
+          output.writeMessage(2, map_.get(i));
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+        }
+        for (int i = 0; i < map_.size(); i++) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, map_.get(i));
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.DBMS.proto.DBMS.Index.IX)) {
+          return super.equals(obj);
+        }
+        com.DBMS.proto.DBMS.Index.IX other = (com.DBMS.proto.DBMS.Index.IX) obj;
+
+        boolean result = true;
+        result = result && getName()
+            .equals(other.getName());
+        result = result && getMapList()
+            .equals(other.getMapList());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+        if (getMapCount() > 0) {
+          hash = (37 * hash) + MAP_FIELD_NUMBER;
+          hash = (53 * hash) + getMapList().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.DBMS.proto.DBMS.Index.IX parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.DBMS.proto.DBMS.Index.IX prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code Index.IX}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:Index.IX)
+          com.DBMS.proto.DBMS.Index.IXOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.DBMS.proto.DBMS.internal_static_Index_IX_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.DBMS.proto.DBMS.internal_static_Index_IX_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.DBMS.proto.DBMS.Index.IX.class, com.DBMS.proto.DBMS.Index.IX.Builder.class);
+        }
+
+        // Construct using com.DBMS.proto.DBMS.Index.IX.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+            getMapFieldBuilder();
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          name_ = "";
+
+          if (mapBuilder_ == null) {
+            map_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            mapBuilder_.clear();
+          }
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.DBMS.proto.DBMS.internal_static_Index_IX_descriptor;
+        }
+
+        public com.DBMS.proto.DBMS.Index.IX getDefaultInstanceForType() {
+          return com.DBMS.proto.DBMS.Index.IX.getDefaultInstance();
+        }
+
+        public com.DBMS.proto.DBMS.Index.IX build() {
+          com.DBMS.proto.DBMS.Index.IX result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.DBMS.proto.DBMS.Index.IX buildPartial() {
+          com.DBMS.proto.DBMS.Index.IX result = new com.DBMS.proto.DBMS.Index.IX(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          result.name_ = name_;
+          if (mapBuilder_ == null) {
+            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              map_ = java.util.Collections.unmodifiableList(map_);
+              bitField0_ = (bitField0_ & ~0x00000002);
+            }
+            result.map_ = map_;
+          } else {
+            result.map_ = mapBuilder_.build();
+          }
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.DBMS.proto.DBMS.Index.IX) {
+            return mergeFrom((com.DBMS.proto.DBMS.Index.IX)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.DBMS.proto.DBMS.Index.IX other) {
+          if (other == com.DBMS.proto.DBMS.Index.IX.getDefaultInstance()) return this;
+          if (!other.getName().isEmpty()) {
+            name_ = other.name_;
+            onChanged();
+          }
+          if (mapBuilder_ == null) {
+            if (!other.map_.isEmpty()) {
+              if (map_.isEmpty()) {
+                map_ = other.map_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+              } else {
+                ensureMapIsMutable();
+                map_.addAll(other.map_);
+              }
+              onChanged();
+            }
+          } else {
+            if (!other.map_.isEmpty()) {
+              if (mapBuilder_.isEmpty()) {
+                mapBuilder_.dispose();
+                mapBuilder_ = null;
+                map_ = other.map_;
+                bitField0_ = (bitField0_ & ~0x00000002);
+                mapBuilder_ = 
+                  com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                     getMapFieldBuilder() : null;
+              } else {
+                mapBuilder_.addAllMessages(other.map_);
+              }
+            }
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.DBMS.proto.DBMS.Index.IX parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.DBMS.proto.DBMS.Index.IX) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object name_ = "";
+        /**
+         * <code>optional string name = 1;</code>
+         */
+        public java.lang.String getName() {
+          java.lang.Object ref = name_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            name_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string name = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getNameBytes() {
+          java.lang.Object ref = name_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            name_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string name = 1;</code>
+         */
+        public Builder setName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          name_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string name = 1;</code>
+         */
+        public Builder clearName() {
+          
+          name_ = getDefaultInstance().getName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string name = 1;</code>
+         */
+        public Builder setNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          name_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> map_ =
+          java.util.Collections.emptyList();
+        private void ensureMapIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            map_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX.Map>(map_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.DBMS.proto.DBMS.Index.IX.Map, com.DBMS.proto.DBMS.Index.IX.Map.Builder, com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> mapBuilder_;
+
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> getMapList() {
+          if (mapBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(map_);
+          } else {
+            return mapBuilder_.getMessageList();
+          }
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public int getMapCount() {
+          if (mapBuilder_ == null) {
+            return map_.size();
+          } else {
+            return mapBuilder_.getCount();
+          }
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public com.DBMS.proto.DBMS.Index.IX.Map getMap(int index) {
+          if (mapBuilder_ == null) {
+            return map_.get(index);
+          } else {
+            return mapBuilder_.getMessage(index);
+          }
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder setMap(
+            int index, com.DBMS.proto.DBMS.Index.IX.Map value) {
+          if (mapBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMapIsMutable();
+            map_.set(index, value);
+            onChanged();
+          } else {
+            mapBuilder_.setMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder setMap(
+            int index, com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
+          if (mapBuilder_ == null) {
+            ensureMapIsMutable();
+            map_.set(index, builderForValue.build());
+            onChanged();
+          } else {
+            mapBuilder_.setMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder addMap(com.DBMS.proto.DBMS.Index.IX.Map value) {
+          if (mapBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMapIsMutable();
+            map_.add(value);
+            onChanged();
+          } else {
+            mapBuilder_.addMessage(value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder addMap(
+            int index, com.DBMS.proto.DBMS.Index.IX.Map value) {
+          if (mapBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            ensureMapIsMutable();
+            map_.add(index, value);
+            onChanged();
+          } else {
+            mapBuilder_.addMessage(index, value);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder addMap(
+            com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
+          if (mapBuilder_ == null) {
+            ensureMapIsMutable();
+            map_.add(builderForValue.build());
+            onChanged();
+          } else {
+            mapBuilder_.addMessage(builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder addMap(
+            int index, com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
+          if (mapBuilder_ == null) {
+            ensureMapIsMutable();
+            map_.add(index, builderForValue.build());
+            onChanged();
+          } else {
+            mapBuilder_.addMessage(index, builderForValue.build());
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder addAllMap(
+            java.lang.Iterable<? extends com.DBMS.proto.DBMS.Index.IX.Map> values) {
+          if (mapBuilder_ == null) {
+            ensureMapIsMutable();
+            com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                values, map_);
+            onChanged();
+          } else {
+            mapBuilder_.addAllMessages(values);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder clearMap() {
+          if (mapBuilder_ == null) {
+            map_ = java.util.Collections.emptyList();
+            bitField0_ = (bitField0_ & ~0x00000002);
+            onChanged();
+          } else {
+            mapBuilder_.clear();
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public Builder removeMap(int index) {
+          if (mapBuilder_ == null) {
+            ensureMapIsMutable();
+            map_.remove(index);
+            onChanged();
+          } else {
+            mapBuilder_.remove(index);
+          }
+          return this;
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public com.DBMS.proto.DBMS.Index.IX.Map.Builder getMapBuilder(
+            int index) {
+          return getMapFieldBuilder().getBuilder(index);
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
+            int index) {
+          if (mapBuilder_ == null) {
+            return map_.get(index);  } else {
+            return mapBuilder_.getMessageOrBuilder(index);
+          }
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
+             getMapOrBuilderList() {
+          if (mapBuilder_ != null) {
+            return mapBuilder_.getMessageOrBuilderList();
+          } else {
+            return java.util.Collections.unmodifiableList(map_);
+          }
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public com.DBMS.proto.DBMS.Index.IX.Map.Builder addMapBuilder() {
+          return getMapFieldBuilder().addBuilder(
+              com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public com.DBMS.proto.DBMS.Index.IX.Map.Builder addMapBuilder(
+            int index) {
+          return getMapFieldBuilder().addBuilder(
+              index, com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance());
+        }
+        /**
+         * <code>repeated .Index.IX.Map map = 2;</code>
+         */
+        public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map.Builder> 
+             getMapBuilderList() {
+          return getMapFieldBuilder().getBuilderList();
+        }
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+            com.DBMS.proto.DBMS.Index.IX.Map, com.DBMS.proto.DBMS.Index.IX.Map.Builder, com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
+            getMapFieldBuilder() {
+          if (mapBuilder_ == null) {
+            mapBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                com.DBMS.proto.DBMS.Index.IX.Map, com.DBMS.proto.DBMS.Index.IX.Map.Builder, com.DBMS.proto.DBMS.Index.IX.MapOrBuilder>(
+                    map_,
+                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    getParentForChildren(),
+                    isClean());
+            map_ = null;
+          }
+          return mapBuilder_;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:Index.IX)
+      }
+
+      // @@protoc_insertion_point(class_scope:Index.IX)
+      private static final com.DBMS.proto.DBMS.Index.IX DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.Index.IX();
+      }
+
+      public static com.DBMS.proto.DBMS.Index.IX getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<IX>
+          PARSER = new com.google.protobuf.AbstractParser<IX>() {
+        public IX parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new IX(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<IX> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<IX> getParserForType() {
+        return PARSER;
+      }
+
+      public com.DBMS.proto.DBMS.Index.IX getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
+    }
+
+    public static final int IX_FIELD_NUMBER = 1;
+    private java.util.List<com.DBMS.proto.DBMS.Index.IX> ix_;
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    public java.util.List<com.DBMS.proto.DBMS.Index.IX> getIxList() {
+      return ix_;
+    }
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    public java.util.List<? extends com.DBMS.proto.DBMS.Index.IXOrBuilder> 
+        getIxOrBuilderList() {
+      return ix_;
+    }
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    public int getIxCount() {
+      return ix_.size();
+    }
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    public com.DBMS.proto.DBMS.Index.IX getIx(int index) {
+      return ix_.get(index);
+    }
+    /**
+     * <code>repeated .Index.IX ix = 1;</code>
+     */
+    public com.DBMS.proto.DBMS.Index.IXOrBuilder getIxOrBuilder(
+        int index) {
+      return ix_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < ix_.size(); i++) {
+        output.writeMessage(1, ix_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < ix_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, ix_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.DBMS.proto.DBMS.Index)) {
+        return super.equals(obj);
+      }
+      com.DBMS.proto.DBMS.Index other = (com.DBMS.proto.DBMS.Index) obj;
+
+      boolean result = true;
+      result = result && getIxList()
+          .equals(other.getIxList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getIxCount() > 0) {
+        hash = (37 * hash) + IX_FIELD_NUMBER;
+        hash = (53 * hash) + getIxList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.Index parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.Index parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.DBMS.proto.DBMS.Index parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.DBMS.proto.DBMS.Index prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code Index}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Index)
+        com.DBMS.proto.DBMS.IndexOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.DBMS.proto.DBMS.internal_static_Index_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.DBMS.proto.DBMS.internal_static_Index_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.DBMS.proto.DBMS.Index.class, com.DBMS.proto.DBMS.Index.Builder.class);
+      }
+
+      // Construct using com.DBMS.proto.DBMS.Index.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getIxFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (ixBuilder_ == null) {
+          ix_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          ixBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.DBMS.proto.DBMS.internal_static_Index_descriptor;
+      }
+
+      public com.DBMS.proto.DBMS.Index getDefaultInstanceForType() {
+        return com.DBMS.proto.DBMS.Index.getDefaultInstance();
+      }
+
+      public com.DBMS.proto.DBMS.Index build() {
+        com.DBMS.proto.DBMS.Index result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.DBMS.proto.DBMS.Index buildPartial() {
+        com.DBMS.proto.DBMS.Index result = new com.DBMS.proto.DBMS.Index(this);
+        int from_bitField0_ = bitField0_;
+        if (ixBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            ix_ = java.util.Collections.unmodifiableList(ix_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.ix_ = ix_;
+        } else {
+          result.ix_ = ixBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.DBMS.proto.DBMS.Index) {
+          return mergeFrom((com.DBMS.proto.DBMS.Index)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.DBMS.proto.DBMS.Index other) {
+        if (other == com.DBMS.proto.DBMS.Index.getDefaultInstance()) return this;
+        if (ixBuilder_ == null) {
+          if (!other.ix_.isEmpty()) {
+            if (ix_.isEmpty()) {
+              ix_ = other.ix_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureIxIsMutable();
+              ix_.addAll(other.ix_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.ix_.isEmpty()) {
+            if (ixBuilder_.isEmpty()) {
+              ixBuilder_.dispose();
+              ixBuilder_ = null;
+              ix_ = other.ix_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              ixBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getIxFieldBuilder() : null;
+            } else {
+              ixBuilder_.addAllMessages(other.ix_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.DBMS.proto.DBMS.Index parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.DBMS.proto.DBMS.Index) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.DBMS.proto.DBMS.Index.IX> ix_ =
+        java.util.Collections.emptyList();
+      private void ensureIxIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          ix_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX>(ix_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.DBMS.proto.DBMS.Index.IX, com.DBMS.proto.DBMS.Index.IX.Builder, com.DBMS.proto.DBMS.Index.IXOrBuilder> ixBuilder_;
+
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public java.util.List<com.DBMS.proto.DBMS.Index.IX> getIxList() {
+        if (ixBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(ix_);
+        } else {
+          return ixBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public int getIxCount() {
+        if (ixBuilder_ == null) {
+          return ix_.size();
+        } else {
+          return ixBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX getIx(int index) {
+        if (ixBuilder_ == null) {
+          return ix_.get(index);
+        } else {
+          return ixBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder setIx(
+          int index, com.DBMS.proto.DBMS.Index.IX value) {
+        if (ixBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureIxIsMutable();
+          ix_.set(index, value);
+          onChanged();
+        } else {
+          ixBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder setIx(
+          int index, com.DBMS.proto.DBMS.Index.IX.Builder builderForValue) {
+        if (ixBuilder_ == null) {
+          ensureIxIsMutable();
+          ix_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          ixBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder addIx(com.DBMS.proto.DBMS.Index.IX value) {
+        if (ixBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureIxIsMutable();
+          ix_.add(value);
+          onChanged();
+        } else {
+          ixBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder addIx(
+          int index, com.DBMS.proto.DBMS.Index.IX value) {
+        if (ixBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureIxIsMutable();
+          ix_.add(index, value);
+          onChanged();
+        } else {
+          ixBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder addIx(
+          com.DBMS.proto.DBMS.Index.IX.Builder builderForValue) {
+        if (ixBuilder_ == null) {
+          ensureIxIsMutable();
+          ix_.add(builderForValue.build());
+          onChanged();
+        } else {
+          ixBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder addIx(
+          int index, com.DBMS.proto.DBMS.Index.IX.Builder builderForValue) {
+        if (ixBuilder_ == null) {
+          ensureIxIsMutable();
+          ix_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          ixBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder addAllIx(
+          java.lang.Iterable<? extends com.DBMS.proto.DBMS.Index.IX> values) {
+        if (ixBuilder_ == null) {
+          ensureIxIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, ix_);
+          onChanged();
+        } else {
+          ixBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder clearIx() {
+        if (ixBuilder_ == null) {
+          ix_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          ixBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public Builder removeIx(int index) {
+        if (ixBuilder_ == null) {
+          ensureIxIsMutable();
+          ix_.remove(index);
+          onChanged();
+        } else {
+          ixBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX.Builder getIxBuilder(
+          int index) {
+        return getIxFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IXOrBuilder getIxOrBuilder(
+          int index) {
+        if (ixBuilder_ == null) {
+          return ix_.get(index);  } else {
+          return ixBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public java.util.List<? extends com.DBMS.proto.DBMS.Index.IXOrBuilder> 
+           getIxOrBuilderList() {
+        if (ixBuilder_ != null) {
+          return ixBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(ix_);
+        }
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX.Builder addIxBuilder() {
+        return getIxFieldBuilder().addBuilder(
+            com.DBMS.proto.DBMS.Index.IX.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public com.DBMS.proto.DBMS.Index.IX.Builder addIxBuilder(
+          int index) {
+        return getIxFieldBuilder().addBuilder(
+            index, com.DBMS.proto.DBMS.Index.IX.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Index.IX ix = 1;</code>
+       */
+      public java.util.List<com.DBMS.proto.DBMS.Index.IX.Builder> 
+           getIxBuilderList() {
+        return getIxFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.DBMS.proto.DBMS.Index.IX, com.DBMS.proto.DBMS.Index.IX.Builder, com.DBMS.proto.DBMS.Index.IXOrBuilder> 
+          getIxFieldBuilder() {
+        if (ixBuilder_ == null) {
+          ixBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.DBMS.proto.DBMS.Index.IX, com.DBMS.proto.DBMS.Index.IX.Builder, com.DBMS.proto.DBMS.Index.IXOrBuilder>(
+                  ix_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          ix_ = null;
+        }
+        return ixBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Index)
+    }
+
+    // @@protoc_insertion_point(class_scope:Index)
+    private static final com.DBMS.proto.DBMS.Index DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.DBMS.proto.DBMS.Index();
+    }
+
+    public static com.DBMS.proto.DBMS.Index getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Index>
+        PARSER = new com.google.protobuf.AbstractParser<Index>() {
+      public Index parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Index(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Index> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Index> getParserForType() {
+      return PARSER;
+    }
+
+    public com.DBMS.proto.DBMS.Index getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Table_descriptor;
   private static final 
@@ -4755,11 +8789,6 @@ public final class DBMS {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Table_Column_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Table_Column_Constraint_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Table_Column_Constraint_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Database_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -4769,6 +8798,31 @@ public final class DBMS {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Database_DB_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TBMessage_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TBMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TBMessage_TB_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TBMessage_TB_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Index_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Index_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Index_IX_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Index_IX_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Index_IX_Map_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Index_IX_Map_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4778,16 +8832,22 @@ public final class DBMS {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nDBMS.proto\"\355\001\n\005Table\022\021\n\ttableName\030\001 \001(" +
-      "\t\022\035\n\006column\030\002 \003(\0132\r.Table.Column\032\261\001\n\006Col" +
+      "\n\nDBMS.proto\"\215\002\n\005Table\022\021\n\ttableName\030\001 \001(" +
+      "\t\022\035\n\006column\030\002 \003(\0132\r.Table.Column\032\321\001\n\006Col" +
       "umn\022\022\n\ncolumnName\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\022\n" +
-      "\ntypeLength\030\003 \001(\t\022\013\n\003val\030\004 \003(\t\022,\n\nconstr" +
-      "aint\030\005 \003(\0132\030.Table.Column.Constraint\0326\n\n" +
-      "Constraint\022\026\n\016constraintName\030\001 \001(\t\022\020\n\010de" +
-      "scribe\030\002 \001(\t\"l\n\010Database\022\030\n\002db\030\001 \003(\0132\014.D" +
-      "atabase.DB\032F\n\002DB\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002" +
-      " \001(\t\022\020\n\010filePath\030\003 \001(\t\022\022\n\ncreateDate\030\004 \001" +
-      "(\tB\030\n\016com.DBMS.protoB\004DBMSP\000b\006proto3"
+      "\ntypeLength\030\003 \001(\t\022\013\n\003val\030\004 \003(\t\022\017\n\007primar" +
+      "y\030\005 \001(\t\022\017\n\007foreign\030\006 \001(\t\022\017\n\007notNull\030\007 \001(" +
+      "\t\022\016\n\006unique\030\010 \001(\t\022\017\n\007default\030\t \001(\t\022\020\n\010id" +
+      "entity\030\n \001(\t\022\r\n\005check\030\013 \001(\t\022\017\n\007comment\030\014" +
+      " \001(\t\"l\n\010Database\022\030\n\002db\030\001 \003(\0132\014.Database." +
+      "DB\032F\n\002DB\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\020\n\010" +
+      "filePath\030\003 \001(\t\022\022\n\ncreateDate\030\004 \001(\t\"P\n\tTB",
+      "Message\022\031\n\002tb\030\001 \003(\0132\r.TBMessage.TB\032(\n\002TB" +
+      "\022\016\n\006TBName\030\001 \001(\t\022\022\n\ncreateDate\030\002 \001(\t\"o\n\005" +
+      "Index\022\025\n\002ix\030\001 \003(\0132\t.Index.IX\032O\n\002IX\022\014\n\004na" +
+      "me\030\001 \001(\t\022\032\n\003map\030\002 \003(\0132\r.Index.IX.Map\032\037\n\003" +
+      "Map\022\013\n\003key\030\001 \001(\t\022\013\n\003val\030\002 \003(\005B\030\n\016com.DBM" +
+      "S.protoB\004DBMSP\000b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4812,13 +8872,7 @@ public final class DBMS {
     internal_static_Table_Column_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Table_Column_descriptor,
-        new java.lang.String[] { "ColumnName", "Type", "TypeLength", "Val", "Constraint", });
-    internal_static_Table_Column_Constraint_descriptor =
-      internal_static_Table_Column_descriptor.getNestedTypes().get(0);
-    internal_static_Table_Column_Constraint_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Table_Column_Constraint_descriptor,
-        new java.lang.String[] { "ConstraintName", "Describe", });
+        new java.lang.String[] { "ColumnName", "Type", "TypeLength", "Val", "Primary", "Foreign", "NotNull", "Unique", "Default", "Identity", "Check", "Comment", });
     internal_static_Database_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Database_fieldAccessorTable = new
@@ -4831,6 +8885,36 @@ public final class DBMS {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Database_DB_descriptor,
         new java.lang.String[] { "Name", "Type", "FilePath", "CreateDate", });
+    internal_static_TBMessage_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_TBMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TBMessage_descriptor,
+        new java.lang.String[] { "Tb", });
+    internal_static_TBMessage_TB_descriptor =
+      internal_static_TBMessage_descriptor.getNestedTypes().get(0);
+    internal_static_TBMessage_TB_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TBMessage_TB_descriptor,
+        new java.lang.String[] { "TBName", "CreateDate", });
+    internal_static_Index_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_Index_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Index_descriptor,
+        new java.lang.String[] { "Ix", });
+    internal_static_Index_IX_descriptor =
+      internal_static_Index_descriptor.getNestedTypes().get(0);
+    internal_static_Index_IX_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Index_IX_descriptor,
+        new java.lang.String[] { "Name", "Map", });
+    internal_static_Index_IX_Map_descriptor =
+      internal_static_Index_IX_descriptor.getNestedTypes().get(0);
+    internal_static_Index_IX_Map_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Index_IX_Map_descriptor,
+        new java.lang.String[] { "Key", "Val", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
