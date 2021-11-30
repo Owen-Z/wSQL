@@ -25,3 +25,14 @@ message Table{
   }
   repeated Column column = 2;
 }
+
+
+message Database{
+  message DB{
+    string name = 1;
+    string type = 2;
+    string filePath = 3;
+    string createDate = 4;
+  }
+  repeated DB db = 1;
+}
