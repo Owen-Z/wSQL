@@ -279,6 +279,69 @@ public class API {
 
             }
 
+            // 删除数据表
+            if(sqlStatement instanceof SQLDropTableStatement){
+                SQLDropTableStatement sqlDropTableStatement = (SQLDropTableStatement) sqlStatement;
+                System.out.println(sqlDropTableStatement.getTableSources().toString());
+            }
+
+            // 修改数据表字段
+            if(sqlStatement instanceof SQLAlterTableStatement){
+                // 转换
+                SQLAlterTableStatement sqlAlterTableStatement = (SQLAlterTableStatement) sqlStatement;
+//                System.out.println(sqlAlterTableStatement.getItems().size());
+
+                System.out.println(sqlAlterTableStatement.getTableSource());
+
+                for(SQLAlterTableItem element : sqlAlterTableStatement.getItems()){
+                    if(element instanceof SQLAlterTableDropColumnItem){
+                        System.out.println(((SQLAlterTableDropColumnItem) element).getColumns());
+                        for(SQLName dropElement : ((SQLAlterTableDropColumnItem) element).getColumns()){
+                            System.out.println(dropElement);
+                        }
+                    }else if(element instanceof SQLAlterTableAddColumn){
+                        SQLColumnDefinition addElement = ((SQLAlterTableAddColumn) element).getColumns().get(0);
+                        System.out.println(addElement.getName());
+                        System.out.println(addElement.getDataType());
+                        // 同创建表约束
+                        System.out.println(addElement.getConstraints());
+                    }
+                }
+
+
+            }
+
+            // 更新数据表数据
+            if(sqlStatement instanceof SQLUpdateStatement){
+                System.out.println(6666);
+                SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
+                // 字段需要变成什么样
+                System.out.println(sqlUpdateStatement.getItems().getClass());
+                for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
+                    // e.g. student.id = 19
+                    // 需要设置的字段
+                    System.out.println(item.getColumn());   //student.id
+                    // 字段需要设置成的值
+                    System.out.println(item.getValue());    //19
+                }
+
+
+                // where条件
+                SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
+
+                while (where.getOperator().toString().equals("BooleanAnd")){
+                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    where = (SQLBinaryOpExpr)where.getLeft();
+                }
+                System.out.println(where.getRight());
+                System.out.println(where.getLeft());
+//                while (where.getOperator() instanceof SQLBinaryOpExpr)
+//                System.out.println(sqlUpdateStatement.getWhere());
+            }
+
+
+
 
             if (sqlStatement instanceof SQLSelectStatement) {
                 // 转换
