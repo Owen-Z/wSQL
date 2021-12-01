@@ -1,5 +1,7 @@
 package API;
+import com.Data.DataDelete;
 import com.Data.DataInsert;
+import com.Data.DataUpdate;
 import com.Database.DatabaseCreate;
 import com.Database.DatabaseDelete;
 import com.Field.FieldAdd;
@@ -419,16 +421,16 @@ public class API {
                                 unique = "true";
                             }
                         }
-                        System.out.println("name:" + name);
-                        System.out.println("type:" + type);
+//                        System.out.println("name:" + name);
+//                        System.out.println("type:" + type);
 //                        System.out.println("def:" + def);
 //                        System.out.println("comment:" + comment);
 //                        System.out.println("auto:" + auto);
-                        System.out.println("primaryKey:" + primaryKey);
-                        System.out.println("notNUll:" + notNUll);
-                        System.out.println("check:" + check);
-                        System.out.println("unique:" + unique);
-                        System.out.println("foreignKey:" + foreignKey);
+//                        System.out.println("primaryKey:" + primaryKey);
+//                        System.out.println("notNUll:" + notNUll);
+//                        System.out.println("check:" + check);
+//                        System.out.println("unique:" + unique);
+//                        System.out.println("foreignKey:" + foreignKey);
                     }
                 }
             }
@@ -439,47 +441,77 @@ public class API {
                 SQLDeleteStatement sqlDeleteStatement = (SQLDeleteStatement) sqlStatement;
 
                 // 需要删除字段的表名
-                System.out.println(sqlDeleteStatement.getTableName());
+//                System.out.println(sqlDeleteStatement.getTableName());
 
                 // 获取where的查询条件
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlDeleteStatement.getWhere();
 
+                List<String> fields = new ArrayList<>();
+                List<String> vals = new ArrayList<>();
+
                 while (where.getOperator().toString().equals("BooleanAnd")){
                     // 条件右边
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
                     // 条件左边
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-                System.out.println(where.getRight());
-                System.out.println(where.getLeft());
+//                System.out.println(where.getRight());
+//                System.out.println(where.getLeft());
+                fields.add(where.getLeft().toString());
+                vals.add(where.getRight().toString());
+                DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
+                if(dataDelete.delete(fields,vals)){
+                    System.out.println("删除成功");
+                }else {
+                    System.out.println("删除失败");
+                }
             }
 
             // 更新数据表数据
             if(sqlStatement instanceof SQLUpdateStatement){
-                System.out.println(6666);
                 SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
                 // 字段需要变成什么样
-                System.out.println(sqlUpdateStatement.getItems().getClass());
+//                System.out.println(sqlUpdateStatement.getTableSource().toString());
+                String tbName = sqlUpdateStatement.getTableSource().toString();
+                String key = "";
+                String val = "";
                 for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
                     // e.g. student.id = 19
                     // 需要设置的字段
-                    System.out.println(item.getColumn());   //student.id
+//                    System.out.println(item.getColumn());   //student.id
+                    key = item.getColumn().toString();
                     // 字段需要设置成的值
-                    System.out.println(item.getValue());    //19
+//                    System.out.println(item.getValue());    //19
+                    val = item.getValue().toString();
                 }
 
-
                 // where条件
+                List<String> fields = new ArrayList<>();
+                List<String> vals = new ArrayList<>();
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
 
                 while (where.getOperator().toString().equals("BooleanAnd")){
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-                System.out.println(where.getRight());
-                System.out.println(where.getLeft());
+//                System.out.println(where.getRight());
+//                System.out.println(where.getLeft());
+                fields.add(where.getLeft().toString());
+                vals.add(where.getRight().toString());
+                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
+
+                if(dataUpdate.update(key,val,fields,vals)){
+                    System.out.println("更新成功");
+                }else {
+                    System.out.println("更新失败");
+                }
+
 //                while (where.getOperator() instanceof SQLBinaryOpExpr)
 //                System.out.println(sqlUpdateStatement.getWhere());
             }
@@ -529,20 +561,25 @@ public class API {
                 SQLSelectStatement sqlSelectStatement = (SQLSelectStatement) sqlStatement;
 //                System.out.println(sqlSelectStatement);
 
-
-                MySqlASTVisitor visitor = new MySqlASTVisitorAdapter();
                 MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                 sqlSelectStatement.accept(visitor1);
 
-                System.out.println(visitor1.getTables().getClass());
+//                System.out.println(visitor1.getTables().getClass());
 
                 
                 int needReturn = visitor1.getColumns().size() - visitor1.getConditions().size();
                 int length = visitor1.getColumns().toString().length();
                 String str = visitor1.getColumns().toString().substring(1,length-1);
                 String[] sList = str.split(",");
+                String tbName = "";
+                List<String> key = new ArrayList<>();
+                List<String> val = new ArrayList<>();
                 for(int i = 0; i < needReturn; i++){
-                    System.out.println(sList[i]);
+                    String[] keys = sList[i].split(" ");
+//                    System.out.println(keys[keys.length-1]);
+                    String[] ke = keys[keys.length-1].split(".");
+                    tbName = ke[0];
+                    key.add(ke[ke.length-1]);
                 }
                 // 获取所有的普通值限制
                 List<TableStat.Condition> conditions = visitor1.getConditions();
@@ -553,19 +590,13 @@ public class API {
                     }
                 }
 
-                // 连续查询两个表
-                if (visitor1.getTables().size() > 1) {
-                    // 两个表有连接查询
-                    if (visitor1.getRelationships().size() > 0) {
-                        System.out.println(visitor1.getRelationships());    //  两个表的表名.列名 = 表名.列名
-                    }
-                }
-
-
-//                MySqlSchemaStatVisitor visitor = new MySqlSchemaStatVisitor();
-                sqlSelectStatement.accept(visitor);
-//                System.out.println(visitor.visit(sqlSelectStatement));
-                SQLSelectQuery sqlSelectQuery = sqlSelectStatement.getSelect().getQuery();
+//                // 连续查询两个表
+//                if (visitor1.getTables().size() > 1) {
+//                    // 两个表有连接查询
+//                    if (visitor1.getRelationships().size() > 0) {
+//                        System.out.println(visitor1.getRelationships());    //  两个表的表名.列名 = 表名.列名
+//                    }
+//                }
 
             }
 
