@@ -515,7 +515,12 @@ public class API {
                     map.put(columnsName.get(i),dataList.get(i));
                 }
 
-
+                if(dataInsert.DateCheck(map)){
+                    dataInsert.DataSave(map);
+                    System.out.println("插入成功");
+                }else {
+                    System.out.println("插入失败");
+                }
             }
 
             //查询指令
@@ -537,7 +542,6 @@ public class API {
                 String str = visitor1.getColumns().toString().substring(1,length-1);
                 String[] sList = str.split(",");
                 for(int i = 0; i < needReturn; i++){
-
                     System.out.println(sList[i]);
                 }
                 // 获取所有的普通值限制
