@@ -103,7 +103,7 @@ public class Test {
 
         //数据查询
         API api = new API();
-        api.parse("SELECT * FROM SC WHERE ID = 1");
+        api.parse("SELECT * FROM SC WHERE (ID = 1)");
 
 
     }

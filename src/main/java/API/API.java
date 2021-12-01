@@ -1,6 +1,7 @@
 package API;
 import com.Data.DataDelete;
 import com.Data.DataInsert;
+import com.Data.DataSelect;
 import com.Data.DataUpdate;
 import com.Database.DatabaseCreate;
 import com.Database.DatabaseDelete;
@@ -571,23 +572,34 @@ public class API {
                 int length = visitor1.getColumns().toString().length();
                 String str = visitor1.getColumns().toString().substring(1,length-1);
                 String[] sList = str.split(",");
-                String tbName = "";
+                String tbName = sqlSelectStatement.getSelect().getFirstQueryBlock().getFrom().toString();
+//                System.out.println(tbName);
+                List<String> result = new ArrayList<>();
                 List<String> key = new ArrayList<>();
                 List<String> val = new ArrayList<>();
                 for(int i = 0; i < needReturn; i++){
                     String[] keys = sList[i].split(" ");
 //                    System.out.println(keys[keys.length-1]);
-                    String[] ke = keys[keys.length-1].split(".");
-                    tbName = ke[0];
-                    key.add(ke[ke.length-1]);
+                    String[] ke = keys[keys.length-1].split("\\.");
+//                    System.out.println(ke[1]);
+                    result.add(ke[1]);
                 }
                 // 获取所有的普通值限制
                 List<TableStat.Condition> conditions = visitor1.getConditions();
                 for (TableStat.Condition condition : conditions) {
                     if (condition.getValues().size() != 0) {
-                        System.out.println(condition.getColumn());  // 需要查的表名+列名
-                        System.out.println(condition.getValues().get(0));   // 对应的值
+                        String[] ke = condition.getColumn().toString().split("\\.");
+//                        System.out.println(ke[1]);
+                        key.add(ke[1]);
+//                        System.out.println(condition.getValues().get(0).toString());
+                        val.add(condition.getValues().get(0).toString());
                     }
+                }
+                DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                if(dataSelect.select(result,key,val)){
+                    System.out.println("查询成功");
+                }else {
+                    System.out.println("查询失败");
                 }
 
 //                // 连续查询两个表
