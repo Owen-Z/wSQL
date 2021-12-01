@@ -10,26 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InsertTable {
-    String tableName;
-    DBMS.Table table;
-    List<DBMS.Table.Column> listColumn;
-
-    public InsertTable(String s){
-        tableName = s;
-    }
-
-    public void getTable(){
-        try {
-            FileInputStream input = new FileInputStream("src\\data\\test\\runoob_tbl.ibd");
-            byte[] buffer = new byte[1024];
-            int len = input.read(buffer);
-            String str = new String(buffer);
-            table = SerializationUtils.deserialize(buffer);
-            input.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    String tableName;
+//    DBMS.Table table;
+//    List<DBMS.Table.Column> listColumn;
+//
+//    public InsertTable(String s){
+//        tableName = s;
+//    }
+//
+//    public void getTable(){
+//        try {
+//            FileInputStream input = new FileInputStream("src\\data\\test\\runoob_tbl.ibd");
+//            byte[] buffer = new byte[1024];
+//            int len = input.read(buffer);
+//            String str = new String(buffer);
+//            table = SerializationUtils.deserialize(buffer);
+//            input.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void setTable(List<String> val){
 //        List<DBMS.Table.Column> list = new ArrayList<>(table.getColumnList());

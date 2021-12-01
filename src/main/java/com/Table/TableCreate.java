@@ -224,7 +224,7 @@ public class TableCreate {
     }
 
     public boolean TBCheck(){
-        File file = new File("src\\DBMS_ROOT\\"+dbName + "\\" +dbName+".tb");
+        File file = new File("src\\DBMS_ROOT\\data\\"+dbName+"\\"+dbName+".tb");
         if(file.exists()){
             try {
                 FileInputStream input = new FileInputStream(file);
@@ -234,8 +234,9 @@ public class TableCreate {
                 DBMS.TBMessage tbMessage = SerializationUtils.deserialize(buffer);
                 List<DBMS.TBMessage.TB> tbs = new ArrayList<>(tbMessage.getTbList());
                 for (DBMS.TBMessage.TB tb : tbs){
-                    if (tb.getTBName() == tbName)
+                    if (tb.getTBName().equals(tbName)) {
                         return false;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -255,7 +256,7 @@ public class TableCreate {
                     .setCreateDate(time)
                     .build();
             List<DBMS.TBMessage.TB> tbs;
-            File file = new File("src\\DBMS_ROOT\\"+dbName + "\\" +dbName+".tb");
+            File file = new File("src\\DBMS_ROOT\\data\\"+dbName + "\\" +dbName+".tb");
             if(file.exists()){
                 FileInputStream input = new FileInputStream(file);
                 byte[] buffer = new byte[10240];
@@ -287,10 +288,7 @@ public class TableCreate {
             for(int i = 0; i < val.length;i++){
                 fileOutputStream.write(val[i]);
             }
-            System.out.println(val);
-            DBMS.Table table1 = SerializationUtils.deserialize(val);
-            System.out.println(table1.getTableName());
-            System.out.println("11");
+            fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

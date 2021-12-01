@@ -42,9 +42,32 @@ public class Test {
 //                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id)\n" +
 //                ")");
 
+        //表创建
+//        API api = new API();
+//        api.parse("CREATE TABLE IF NOT EXISTS `SC`(\n"+
+//                "`ID` INTEGER PRIMARY KEY,\n"+
+//                "`NAME` VARCHAR(20) NOT NULL\n"+
+//                ")");
+
         //表删除
+//        API api = new API();
+//        api.parse("DROP TABLE runoob_tbl");
+
+        //字段删除测试
+//        API api = new API();
+//        api.parse("ALTER TABLE SC DROP COLUMN NAME");
+
+        //字段增加测试
+//        API api = new API();
+//        api.parse("ALTER TABLE SC ADD COLUMN NAME VARCHAR(40) DEFAULT WEF COMMENT 2233");
+
+        //字段修改测试
+//        API api = new API();
+//        api.parse("ALTER TABLE SC MODIFY COLUMN NAME INTEGER NOt NULL CHECK(NAME > 10)");
+
+        //字段修改测试
         API api = new API();
-        api.parse("");
+        api.parse("INSERT INTO SC (ID,NAME) VALUES (1,2)");
 
 
     }

@@ -62,6 +62,15 @@ public class DatabaseCreate {
             file = new File("src\\DBMS_ROOT\\data\\"+databaseName+"\\"+databaseName+".log");
             file.createNewFile();
 
+            DBMS.TBMessage tbMessage = DBMS.TBMessage.newBuilder()
+                    .build();
+            val = SerializationUtils.serialize(tbMessage);
+            fileOutputStream =
+                    new FileOutputStream("src\\DBMS_ROOT\\data\\"+databaseName+"\\"+databaseName+".tb");
+            for(int i = 0; i < val.length;i++){
+                fileOutputStream.write(val[i]);
+            }
+            fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
