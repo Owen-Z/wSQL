@@ -16,7 +16,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         //数据库创建
 //        API api = new API();
-//        api.parse("create database `mySqlite`");
+//        api.parse("log.create database `mySqlite`");
 
         //数据库查询
 //        File file = new File("src\\DBMS_ROOT\\database.db");

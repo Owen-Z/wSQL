@@ -35,6 +35,19 @@ public class API {
 //        dbName = dbn;
     }
 
+    public void AddToLog(String dbName, SQLStatement sqlStatement){
+        try{
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/DBMS_ROOT/data/" + dbName + "/" + dbName + ".log", true));
+            out.write(sqlStatement.toString());
+            out.close();
+            System.out.println(666);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getDbName() {
         return dbName;
     }
@@ -267,6 +280,9 @@ public class API {
                 }
                 tableCreate.create();
                 System.out.println("表创建成功");
+
+
+
             }
 
             // 删除数据表
@@ -460,10 +476,10 @@ public class API {
                 System.out.println(6666);
                 SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
                 // 字段需要变成什么样
-                System.out.println(sqlUpdateStatement.getItems().getClass());
+                System.out.println(sqlUpdateStatement.getTableSource().toString());
                 for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
                     // e.g. student.id = 19
-                    // 需要设置的字段
+                    // 需要设置的字段-
                     System.out.println(item.getColumn());   //student.id
                     // 字段需要设置成的值
                     System.out.println(item.getValue());    //19
