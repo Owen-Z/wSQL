@@ -7,6 +7,7 @@ import com.Database.DatabaseCreate;
 import com.Database.DatabaseDelete;
 import com.Field.FieldAdd;
 import com.Field.FieldDelete;
+import com.Field.FieldModify;
 import com.Table.TableCreate;
 import com.Table.TableDelete;
 import com.alibaba.druid.sql.SQLUtils;
@@ -449,16 +450,22 @@ public class API {
                         map.put("check", check);
                         map.put("foreignKey", foreignKey);
                         map.put("unique", unique);
-                        System.out.println("name:" + name);
-                        System.out.println("type:" + type);
-                        System.out.println("def:" + def);
-                        System.out.println("comment:" + comment);
-                        System.out.println("auto:" + auto);
-                        System.out.println("primaryKey:" + primaryKey);
-                        System.out.println("notNUll:" + notNUll);
-                        System.out.println("check:" + check);
-                        System.out.println("unique:" + unique);
-                        System.out.println("foreignKey:" + foreignKey);
+//                        System.out.println("name:" + name);
+//                        System.out.println("type:" + type);
+//                        System.out.println("def:" + def);
+//                        System.out.println("comment:" + comment);
+//                        System.out.println("auto:" + auto);
+//                        System.out.println("primaryKey:" + primaryKey);
+//                        System.out.println("notNUll:" + notNUll);
+//                        System.out.println("check:" + check);
+//                        System.out.println("unique:" + unique);
+//                        System.out.println("foreignKey:" + foreignKey);
+                        FieldModify fieldModify = new FieldModify("MYSQLITE",tbName);
+                        if(fieldModify.check(map)){
+                            System.out.println("字段更新失败");
+                        }else {
+                            System.out.println("字段更新成功");
+                        }
                     }
                 }
             }
@@ -637,6 +644,16 @@ public class API {
 //                    }
 //                }
 
+            }
+
+            if(sqlStatement instanceof SQLCreateIndexStatement){
+                SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
+                // 选择表名
+                System.out.println(sqlCreateIndexStatement.getTableName());
+                // 索引名
+                System.out.println(sqlCreateIndexStatement.getName());
+                // 索引对应行
+                System.out.println(sqlCreateIndexStatement.getItems().get(0).getExpr());
             }
 
         }
