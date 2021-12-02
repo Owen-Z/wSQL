@@ -439,7 +439,6 @@ public class DataSelect {
         return "null";
     }
 
-
     //查询语句无需where
     public String select1(List<String> result){
         try{
