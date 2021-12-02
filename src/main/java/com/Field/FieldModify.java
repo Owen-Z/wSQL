@@ -32,6 +32,7 @@ public class FieldModify {
                 foreignKey= map.get("foreignKey"),
                 unique = map.get("unique"),
                 length = getLength(type);
+        System.out.println(map);
         try {
             File file = new File("src\\DBMS_ROOT\\data\\"+dbName+"\\"+tbName+".ibd");
             if (file.exists()){

@@ -632,7 +632,6 @@ public class API {
                 //根据是否存在where语句选取不同的方法
                 SQLBinaryOpExpr where = (SQLBinaryOpExpr) sqlSelectStatement.getSelect().getQueryBlock().getWhere();
                 if(where == null){
-                    System.out.println(1);
                     String s = dataSelect.select1(result);
                     if(!s.equals("null")){
                         System.out.println("查询成功");
@@ -641,7 +640,6 @@ public class API {
                         System.out.println("查询失败");
                     }
                 }else {
-//                    System.out.println(2);
                     List<String> key = new ArrayList<>();
                     List<String> val = new ArrayList<>();
                     List<String> exp = new ArrayList<>();

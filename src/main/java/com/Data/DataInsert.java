@@ -7,6 +7,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class DataInsert {
@@ -81,6 +82,28 @@ public class DataInsert {
                                 return false;
                             }
                         }
+
+                        if(column.getPrimary().equals("true")){
+                            List<String> list = new ArrayList<>();
+                            HashSet set = new HashSet(list);
+                            if (set.contains(val)){
+                                return false;
+                            }
+                        }
+
+                        try {
+                            if(!column.getCheck().equals("null")){
+                                String[] ss = column.getCheck().split(" ");
+                                if(!ss[0].equals(column.getColumnName())){
+                                    return false;
+                                }
+                                if(ss[1].equals(">")){
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            return false;
+                        }
                         size--;
                     }
                 }
@@ -100,13 +123,14 @@ public class DataInsert {
             simpleDateFormat.format(str);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 
     public boolean DataSave(HashMap<String,String> map){
         try{
-            File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
+            File file = new File("src\\DBMS_ROOT\\data\\"+dbName+"\\"+tbName+".ibd");
             FileInputStream input = new FileInputStream(file);
             byte[] buffer = new byte[10240];
             input.read(buffer);
