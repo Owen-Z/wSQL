@@ -12,6 +12,7 @@ import com.Index.IndexCreate;
 import com.Index.IndexDelete;
 import com.Table.TableCreate;
 import com.Table.TableDelete;
+import com.Transaction.Commit;
 import com.alibaba.druid.sql.SQLUtils;
 import com.alibaba.druid.sql.ast.*;
 import com.alibaba.druid.sql.ast.expr.*;
@@ -35,10 +36,12 @@ import java.util.*;
 public class API {
     private String userName;    //使用当前模块的用户名
     private String dbName;      //当前使用的数据库
+    private Commit commit;
 
     public API(){
 //        userName = un;
 //        dbName = dbn;
+        commit = new Commit();
     }
 
     public String getDbName() {
@@ -632,6 +635,11 @@ public class API {
                     }
                 }
                 DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                if(!commit.getState()){
+                    commit.setDbName("MYSQLITE");
+                    commit.setTbName(tbName);
+                    commit.getTB();
+                }
                 if(dataSelect.select(result,key,val)){
                     System.out.println("查询成功");
                 }else {
