@@ -609,6 +609,7 @@ public class API {
 
                 
                 int needReturn = visitor1.getColumns().size() - visitor1.getConditions().size();
+                System.out.println(needReturn);
                 int length = visitor1.getColumns().toString().length();
                 String str = visitor1.getColumns().toString().substring(1,length-1);
                 String[] sList = str.split(",");
@@ -631,6 +632,7 @@ public class API {
                         String[] ke = condition.getColumn().toString().split("\\.");
 //                        System.out.println(ke[1]);
                         key.add(ke[1]);
+                        System.out.println(condition.getOperator());
 //                        System.out.println(condition.getValues().get(0).toString());
                         val.add(condition.getValues().get(0).toString());
                     }
@@ -645,7 +647,6 @@ public class API {
                 if(!s.equals("null")){
                     System.out.println("查询成功");
                     return s;
-
                 }else {
                     System.out.println("查询失败");
                 }
