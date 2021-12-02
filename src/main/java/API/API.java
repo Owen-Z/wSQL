@@ -393,14 +393,35 @@ public class API {
 //                        System.out.println("foreignKey:" + foreignKey);
 
                     }else if(element instanceof MySqlAlterTableModifyColumn){
+                        HashMap<String,String> map = new HashMap<>();
                         // 获取要修改的列名
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getName());
                         String name = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getName().toString();
+                        map.put("name",name);
                         // 获取要修改的字段属性
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType());
                         String type = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType().toString();
-                        // 所有约束
-//                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints());
+                        map.put("type",type);
+                        // 默认值
+                        String def = "null";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr() != null){
+                            def = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr().toString();
+                        }
+                        map.put("def",def);
+//                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr());
+                        //自增
+                        String auto = "false";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().isAutoIncrement()){
+                            auto = "true";
+                        }
+                        auto = "true";
+                        map.put("auto",auto);
+                        //备注
+                        String comment = "null";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getComment() != null){
+                            comment = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getComment().toString();
+                        }
+                        map.put("comment",comment);
                         String primaryKey = "false";
                         String notNUll = "false";
                         String check = "null";
@@ -408,6 +429,7 @@ public class API {
                         String unique = "false";
                         List<SQLColumnConstraint> list =
                                 ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints();
+
                         for (SQLColumnConstraint cons : list) {
                             if (cons instanceof SQLNotNullConstraint) {
                                 notNUll = "true";
@@ -422,16 +444,21 @@ public class API {
                                 unique = "true";
                             }
                         }
-//                        System.out.println("name:" + name);
-//                        System.out.println("type:" + type);
-//                        System.out.println("def:" + def);
-//                        System.out.println("comment:" + comment);
-//                        System.out.println("auto:" + auto);
-//                        System.out.println("primaryKey:" + primaryKey);
-//                        System.out.println("notNUll:" + notNUll);
-//                        System.out.println("check:" + check);
-//                        System.out.println("unique:" + unique);
-//                        System.out.println("foreignKey:" + foreignKey);
+                        map.put("notNUll", notNUll);
+                        map.put("primaryKey", primaryKey);
+                        map.put("check", check);
+                        map.put("foreignKey", foreignKey);
+                        map.put("unique", unique);
+                        System.out.println("name:" + name);
+                        System.out.println("type:" + type);
+                        System.out.println("def:" + def);
+                        System.out.println("comment:" + comment);
+                        System.out.println("auto:" + auto);
+                        System.out.println("primaryKey:" + primaryKey);
+                        System.out.println("notNUll:" + notNUll);
+                        System.out.println("check:" + check);
+                        System.out.println("unique:" + unique);
+                        System.out.println("foreignKey:" + foreignKey);
                     }
                 }
             }
