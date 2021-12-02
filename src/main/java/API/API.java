@@ -18,17 +18,10 @@ import com.alibaba.druid.sql.ast.*;
 import com.alibaba.druid.sql.ast.expr.*;
 import com.alibaba.druid.sql.ast.statement.*;
 import com.alibaba.druid.sql.dialect.mysql.ast.*;
-import com.alibaba.druid.sql.dialect.mysql.ast.clause.*;
-import com.alibaba.druid.sql.dialect.mysql.ast.expr.*;
 import com.alibaba.druid.sql.dialect.mysql.ast.statement.*;
-import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlASTVisitor;
-import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlASTVisitorAdapter;
 import com.alibaba.druid.sql.dialect.mysql.visitor.MySqlSchemaStatVisitor;
-import com.alibaba.druid.sql.dialect.sqlserver.ast.stmt.SQLServerInsertStatement;
-import com.alibaba.druid.sql.dialect.sqlserver.ast.stmt.SQLServerUpdateStatement;
 import com.alibaba.druid.stat.TableStat;
 import com.alibaba.druid.util.JdbcConstants;
-import jdk.swing.interop.SwingInterOpUtils;
 
 import java.io.*;
 import java.util.*;
@@ -62,6 +55,10 @@ public class API {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setDbName(String _dbName){
+        dbName = _dbName;
     }
 
     /**
@@ -120,7 +117,7 @@ public class API {
 
         if(statement.equals("mysqldump")){
             try{
-                BufferedReader br = new BufferedReader(new FileReader("src/DBMS_ROOT/" + dbName));
+                BufferedReader br = new BufferedReader(new FileReader("src/DBMS_ROOT/" + dbName + "/" + dbName + ".log"));
                 String line = null;
                 while((line= br.readLine()) != null){
                     parse(line);
@@ -195,7 +192,7 @@ public class API {
                 String storeTableName = tableName.substring(1, tableName.length() - 1);
 
                 //实例化创建表
-                TableCreate tableCreate = new TableCreate("MYSQLITE",storeTableName);
+                TableCreate tableCreate = new TableCreate(dbName,storeTableName);
                 if (!tableCreate.TBCheck()){
                     System.out.println("表已经存在");
                     return "false";
@@ -306,7 +303,7 @@ public class API {
                 String tbName = sqlDropTableStatement.getTableSources().toString();
                 System.out.println(tbName.substring(1,tbName.length()-1));
                 String storeTableName = tbName.substring(1,tbName.length()-1);
-                TableDelete tableDelete = new TableDelete("MYSQLITE",storeTableName.toUpperCase(Locale.ROOT));
+                TableDelete tableDelete = new TableDelete(dbName,storeTableName.toUpperCase(Locale.ROOT));
                 if (tableDelete.TBCheck()){
                     tableDelete.DBDelete();
                 }else {
@@ -325,7 +322,7 @@ public class API {
 //                        System.out.println(((SQLAlterTableDropColumnItem) element).getColumns());
                         for(SQLName dropElement : ((SQLAlterTableDropColumnItem) element).getColumns()){
 //                            System.out.println(dropElement);
-                            FieldDelete fieldDelete = new FieldDelete("MYSQLITE",tbName);
+                            FieldDelete fieldDelete = new FieldDelete(dbName,tbName);
                             if(fieldDelete.FieldDrop(dropElement.toString().toUpperCase(Locale.ROOT))){
                                 System.out.println("字段删除成功");
                             }else {
@@ -334,7 +331,7 @@ public class API {
                         }
                     }else if(element instanceof SQLAlterTableAddColumn){
                         SQLColumnDefinition addElement = ((SQLAlterTableAddColumn) element).getColumns().get(0);
-                        FieldAdd fieldAdd = new FieldAdd("MYSQLITE",tbName);
+                        FieldAdd fieldAdd = new FieldAdd(dbName,tbName);
                         if (!fieldAdd.FieldCheck(addElement.getName().toString())){
                             System.out.println("字段增加失败");
                             return "true";
@@ -486,9 +483,9 @@ public class API {
 //                        System.out.println("check:" + check);
 //                        System.out.println("unique:" + unique);
 //                        System.out.println("foreignKey:" + foreignKey);
-                        FieldModify fieldModify = new FieldModify("MYSQLITE",tbName);
+                        FieldModify fieldModify = new FieldModify(dbName,tbName);
                         if(!commit.getState()){
-                            commit.setDbName("MYSQLITE");
+                            commit.setDbName(dbName);
                             commit.setTbName(tbName);
                             commit.getTB();
                         }
@@ -529,7 +526,7 @@ public class API {
                 fields.add(where.getLeft().toString());
                 vals.add(where.getRight().toString());
                 exps.add(where.getOperator().getName());
-                DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
+                DataDelete dataDelete = new DataDelete(dbName,sqlDeleteStatement.getTableName().toString());
                 if(dataDelete.delete(fields,vals)){
                     System.out.println("删除成功");
                 }else {
@@ -575,10 +572,10 @@ public class API {
                 fields.add(where.getLeft().toString());
                 vals.add(where.getRight().toString());
                 exps.add(where.getOperator().getName());
-                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
+                DataUpdate dataUpdate = new DataUpdate(dbName,tbName);
 
                 if(!commit.getState()){
-                    commit.setDbName("MYSQLITE");
+                    commit.setDbName(dbName);
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
@@ -617,13 +614,13 @@ public class API {
                     return "false";
                 }
 
-                DataInsert dataInsert = new DataInsert("MYSQLITE",insertStatement.getTableName().getSimpleName());
+                DataInsert dataInsert = new DataInsert(dbName,insertStatement.getTableName().getSimpleName());
                 HashMap<String,String> map = new HashMap<>();
                 for (int i = 0;i<columnsName.size();i++){
                     map.put(columnsName.get(i),dataList.get(i));
                 }
                 if(!commit.getState()){
-                    commit.setDbName("MYSQLITE");
+                    commit.setDbName(dbName);
                     commit.setTbName(insertStatement.getTableName().getSimpleName());
                     commit.getTB();
                 }
@@ -687,9 +684,9 @@ public class API {
                         val.add(condition.getValues().get(0).toString());
                     }
                 }
-                DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                DataSelect dataSelect = new DataSelect(dbName,tbName);
                 if(!commit.getState()){
-                    commit.setDbName("MYSQLITE");
+                    commit.setDbName(dbName);
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
@@ -724,7 +721,7 @@ public class API {
                 String tbName = sqlCreateIndexStatement.getTableName();
                 String ixName = sqlCreateIndexStatement.getName().toString();
                 String cName = sqlCreateIndexStatement.getItems().get(0).getExpr().toString();
-                IndexCreate indexCreate = new IndexCreate("MYSQLITE",tbName);
+                IndexCreate indexCreate = new IndexCreate(dbName,tbName);
 //                System.out.println(indexCreate.checkField(cName));
 //                System.out.println(indexCreate.checkIndex(cName,ixName));
                 if(indexCreate.checkField(cName)&&indexCreate.checkIndex(cName,ixName)){
@@ -742,7 +739,7 @@ public class API {
 //                System.out.println(sqlDropIndexStatement.getIndexName());
                 String tbName = sqlDropIndexStatement.getTableName().toString();
                 String ixName = sqlDropIndexStatement.getIndexName().toString();
-                IndexDelete indexDelete = new IndexDelete("MYSQLITE",tbName);
+                IndexDelete indexDelete = new IndexDelete(dbName,tbName);
 
                 if(indexDelete.delete(ixName)){
                     System.out.println("删除成功");
