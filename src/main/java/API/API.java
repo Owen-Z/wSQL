@@ -9,6 +9,7 @@ import com.Field.FieldAdd;
 import com.Field.FieldDelete;
 import com.Field.FieldModify;
 import com.Index.IndexCreate;
+import com.Index.IndexDelete;
 import com.Table.TableCreate;
 import com.Table.TableDelete;
 import com.alibaba.druid.sql.SQLUtils;
@@ -660,8 +661,8 @@ public class API {
                 String ixName = sqlCreateIndexStatement.getName().toString();
                 String cName = sqlCreateIndexStatement.getItems().get(0).getExpr().toString();
                 IndexCreate indexCreate = new IndexCreate("MYSQLITE",tbName);
-                System.out.println(indexCreate.checkField(cName));
-                System.out.println(indexCreate.checkIndex(cName,ixName));
+//                System.out.println(indexCreate.checkField(cName));
+//                System.out.println(indexCreate.checkIndex(cName,ixName));
                 if(indexCreate.checkField(cName)&&indexCreate.checkIndex(cName,ixName)){
                     indexCreate.create(cName,ixName);
                     System.out.println("索引建立成功");
@@ -673,11 +674,16 @@ public class API {
 
             if(sqlStatement instanceof SQLDropIndexStatement){
                 SQLDropIndexStatement sqlDropIndexStatement = (SQLDropIndexStatement) sqlStatement;
-                System.out.println(sqlDropIndexStatement.getTableName());
-                System.out.println(sqlDropIndexStatement.getIndexName());
+//                System.out.println(sqlDropIndexStatement.getTableName());
+//                System.out.println(sqlDropIndexStatement.getIndexName());
                 String tbName = sqlDropIndexStatement.getTableName().toString();
                 String ixName = sqlDropIndexStatement.getIndexName().toString();
-
+                IndexDelete indexDelete = new IndexDelete("MYSQLITE",tbName);
+                if(indexDelete.delete(ixName)){
+                    System.out.println("删除成功");
+                }else {
+                    System.out.println("删除失败");
+                }
             }
 
         }
