@@ -106,8 +106,18 @@ public class Test {
 //        api.parse("SELECT * FROM SC WHERE (ID = 1)");
 
         //字段更新
+//        API api = new API();
+//        api.parse("ALTER TABLE SC MODIFY COLUMN CLASS VARCHAR(20) ");
+
+        //索引建立
+//        API api = new API();
+//        api.parse("CREATE INDEX NAME ON SC(NAME)");
+
+        //索引删除
         API api = new API();
-        api.parse("ALTER TABLE SC MODIFY COLUMN CLASS VARCHAR(20) ");
+        api.parse("CREATE INDEX NAME ON SC(NAME)");
+
+
 
 
     }

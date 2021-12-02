@@ -59,11 +59,13 @@ message Index{
   message IX{
     string dbName = 1;
     string tbName = 2;
+    string cName = 3;
+    string ixName = 4;
     message Map{
       string key = 1;
       repeated int32 val = 2;
     }
-    repeated Map map = 3;
+    repeated Map map = 5;
   }
   repeated IX ix = 1;
 }
