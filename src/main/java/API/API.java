@@ -116,6 +116,23 @@ public class API {
         // 第二个参数为解析的数据库类型
         statement = statement.toUpperCase(Locale.ROOT);
         List<SQLStatement> statementList = SQLUtils.parseStatements(statement, JdbcConstants.MYSQL);
+
+
+        if(statement.equals("mysqldump")){
+            try{
+                BufferedReader br = new BufferedReader(new FileReader("src/DBMS_ROOT/" + dbName));
+                String line = null;
+                while((line= br.readLine()) != null){
+                    parse(line);
+                }
+                br.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
         // 单语句解析，只有一条数据
         if (!statement.isEmpty()) {
             SQLStatement sqlStatement = statementList.get(0);
@@ -221,6 +238,7 @@ public class API {
                         String check = "null";
                         String foreignKey = "false";
                         String unique = "false";
+
                         for (SQLColumnConstraint cons : list) {
                             if (cons instanceof SQLNotNullConstraint) {
                                 notNUll = "true";
@@ -270,6 +288,9 @@ public class API {
                         }else if(result1 == 4){
                             System.out.println("外键设置成功");
                         }
+                    }else if (elements.get(i) instanceof SQLCheck){
+                        // 左值
+                        ((SQLCheck) elements.get(i)).getExpr();
                     }
                 }
                 tableCreate.create();

@@ -32,15 +32,16 @@ public class Test {
 //        api.parse("drop database `mySqlite`");
 
         //表创建
-//        API api = new API();
-//        api.parse("CREATE TABLE IF NOT EXISTS `runoob_tbl`(\n" +
-//                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
-//                "   `runoob_title` VARCHAR(100) NOT NULL UNIQUE,\n" +
-//                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
-//                "   `submission_date` DATE check(submission_date>1000),\n" +
-//                "   PRIMARY KEY ( `runoob_id` ),\n" +
-//                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id)\n" +
-//                ")");
+        API api = new API();
+        api.parse("CREATE TABLE IF NOT EXISTS `runo_tbl`(\n" +
+                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
+                "   `runoob_title` VARCHAR(100) NOT NULL UNIQUE ,\n" +
+                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
+                "   `submission_date` DATE check(submission_date>1000),\n" +
+                "   PRIMARY KEY ( `runoob_id` ),\n" +
+                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id),\n" +
+                "   CHECK (runoob_id > 10)" +
+                ")");
 
         //表创建
 //        API api = new API();
@@ -102,8 +103,8 @@ public class Test {
 //        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
 
         //数据查询
-        API api = new API();
-        api.parse("SELECT * FROM SC WHERE (ID > 2 AND ID < 3)" );
+//        API api = new API();
+//        api.parse("SELECT * FROM SC WHERE (ID > 2 AND ID < 3)" );
 
 
         //字段更新
