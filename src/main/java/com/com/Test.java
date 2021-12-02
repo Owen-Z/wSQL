@@ -16,7 +16,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         //数据库创建
 //        API api = new API();
-//        api.parse("create database `mySqlite`");
+//        api.parse("log.create database `mySqlite`");
 
         //数据库查询
 //        File file = new File("src\\DBMS_ROOT\\database.db");
@@ -57,7 +57,7 @@ public class Test {
 //        API api = new API();
 //        api.parse("ALTER TABLE SC DROP COLUMN NAME");
 
-        //字段增加测试
+//        字段增加测试
 //        API api = new API();
 //        api.parse("ALTER TABLE SC ADD COLUMN CLASS VARCHAR(40)");
 
@@ -75,7 +75,7 @@ public class Test {
 //        System.out.println(table.getColumnList().get(1).getType());
 
 //        API api = new API();
-//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,3)");
+//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,7)");
 
 //        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
 //        FileInputStream input = new FileInputStream(file);
@@ -104,6 +104,7 @@ public class Test {
         //数据查询
 //        API api = new API();
 //        api.parse("SELECT * FROM SC");
+
 
         //字段更新
 //        API api = new API();

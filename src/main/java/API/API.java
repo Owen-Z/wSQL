@@ -44,6 +44,18 @@ public class API {
         commit = new Commit();
     }
 
+    public void AddToLog(String dbName, SQLStatement sqlStatement){
+        try{
+            BufferedWriter out = new BufferedWriter(new FileWriter("src/DBMS_ROOT/data/" + dbName + "/" + dbName + ".log", true));
+            out.write(sqlStatement.toString());
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getDbName() {
         return dbName;
     }
@@ -98,7 +110,7 @@ public class API {
         return exist;
     }
 
-    public void parse(String statement) {
+    public String parse(String statement) {
         // 使用druid解析语句
         // 第一个参数为SQL语句
         // 第二个参数为解析的数据库类型
@@ -169,7 +181,7 @@ public class API {
                 TableCreate tableCreate = new TableCreate("MYSQLITE",storeTableName);
                 if (!tableCreate.TBCheck()){
                     System.out.println("表已经存在");
-                    return;
+                    return "false";
                 }
 
                 List<SQLTableElement> elements = sqlCreateTableStatement.getTableElementList();
@@ -228,22 +240,11 @@ public class API {
                         map.put("check", check);
                         map.put("foreignKey", foreignKey);
                         map.put("unique", unique);
-//                        System.out.println(i + "name:" + name);
-//                        System.out.println(i + "type:" + type);
-//                        System.out.println(i + "def:" + def);
-//                        System.out.println(i + "comment:" + comment);
-//                        System.out.println(i + "auto:" + auto);
-//                        System.out.println(i + "primaryKey:" + primaryKey);
-//                        System.out.println(i + "notNUll:" + notNUll);
-//                        System.out.println(i + "check:" + check);
-//                        System.out.println(i + "unique:" + unique);
-//                        System.out.println(i + "foreignKey:" + foreignKey);
                         tableCreate.TBCreateColumn(map);
                     } else if (elements.get(i) instanceof MySqlPrimaryKey) {
                         MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                         elements.get(i).accept(visitor1);
                         String[] str = visitor1.getColumns().toString().split("\\[|\\.|\\]");
-//                        System.out.println(str[2]);
                         if(tableCreate.setPrimaryKey(str[2])){
                             System.out.println("主键设置成功");
                         }else{
@@ -257,9 +258,6 @@ public class API {
                         String[] s = result.split(" ");
                         String[] s1 = s[0].split("\\.|\\,");
                         String[] s2 = s[1].split("\\.");
-//                        System.out.println(s1[1]);
-//                        System.out.println(s2[0]);
-//                        System.out.println(s2[1]);
                         int result1 = tableCreate.setForeign(s1[1],s2[0],s2[1]);
                         if(result1 == 0){
                             System.out.println("字段不存在");
@@ -276,6 +274,9 @@ public class API {
                 }
                 tableCreate.create();
                 System.out.println("表创建成功");
+
+
+
             }
 
             // 删除数据表
@@ -296,9 +297,6 @@ public class API {
             if(sqlStatement instanceof SQLAlterTableStatement){
                 // 转换
                 SQLAlterTableStatement sqlAlterTableStatement = (SQLAlterTableStatement) sqlStatement;
-//                System.out.println(sqlAlterTableStatement.getItems().size());
-
-//                System.out.println(sqlAlterTableStatement.getTableSource());
                 String tbName = sqlAlterTableStatement.getTableSource().toString().toUpperCase(Locale.ROOT);
 
                 for(SQLAlterTableItem element : sqlAlterTableStatement.getItems()){
@@ -318,7 +316,7 @@ public class API {
                         FieldAdd fieldAdd = new FieldAdd("MYSQLITE",tbName);
                         if (!fieldAdd.FieldCheck(addElement.getName().toString())){
                             System.out.println("字段增加失败");
-                            return;
+                            return "true";
                         }
                         HashMap<String, String> map = new HashMap<>();
                         //1.name
@@ -407,6 +405,7 @@ public class API {
                         // 获取要修改的字段属性
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType());
                         String type = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType().toString();
+
                         map.put("type",type);
                         // 默认值
                         String def = "null";
@@ -428,6 +427,7 @@ public class API {
                             comment = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getComment().toString();
                         }
                         map.put("comment",comment);
+
                         String primaryKey = "false";
                         String notNUll = "false";
                         String check = "null";
@@ -514,6 +514,7 @@ public class API {
             if(sqlStatement instanceof SQLUpdateStatement){
                 SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
                 // 字段需要变成什么样
+
 //                System.out.println(sqlUpdateStatement.getTableSource().toString());
                 String tbName = sqlUpdateStatement.getTableSource().toString();
                 String key = "";
@@ -578,7 +579,7 @@ public class API {
                 }
                 if(columnsName.size() != dataList.size()){
                     System.out.println("插入错误");
-                    return;
+                    return "false";
                 }
 
                 DataInsert dataInsert = new DataInsert("MYSQLITE",insertStatement.getTableName().getSimpleName());
@@ -640,8 +641,11 @@ public class API {
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
-                if(dataSelect.select(result,key,val)){
+                String s = dataSelect.select(result,key,val);
+                if(!s.equals("null")){
                     System.out.println("查询成功");
+                    return s;
+
                 }else {
                     System.out.println("查询失败");
                 }
@@ -694,8 +698,20 @@ public class API {
                 }
             }
 
-        }
+            if(sqlStatement instanceof SQLCreateIndexStatement){
+                SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
+                // 选择表名
+                System.out.println(sqlCreateIndexStatement.getTableName());
+                // 索引名
+                System.out.println(sqlCreateIndexStatement.getName());
+                // 索引对应行
+                System.out.println(sqlCreateIndexStatement.getItems().get(0).getExpr());
 
+                return "true";
+            }
+
+        }
+        return "true";
     }
 
     private static Object getValue(SQLExpr value) {

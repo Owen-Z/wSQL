@@ -16,7 +16,7 @@ public class DataSelect {
         this.tbName = tbName;
     }
 
-    public boolean select(List<String> result ,List<String> key ,List<String> val ){
+    public String select(List<String> result ,List<String> key ,List<String> val ){
         try {
             File file = new File("src\\DBMS_ROOT\\data\\"+dbName+"\\"+tbName+".ibd");
             if (file.exists()) {
@@ -69,6 +69,7 @@ public class DataSelect {
                         }
                     }
                 }
+
                 HashMap<String,List<String>> results = new HashMap<>();
                 int j = 0;
                 if(result.get(0).equals("*")){
@@ -80,11 +81,29 @@ public class DataSelect {
                         }
                         results.put(column.getColumnName(),list1);
                     }
+                    String allKeys = "";
+                    String allValues = "";
+                    List<List<String>> aa = new ArrayList<>();;
                     for (Map.Entry<String,List<String>> entry:results.entrySet()){
+                        String currentKey = "|" + entry.getKey();
+
                         System.out.println("KEY:"+entry.getKey());
+
+                        currentKey = String.format("%-15s", currentKey);
+                        allKeys += currentKey;
                         System.out.println("VALUE:"+entry.getValue());
+                        aa.add(entry.getValue());
                     }
-                    return true;
+                    for(int i = 0; i < aa.get(0).size(); i++){
+                        for(int k = 0; k < aa.size(); k++){
+                            String currentValue =  "|" + aa.get(k).get(i) ;
+                            currentValue = String.format("%-15s", currentValue);
+                            allValues += currentValue;
+                        }
+                        allValues += "\n";
+                    }
+
+                    return allKeys + "\n" + allValues;
                 }else {
                     for (DBMS.Table.Column column: columnList){
                         for (String res : result){
@@ -100,17 +119,36 @@ public class DataSelect {
                         }
                     }
                     if(j == result.size()) {
+                        String allKeys = "";
+                        String allValues = "";
+                        List<List<String>> aa = new ArrayList<>();;
                         for (Map.Entry<String,List<String>> entry:results.entrySet()){
+                            String currentKey = "|" + entry.getKey();
+
                             System.out.println("KEY:"+entry.getKey());
+
+                            currentKey = String.format("%-15s", currentKey);
+                            allKeys += currentKey;
                             System.out.println("VALUE:"+entry.getValue());
+                            aa.add(entry.getValue());
                         }
-                        return true;
+                        for(int i = 0; i < aa.get(0).size(); i++){
+                            for(int k = 0; k < aa.size(); k++){
+                                String currentValue =  "|" + aa.get(k).get(i) ;
+                                currentValue = String.format("%-15s", currentValue);
+                                allValues += currentValue;
+                            }
+                            allValues += "\n";
+                        }
+
+
+                        return allKeys + "\n" + allValues;
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return "null";
     }
 }

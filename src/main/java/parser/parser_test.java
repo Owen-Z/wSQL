@@ -15,7 +15,7 @@ public class parser_test {
 //        api.parse("CREATE TABLE Persons(Id_P int NOT NULL,LastName varchar(255) NOT NULL,FirstName varchar(255),Address varchar(255),City varchar(255),CHECK (Id_P>0))");
 
 
-//        api.parse("CREATE TABLE IF NOT EXISTS `runoob_tbl`(\n" +
+//        api.parse("CREATE TABLE IF NOT EXISTS `runoo233332333222b`(\n" +
 //                "   `runoob_id` INTEGER UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good' check (id > 10),\n" +
 //                "   `runoob_title` VARCHAR(100) ,\n" +
 //                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
@@ -72,6 +72,7 @@ public class parser_test {
 //        api.parse("select name, classname from student a , class b where (a.id = b.id OR a.name = b.name AND A.ID = 10) ");
 //        api.parse("select * from student a where (id = 10) ");
 
+//        api.parse("CREATE INDEX index_name ON table_name (column_list)");
 //        }
 
     }
