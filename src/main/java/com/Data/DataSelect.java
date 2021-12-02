@@ -453,8 +453,10 @@ public class DataSelect {
                 HashMap<String,List<String>> results = new HashMap<>();
                 int j = 0;
                 if(result.get(0).equals("*")){
+                    System.out.println(1234);
                     for (DBMS.Table.Column column: columnList){
                         List<String> list = new ArrayList<>(column.getValList());
+                        System.out.println(1245);
                         results.put(column.getColumnName(),list);
                     }
                     String allKeys = "";

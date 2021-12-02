@@ -232,8 +232,9 @@ class mainFrame{
 //
 //		return newSuccess;
 //	}
-	public void showFrame() {
+	public void showFrame(String userName) {
 		API startWsql = new API();
+		startWsql.setUserName(userName);
 
 		JFrame mainFr;
 		JPanel mainPaHead;
@@ -362,7 +363,11 @@ class mainFrame{
 			public void actionPerformed(ActionEvent e) {
 				//获取文本的信息
 				String realSen = sqlText.getText().trim();
-				startWsql.parse(realSen);
+				String str = startWsql.parse(realSen);
+				if(realSen.contains("select"))
+				{
+					sqlText.setText(str);
+				}
 			}
 		});
 		JButton sqlCancel = new JButton("CANCEL");
@@ -395,7 +400,7 @@ class mainFrame{
 //				mainFr.add(scrollPane,BorderLayout.WEST);
 				mainFr.dispose();
 				mainFrame mainf = new mainFrame();
-				mainf.showFrame();
+				mainf.showFrame(userName);
 			}
 		});
 		JPanel operation = new JPanel();
@@ -418,10 +423,11 @@ class mainFrame{
 				if(e.getSource() == jTree && e.getClickCount() == 1)
 				{
 					selPath = jTree.getPathForLocation(e.getX(),e.getY());
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) selPath.getLastPathComponent();
-					String strBaseName = node.toString();
-					System.out.println(strBaseName);
-					startWsql.setDbName(strBaseName);
+//					DefaultMutableTreeNode node = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+//					System.out.println();
+
+					System.out.println(selPath.getPath()[1]);
+					startWsql.setDbName(selPath.getPath()[1].toString());
 				}
 				if (e.getSource() == jTree && e.getClickCount() == 2){
 					//节点路径

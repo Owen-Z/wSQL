@@ -48,14 +48,27 @@ public class Commit {
         }
     }
 
-    public void saveTB() throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("src\\DBMS_ROOT\\data\\"+ dbName +"\\"+tbName+".ibd");
-        byte[] val = SerializationUtils.serialize(table);
-        for(int i = 0; i < val.length;i++){
-            fileOutputStream.write(val[i]);
+    public void saveTB() {
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream("src\\DBMS_ROOT\\data\\" + dbName + "\\" + tbName + ".ibd");
+            byte[] val = SerializationUtils.serialize(table);
+            for (int i = 0; i < val.length; i++) {
+                fileOutputStream.write(val[i]);
+            }
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        fileOutputStream.close();
     }
 
+    public boolean change(String name){
+        return tbName.equals(name);
+    }
+
+    public void commit(){
+        state = false;
+        tbName = null;
+        dbName = null;
+    }
 
 }

@@ -30,6 +30,7 @@ public class API {
     private String userName;    //使用当前模块的用户名
     private String dbName;      //当前使用的数据库
     private Commit commit;
+    private List<String> logs;
 
     public API(){
 //        userName = un;
@@ -41,10 +42,11 @@ public class API {
         userName = _userName;
     }
 
-    public void AddToLog(String dbName, SQLStatement sqlStatement){
+    public void AddToLog(String dbName, String sqlStatement){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("src/DBMS_ROOT/data/" + dbName + "/" + dbName + ".log", true));
             out.write(sqlStatement.toString());
+            out.write("\n");
             out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -68,7 +70,7 @@ public class API {
     public boolean JudgeAuthority(){
         try{
             BufferedReader br = new BufferedReader(new FileReader("files/DBMSUser/UserList.txt"));
-            String line = null;
+            String line = " ";
             boolean flag = false;
             while((line= br.readLine()) != null && !flag){
                 if(line.contains(userName)){
@@ -146,6 +148,24 @@ public class API {
         statement = statement.toUpperCase(Locale.ROOT);
         List<SQLStatement> statementList = SQLUtils.parseStatements(statement, JdbcConstants.MYSQL);
 
+        if(statement.equals("ROLLBACK")){
+            try {
+                commit.saveTB();
+                commit.commit();
+                System.out.println("rollback");
+                return "true";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if(statement.equals("COMMIT")){
+            try {
+                commit.commit();
+                System.out.println("commit");
+                return "true";
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
 
         if(statement.equals("mysqldump")){
             try{
@@ -168,6 +188,9 @@ public class API {
 
             // 创建数据库语句
             if (sqlStatement instanceof SQLCreateDatabaseStatement) {
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 // 转换语句格式
                 SQLCreateDatabaseStatement createDatabaseStatement = (SQLCreateDatabaseStatement) sqlStatement;
 
@@ -190,13 +213,13 @@ public class API {
 
             // 删除数据库指令
             if (sqlStatement instanceof SQLDropDatabaseStatement) {
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 // 转换语句格式
                 SQLDropDatabaseStatement sqlDropDatabaseStatement = (SQLDropDatabaseStatement) sqlStatement;
 
-                // 通过解析得到的数据库名含有''   e.g. 'test'
-                String dbName = sqlDropDatabaseStatement.getDatabase().toString();
-                // 去除了''     e.g. test
-                String storeDBName = dbName.substring(1, dbName.length() - 1);
+                String storeDBName = sqlDropDatabaseStatement.getDatabase().toString();
 
                 /*
                     判断数据库是否存在
@@ -215,13 +238,13 @@ public class API {
 
             // 创建表指令
             if (sqlStatement instanceof SQLCreateTableStatement) {
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 SQLCreateTableStatement sqlCreateTableStatement = (SQLCreateTableStatement) sqlStatement;
                 System.out.println(sqlCreateTableStatement);
 
-                // 表名 e.g. 'test'
-                String tableName = sqlCreateTableStatement.getName().toString();
-                // 用以存储的表名 e.g. test
-                String storeTableName = tableName.substring(1, tableName.length() - 1);
+                String storeTableName = sqlCreateTableStatement.getName().toString();
 
                 //实例化创建表
                 TableCreate tableCreate = new TableCreate(dbName,storeTableName);
@@ -301,7 +324,7 @@ public class API {
                         MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                         elements.get(i).accept(visitor1);
                         String str = visitor1.getColumns().toString();
-                        String result = str.substring(1,str.length()-1);
+                        String result = str;
                         String[] s = result.split(" ");
                         String[] s1 = s[0].split("\\.|\\,");
                         String[] s2 = s[1].split("\\.");
@@ -331,6 +354,9 @@ public class API {
 
             // 删除数据表
             if(sqlStatement instanceof SQLDropTableStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 SQLDropTableStatement sqlDropTableStatement = (SQLDropTableStatement) sqlStatement;
                 String tbName = sqlDropTableStatement.getTableSources().toString();
                 System.out.println(tbName.substring(1,tbName.length()-1));
@@ -345,6 +371,9 @@ public class API {
 
             // 修改数据表字段
             if(sqlStatement instanceof SQLAlterTableStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 // 转换
                 SQLAlterTableStatement sqlAlterTableStatement = (SQLAlterTableStatement) sqlStatement;
                 String tbName = sqlAlterTableStatement.getTableSource().toString().toUpperCase(Locale.ROOT);
@@ -532,6 +561,9 @@ public class API {
 
             //删除数据
             if(sqlStatement instanceof SQLDeleteStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 // 转换
                 SQLDeleteStatement sqlDeleteStatement = (SQLDeleteStatement) sqlStatement;
 
@@ -558,7 +590,27 @@ public class API {
                 key.add(where.getLeft().toString());
                 val.add(where.getRight().toString());
                 exp.add(where.getOperator().getName());
-                DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
+
+
+                if(!commit.getState()){
+                    AddToLog(dbName, "ROLLBACK");
+                    commit.setDbName(dbName);
+                    commit.setTbName(sqlDeleteStatement.getTableName().toString());
+                    commit.getTB();
+                }else {
+                    if (commit.change(sqlDeleteStatement.getTableName().toString())){
+                        try {
+                            AddToLog(dbName, "COMMIT");
+                            commit.saveTB();
+                            commit.setDbName(dbName);
+                            commit.setTbName(sqlDeleteStatement.getTableName().toString());
+                            commit.getTB();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                DataDelete dataDelete = new DataDelete(dbName,sqlDeleteStatement.getTableName().toString());
                 if(dataDelete.delete(key,val,exp)){
                     System.out.println("删除成功");
                 }else {
@@ -568,17 +620,33 @@ public class API {
 
             // 更新数据表数据
             if(sqlStatement instanceof SQLUpdateStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
                 // 字段需要变成什么样
 
 //                System.out.println(sqlUpdateStatement.getTableSource().toString());
                 String tbName = sqlUpdateStatement.getTableSource().toString();
                 if(!commit.getState()){
-                    commit.setDbName("MYSQLITE");
+                    AddToLog(dbName, "ROLLBACK");
+                    commit.setDbName(dbName);
                     commit.setTbName(tbName);
                     commit.getTB();
+                }else {
+                    if (commit.change(tbName)){
+                        try {
+                            AddToLog(dbName, "COMMIT");
+                            commit.saveTB();
+                            commit.setDbName(dbName);
+                            commit.setTbName(tbName);
+                            commit.getTB();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
-                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
+                DataUpdate dataUpdate = new DataUpdate(dbName,tbName);
                 String key = "";
                 String val = "";
                 for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
@@ -616,6 +684,9 @@ public class API {
 
             // 插入数据指令
             if(sqlStatement instanceof SQLInsertStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 // 转换
                 SQLInsertStatement insertStatement = (SQLInsertStatement) sqlStatement;
 
@@ -631,23 +702,37 @@ public class API {
                 for (SQLInsertStatement.ValuesClause valuesClause : valuesList) {
                     List<SQLExpr> values = valuesClause.getValues();
                     for (SQLExpr value : values) {
-                        dataList.add(getValue(value).toString());
+                        System.out.println(value.toString());
+                        dataList.add(value.toString());
                     }
                 }
                 if(columnsName.size() != dataList.size()){
                     System.out.println("插入错误");
                     return "false";
                 }
-
-                DataInsert dataInsert = new DataInsert(dbName,insertStatement.getTableName().getSimpleName());
+                String tbName = insertStatement.getTableName().getSimpleName();
+                DataInsert dataInsert = new DataInsert(dbName,tbName);
                 HashMap<String,String> map = new HashMap<>();
                 for (int i = 0;i<columnsName.size();i++){
                     map.put(columnsName.get(i),dataList.get(i));
                 }
                 if(!commit.getState()){
+                    AddToLog(dbName,"ROLLBACK");
                     commit.setDbName(dbName);
                     commit.setTbName(insertStatement.getTableName().getSimpleName());
                     commit.getTB();
+                }else {
+                    if (commit.change(tbName)){
+                        try {
+                            AddToLog(dbName,"ROLLBACK");
+                            commit.saveTB();
+                            commit.setDbName(dbName);
+                            commit.setTbName(tbName);
+                            commit.getTB();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 if(dataInsert.DateCheck(map)){
@@ -673,10 +758,11 @@ public class API {
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
-                DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                DataSelect dataSelect = new DataSelect(dbName,tbName);
                 // 所有要查的列
 //                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getSelectList());
                 List<String> result = new ArrayList<>();
+                System.out.println(result);
                 for(int i = 0; i < sqlSelectStatement.getSelect().getQueryBlock().getSelectList().size();i++){
                     result.add(sqlSelectStatement.getSelect().getQueryBlock().getSelectList().get(i).toString());
                 }
@@ -720,6 +806,9 @@ public class API {
 
             //创建索引
             if(sqlStatement instanceof SQLCreateIndexStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
 ////                 选择表名
 //                System.out.println(sqlCreateIndexStatement.getTableName());
@@ -745,6 +834,9 @@ public class API {
 
             //删除索引
             if(sqlStatement instanceof SQLDropIndexStatement){
+                if(!JudgeAuthority()){
+                    return "false";
+                }
                 SQLDropIndexStatement sqlDropIndexStatement = (SQLDropIndexStatement) sqlStatement;
 //                System.out.println(sqlDropIndexStatement.getTableName());
 //                System.out.println(sqlDropIndexStatement.getIndexName());
@@ -760,6 +852,8 @@ public class API {
             }
 
         }
+
+        AddToLog(dbName,statement);
         return "true";
     }
 
@@ -772,6 +866,7 @@ public class API {
             // 值是字符串
             return ((SQLCharExpr) value).getText();
         }
+
         return null;
     }
 

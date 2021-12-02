@@ -105,7 +105,7 @@ public class Login_Register extends JFrame{
                     	//MainInterface maininterface = new MainInterface //弹出并不存在的主界面
                     }*/
                     mainFrame mainFrame = new mainFrame();
-                    mainFrame.showFrame();
+                    mainFrame.showFrame(username.getText());
             }
         });
         //Add Account键的监听

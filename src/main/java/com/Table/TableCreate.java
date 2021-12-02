@@ -38,7 +38,6 @@ public class TableCreate {
                 foreignKey= map.get("foreignKey"),
                 unique = map.get("unique");
         String length = getLength(type);
-        name = name.substring(1,name.length()-1);
         DBMS.Table.Column column = DBMS.Table.Column
                 .newBuilder()
                 .setColumnName(name)

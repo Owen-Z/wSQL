@@ -411,6 +411,110 @@ public class DataUpdate {
                                 return false;
                             }
                         }
+                        try {
+                            if(!column.getCheck().equals("null")){
+                                String[] ss = column.getCheck().split(" ");
+                                if(ss[1].equals(">")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val1);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left <= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val1);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left <= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals("<")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val1);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left >= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val1);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left >= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals("<=")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val1);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left > right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val1);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left > right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals(">=")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val1);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left < right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val1);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left < right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            return false;
+                        }
 
                         List<String> list = new ArrayList<>(column.getValList());
                         for (Integer i : set){

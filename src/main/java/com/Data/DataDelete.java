@@ -362,7 +362,7 @@ public class DataDelete {
                     List<String> val1 = new ArrayList<>();
                     for (int i = 0;i < vals.size();i++){
                         if(!set.contains(i)){
-                            val1.add(val.get(i));
+                            val1.add(vals.get(i));
                         }
                     }
                     System.out.println(val1.size());

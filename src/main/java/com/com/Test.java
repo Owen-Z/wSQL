@@ -32,16 +32,16 @@ public class Test {
 //        api.parse("drop database `mySqlite`");
 
         //表创建
-        API api = new API();
-        api.parse("CREATE TABLE IF NOT EXISTS `runo_tbl`(\n" +
-                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
-                "   `runoob_title` VARCHAR(100) NOT NULL UNIQUE ,\n" +
-                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
-                "   `submission_date` DATE check(submission_date>1000),\n" +
-                "   PRIMARY KEY ( `runoob_id` ),\n" +
-                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id),\n" +
-                "   CHECK (runoob_id > 10)" +
-                ")");
+//        API api = new API();
+//        api.parse("CREATE TABLE IF NOT EXISTS `runo_tbl`(\n" +
+//                "   `runoob_id` INT UNSIGNED AUTO_INCREMENT DEFAULT '19301137' PRIMARY KEY NOT NULL COMMENT 'good',\n" +
+//                "   `runoob_title` VARCHAR(100) NOT NULL UNIQUE ,\n" +
+//                "   `runoob_author` VARCHAR(40) NOT NULL,\n" +
+//                "   `submission_date` DATE check(submission_date>1000),\n" +
+//                "   PRIMARY KEY ( `runoob_id` ),\n" +
+//                "   FOREIGN KEY(deptId) REFERENCES tb_dept1(id),\n" +
+//                "   CHECK (runoob_id > 10)" +
+//                ")");
 
         //表创建
 //        API api = new API();
@@ -90,13 +90,13 @@ public class Test {
 //        API api = new API();
 //        api.parse("UPDATE SC SET CLASS = 3 WHERE ID > 1");
 //
-//        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
-//        FileInputStream input = new FileInputStream(file);
-//        byte[] buffer = new byte[10240];
-//        input.read(buffer);
-//        input.close();
-//        DBMS.Table table = SerializationUtils.deserialize(buffer);
-//        System.out.println(table.getColumnList().get(1).getValList().get(0));
+        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\TEST4.ibd");
+        FileInputStream input = new FileInputStream(file);
+        byte[] buffer = new byte[10240];
+        input.read(buffer);
+        input.close();
+        DBMS.Table table = SerializationUtils.deserialize(buffer);
+        System.out.println(table);
 
         //数据删除测试
 //        API api = new API();
@@ -104,12 +104,12 @@ public class Test {
 
         //数据查询
 //        API api = new API();
-<<<<<<< HEAD
+
 //        api.parse("SELECT * FROM SC WHERE ID > 2");
 
-=======
-//        api.parse("SELECT * FROM SC WHERE ID > 1");
->>>>>>> zgb
+
+//        api.parse("SELECT * FROM dd");
+
 
         //字段更新
 //        API api = new API();

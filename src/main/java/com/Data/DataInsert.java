@@ -4,10 +4,9 @@ import com.DBMS.proto.DBMS;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DataInsert {
     public String tbName;
@@ -33,6 +32,15 @@ public class DataInsert {
                     if (map.containsKey(column.getColumnName())){
                         String type = column.getType();
                         String val = map.get(column.getColumnName());
+                        System.out.println(column.getPrimary().equals("true"));
+                        System.out.println(column.getUnique().equals("true"));
+                        if(column.getPrimary().equals("true") || column.getUnique().equals("true")){
+                            List<String> list = new ArrayList<>(column.getValList());
+                            HashSet set = new HashSet(list);
+                            if (set.contains(val)){
+                                return false;
+                            }
+                        }
                         if(!column.getForeign().equals("false")){
                             String[] ss = column.getForeign().split(",");
                             File file1 = new File("src\\DBMS_ROOT\\data\\"+dbName + "\\" + ss[0] + ".ibd");
@@ -64,7 +72,7 @@ public class DataInsert {
                                 return false;
                             }
                         }else if(type.equals("BOOL")){
-                            if(!(val.equals("TRUE") || val.equals("FALSE"))){
+                            if(!(val.equals("xTRUE") || val.equals("xFALSE"))){
                                 return false;
                             }
                         }else if(type.equals("DOUBLE")){
@@ -74,16 +82,121 @@ public class DataInsert {
                                 return false;
                             }
                         }else if(type.equals("DATE")){
-                            if (!isData(val))
+                            if (!isData(val.substring(1, val.length()-1)))
                                 return false;
                         }else {
                             if (val.length() > Integer.parseInt(column.getTypeLength())){
                                 return false;
                             }
                         }
+                        try {
+                            if(!column.getCheck().equals("null")){
+                                String[] ss = column.getCheck().split(" ");
+                                if(ss[1].equals(">")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left <= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left <= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals("<")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left >= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left >= right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals("<=")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left > right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left > right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }else if(ss[1].equals(">=")){
+                                    if(type.equals("INTEGER")){
+                                        try {
+                                            int left = Integer.parseInt(val);
+                                            int right = Integer.parseInt(ss[2]);
+                                            if (left < right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else if(type.equals("DOUBLE")){
+                                        try {
+                                            double left = Double.parseDouble(val);
+                                            double right = Double.parseDouble(ss[2]);
+                                            if (left < right){
+                                                return false;
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }else {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            return false;
+                        }
                         size--;
                     }
                 }
+                System.out.println(size);
                 if (size == 0){
                     return true;
                 }
@@ -94,19 +207,22 @@ public class DataInsert {
         return false;
     }
 
-    public boolean isData(String str){
+    public static boolean isData(String str){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-            simpleDateFormat.format(str);
+            date = dateFormat.parse(str);
+            System.out.println(date.toLocaleString().split(" ")[0]);//切割掉不要的时分秒数据
             return true;
-        } catch (Exception e) {
+        } catch (ParseException e) {
+            e.printStackTrace();
             return false;
         }
     }
 
     public boolean DataSave(HashMap<String,String> map){
         try{
-            File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
+            File file = new File("src\\DBMS_ROOT\\data\\" + dbName + "/" + tbName + ".ibd");
             FileInputStream input = new FileInputStream(file);
             byte[] buffer = new byte[10240];
             input.read(buffer);
