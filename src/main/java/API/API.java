@@ -491,25 +491,25 @@ public class API {
                 // 获取where的查询条件
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlDeleteStatement.getWhere();
 
-                List<String> fields = new ArrayList<>();
-                List<String> vals = new ArrayList<>();
-                List<String> exps = new ArrayList<>();
+                List<String> key = new ArrayList<>();
+                List<String> val = new ArrayList<>();
+                List<String> exp = new ArrayList<>();
 
                 while (where.getOperator().toString().equals("BooleanAnd")){
                     // 条件右边
 //                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
-                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
+                    val.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
                     // 条件左边
 //                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
-                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
-                    exps.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
+                    key.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                    exp.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-                fields.add(where.getLeft().toString());
-                vals.add(where.getRight().toString());
-                exps.add(where.getOperator().getName());
+                key.add(where.getLeft().toString());
+                val.add(where.getRight().toString());
+                exp.add(where.getOperator().getName());
                 DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
-                if(dataDelete.delete(fields,vals)){
+                if(dataDelete.delete(key,val,exp)){
                     System.out.println("删除成功");
                 }else {
                     System.out.println("删除失败");
@@ -523,52 +523,45 @@ public class API {
 
 //                System.out.println(sqlUpdateStatement.getTableSource().toString());
                 String tbName = sqlUpdateStatement.getTableSource().toString();
-                String key = "";
-                String val = "";
-                for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
-                    // e.g. student.id = 19
-                    // 需要设置的字段
-//                    System.out.println(item.getColumn());   //student.id
-                    key = item.getColumn().toString();
-                    // 字段需要设置成的值
-//                    System.out.println(item.getValue());    //19
-                    val = item.getValue().toString();
-                }
-
-                // where条件
-                List<String> fields = new ArrayList<>();
-                List<String> vals = new ArrayList<>();
-                List<String> exps = new ArrayList<>();
-                SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
-
-                while (where.getOperator().toString().equals("BooleanAnd")){
-//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
-//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
-                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
-                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
-                    exps.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
-                    where = (SQLBinaryOpExpr)where.getLeft();
-                }
-//                System.out.println(where.getRight());
-//                System.out.println(where.getLeft());
-                fields.add(where.getLeft().toString());
-                vals.add(where.getRight().toString());
-                exps.add(where.getOperator().getName());
-                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
-
                 if(!commit.getState()){
                     commit.setDbName("MYSQLITE");
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
-                if(dataUpdate.update(key,val,fields,vals)){
-                    System.out.println("更新成功");
-                }else {
-                    System.out.println("更新失败");
+                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
+                String key = "";
+                String val = "";
+                for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
+                    key = item.getColumn().toString();
+                    val = item.getValue().toString();
                 }
+                SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
+                if(where == null){
+                    if(dataUpdate.update1(key,val)){
+                        System.out.println("更新成功");
+                    }else {
+                        System.out.println("更新失败");
+                    }
+                }else {
+                    List<String> fields = new ArrayList<>();
+                    List<String> vals = new ArrayList<>();
+                    List<String> exps = new ArrayList<>();
+                    while (where.getOperator().toString().equals("BooleanAnd")){
+                        fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                        vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
+                        exps.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
+                        where = (SQLBinaryOpExpr)where.getLeft();
+                    }
+                    fields.add(where.getLeft().toString());
+                    vals.add(where.getRight().toString());
+                    exps.add(where.getOperator().getName());
 
-//                while (where.getOperator() instanceof SQLBinaryOpExpr)
-//                System.out.println(sqlUpdateStatement.getWhere());
+                    if(dataUpdate.update(key,val,fields,vals,exps)){
+                        System.out.println("更新成功");
+                    }else {
+                        System.out.println("更新失败");
+                    }
+                }
             }
 
             // 插入数据指令

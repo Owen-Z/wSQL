@@ -87,7 +87,7 @@ public class Test {
 
         //数据更新测试
 //        API api = new API();
-//        api.parse("UPDATE SC SET CLASS = 3 WHERE ID = 1");
+//        api.parse("UPDATE SC SET CLASS = 3 WHERE ID > 1");
 //
 //        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
 //        FileInputStream input = new FileInputStream(file);
@@ -102,8 +102,8 @@ public class Test {
 //        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
 
         //数据查询
-        API api = new API();
-        api.parse("SELECT * FROM SC WHERE ID > 2");
+//        API api = new API();
+//        api.parse("SELECT * FROM SC WHERE ID > 1");
 
         //字段更新
 //        API api = new API();

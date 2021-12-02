@@ -267,7 +267,15 @@ public class DataSelect {
                                             }
                                         }
                                     }else if(columnList.get(j).getType().equals("DOUBLE")){
-                                        Map<String,List<Integer>> map = new TreeMap<>(map1.get(columnList.get(j).getColumnName()));
+                                        Map<String,List<Integer>> maps = new TreeMap<>(map1.get(columnList.get(j).getColumnName()));
+                                        Map<String,List<Integer>> map = new TreeMap<>(
+                                                new Comparator<String>() {
+                                                    public int compare(String obj1, String obj2) {
+                                                        // 降序排序
+                                                        return obj2.compareTo(obj1);
+                                                    }
+                                                });
+                                        map.putAll(maps);
                                         set1 = new HashSet<>();
                                         for (String key1 : map.keySet()){
                                             try {
@@ -313,7 +321,15 @@ public class DataSelect {
                                             }
                                         }
                                     }else if(columnList.get(j).getType().equals("DOUBLE")){
-                                        Map<String,List<Integer>> map = new TreeMap<>(map1.get(columnList.get(j).getColumnName()));
+                                        Map<String,List<Integer>> maps = new TreeMap<>(map1.get(columnList.get(j).getColumnName()));
+                                        Map<String,List<Integer>> map = new TreeMap<>(
+                                                new Comparator<String>() {
+                                                    public int compare(String obj1, String obj2) {
+                                                        // 降序排序
+                                                        return obj2.compareTo(obj1);
+                                                    }
+                                                });
+                                        map.putAll(maps);
                                         set1 = new HashSet<>();
                                         for (String key1 : map.keySet()){
                                             try {
@@ -422,7 +438,6 @@ public class DataSelect {
         }
         return "null";
     }
-
 
     //查询语句无需where
     public String select1(List<String> result){
