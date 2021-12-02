@@ -26,6 +26,25 @@ public class DataSelect {
                 input.close();
                 DBMS.Table table = SerializationUtils.deserialize(buffer);
                 List<DBMS.Table.Column> columnList = new ArrayList<>(table.getColumnList());
+                file = new File("src\\DBMS_ROOT\\data\\"+dbName+"\\"+tbName+".index");
+                HashMap<String,HashMap<String,List<Integer>>> map1 = new HashMap<>();
+                if(file.exists()){
+                    input = new FileInputStream(file);
+                    buffer = new byte[10240];
+                    input.read(buffer);
+                    input.close();
+                    DBMS.Index index = SerializationUtils.deserialize(buffer);
+                    List<DBMS.Index.IX> ixList = new ArrayList<>(index.getIxList());
+                    for (DBMS.Index.IX ix:ixList){
+                        String cName = ix.getCName();
+                        List<DBMS.Index.IX.Map> mapList = new ArrayList<>(ix.getMapList());
+                        HashMap<String,List<Integer>> listHashMap = new HashMap<>();
+                        for (DBMS.Index.IX.Map map:mapList){
+                            listHashMap.put(map.getKey(),map.getValList());
+                        }
+                        map1.put(cName,listHashMap);
+                    }
+                }
                 HashSet<Integer> set = new HashSet<>();
                 HashMap<Integer, String> map = new HashMap<>();
                 for (int i = 0; i < columnList.get(0).getValList().size(); i++) {
@@ -34,12 +53,17 @@ public class DataSelect {
                 for(int i = 0;i<key.size();i ++){
                     for(int j = 0;j < columnList.size();j++){
                         if (key.get(i).equals(columnList.get(j).getColumnName())){
-                            HashSet<Integer> set1 = new HashSet<>();
-                            List<String> list = new ArrayList<>(columnList.get(j).getValList());
-                            for (int z = 0; z<list.size();z++){
-                                if(list.get(z).equals(val.get(i))){
-                                    set1.add(z);
+                            HashSet<Integer> set1;
+                            if(!map1.containsKey(columnList.get(j).getColumnName())){
+                                set1 = new HashSet<>();
+                                List<String> list = new ArrayList<>(columnList.get(j).getValList());
+                                for (int z = 0; z<list.size();z++){
+                                    if(list.get(z).equals(val.get(i))){
+                                        set1.add(z);
+                                    }
                                 }
+                            }else {
+                                set1 = new HashSet<>(map1.get(columnList.get(j).getColumnName()).get(val.get(i)));
                             }
                             set.retainAll(set1);
                         }
