@@ -413,7 +413,8 @@ public class API {
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType());
                         String type = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType().toString();
                         // 所有约束
-//                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints());
+                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().isAutoIncrement());
+                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints());
                         String primaryKey = "false";
                         String notNUll = "false";
                         String check = "null";
@@ -579,6 +580,16 @@ public class API {
 //                System.out.println(visitor.visit(sqlSelectStatement));
                 SQLSelectQuery sqlSelectQuery = sqlSelectStatement.getSelect().getQuery();
 
+            }
+
+            if(sqlStatement instanceof SQLCreateIndexStatement){
+                SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
+                // 选择表名
+                System.out.println(sqlCreateIndexStatement.getTableName());
+                // 索引名
+                System.out.println(sqlCreateIndexStatement.getName());
+                // 索引对应行
+                System.out.println(sqlCreateIndexStatement.getItems().get(0).getExpr());
             }
 
         }
