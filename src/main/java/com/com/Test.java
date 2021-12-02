@@ -51,7 +51,7 @@ public class Test {
 
         //表删除
 //        API api = new API();
-//        api.parse("DROP TABLE runoob_tbl");
+//        api.parse("DROP TABLE SC");
 
         //字段删除测试
 //        API api = new API();
@@ -103,7 +103,7 @@ public class Test {
 
         //数据查询
 //        API api = new API();
-//        api.parse("SELECT * FROM SC WHERE (ID = 1)");
+//        api.parse("SELECT * FROM SC");
 
         //字段更新
 //        API api = new API();
@@ -114,11 +114,7 @@ public class Test {
 //        api.parse("CREATE INDEX NAME ON SC(NAME)");
 
         //索引删除
-        API api = new API();
-        api.parse("CREATE INDEX NAME ON SC(NAME)");
-
-
-
-
+//        API api = new API();
+//        api.parse("DROP INDEX NAME ON SC");
     }
 }

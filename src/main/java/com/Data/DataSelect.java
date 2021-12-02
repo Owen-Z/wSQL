@@ -31,7 +31,6 @@ public class DataSelect {
                 for (int i = 0; i < columnList.get(0).getValList().size(); i++) {
                     set.add(i);
                 }
-                int m = 0;
                 for(int i = 0;i<key.size();i ++){
                     for(int j = 0;j < columnList.size();j++){
                         if (key.get(i).equals(columnList.get(j).getColumnName())){
@@ -43,15 +42,12 @@ public class DataSelect {
                                 }
                             }
                             set.retainAll(set1);
-                            m++;
                         }
                     }
                 }
-                if(m != key.size()||set.size() == 0)
-                    return false;
                 HashMap<String,List<String>> results = new HashMap<>();
                 int j = 0;
-                if(result.get(0).equals("*")&&result.size() == 1){
+                if(result.get(0).equals("*")){
                     for (DBMS.Table.Column column: columnList){
                         List<String> list = new ArrayList<>(column.getValList());
                         List<String> list1 = new ArrayList<>();

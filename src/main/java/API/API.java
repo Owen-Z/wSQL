@@ -671,6 +671,15 @@ public class API {
 
             }
 
+            if(sqlStatement instanceof SQLDropIndexStatement){
+                SQLDropIndexStatement sqlDropIndexStatement = (SQLDropIndexStatement) sqlStatement;
+                System.out.println(sqlDropIndexStatement.getTableName());
+                System.out.println(sqlDropIndexStatement.getIndexName());
+                String tbName = sqlDropIndexStatement.getTableName().toString();
+                String ixName = sqlDropIndexStatement.getIndexName().toString();
+
+            }
+
         }
 
     }
