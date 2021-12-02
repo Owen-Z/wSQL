@@ -102,8 +102,12 @@ public class Test {
 //        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
 
         //数据查询
-        API api = new API();
-        api.parse("SELECT * FROM SC where (ID >= 3)");
+//        API api = new API();
+//<<<<<<< HEAD
+//        api.parse("SELECT * FROM SC where (ID >= 3)");
+//=======
+//        api.parse("SELECT * FROM SC WHERE (ID > 2 AND ID < 3)" );
+//>>>>>>> 819caaaf312039d6cb7c8c3b725d14cb0e653986
 
 
         //字段更新

@@ -466,6 +466,11 @@ public class API {
 //                        System.out.println("unique:" + unique);
 //                        System.out.println("foreignKey:" + foreignKey);
                         FieldModify fieldModify = new FieldModify("MYSQLITE",tbName);
+                        if(!commit.getState()){
+                            commit.setDbName("MYSQLITE");
+                            commit.setTbName(tbName);
+                            commit.getTB();
+                        }
                         if(fieldModify.check(map)){
                             System.out.println("字段更新失败");
                         }else {
@@ -488,6 +493,7 @@ public class API {
 
                 List<String> fields = new ArrayList<>();
                 List<String> vals = new ArrayList<>();
+                List<String> exps = new ArrayList<>();
 
                 while (where.getOperator().toString().equals("BooleanAnd")){
                     // 条件右边
@@ -496,12 +502,12 @@ public class API {
                     // 条件左边
 //                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
                     fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                    exps.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-//                System.out.println(where.getRight());
-//                System.out.println(where.getLeft());
                 fields.add(where.getLeft().toString());
                 vals.add(where.getRight().toString());
+                exps.add(where.getOperator().getName());
                 DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
                 if(dataDelete.delete(fields,vals)){
                     System.out.println("删除成功");
@@ -532,6 +538,7 @@ public class API {
                 // where条件
                 List<String> fields = new ArrayList<>();
                 List<String> vals = new ArrayList<>();
+                List<String> exps = new ArrayList<>();
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
 
                 while (where.getOperator().toString().equals("BooleanAnd")){
@@ -539,14 +546,21 @@ public class API {
 //                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
                     fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
                     vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
+                    exps.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
 //                System.out.println(where.getRight());
 //                System.out.println(where.getLeft());
                 fields.add(where.getLeft().toString());
                 vals.add(where.getRight().toString());
+                exps.add(where.getOperator().getName());
                 DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
 
+                if(!commit.getState()){
+                    commit.setDbName("MYSQLITE");
+                    commit.setTbName(tbName);
+                    commit.getTB();
+                }
                 if(dataUpdate.update(key,val,fields,vals)){
                     System.out.println("更新成功");
                 }else {
@@ -587,6 +601,11 @@ public class API {
                 for (int i = 0;i<columnsName.size();i++){
                     map.put(columnsName.get(i),dataList.get(i));
                 }
+                if(!commit.getState()){
+                    commit.setDbName("MYSQLITE");
+                    commit.setTbName(insertStatement.getTableName().getSimpleName());
+                    commit.getTB();
+                }
 
                 if(dataInsert.DateCheck(map)){
                     dataInsert.DataSave(map);
@@ -601,6 +620,8 @@ public class API {
                 // 转换
                 SQLSelectStatement sqlSelectStatement = (SQLSelectStatement) sqlStatement;
 //                System.out.println(sqlSelectStatement);
+
+                SQLBinaryOpExpr where = (SQLBinaryOpExpr) sqlSelectStatement.getSelect().getQueryBlock().getWhere();
 
                 MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                 sqlSelectStatement.accept(visitor1);
@@ -618,13 +639,22 @@ public class API {
                 List<String> result = new ArrayList<>();
                 List<String> key = new ArrayList<>();
                 List<String> val = new ArrayList<>();
-                for(int i = 0; i < needReturn; i++){
-                    String[] keys = sList[i].split(" ");
-//                    System.out.println(keys[keys.length-1]);
-                    String[] ke = keys[keys.length-1].split("\\.");
-//                    System.out.println(ke[1]);
-                    result.add(ke[1]);
+                List<String> exp = new ArrayList<>();
+                while (where.getOperator().toString().equals("BooleanAnd")){
+                    // 条件右边
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+                    val.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
+                    // 条件左边
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    key.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                    exp.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
+                    where = (SQLBinaryOpExpr)where.getLeft();
                 }
+//                System.out.println(where.getRight());
+//                System.out.println(where.getLeft());
+                key.add(where.getLeft().toString());
+                exp.add(where.getOperator().getName());
+                val.add(where.getRight().toString());
                 // 获取所有的普通值限制
                 List<TableStat.Condition> conditions = visitor1.getConditions();
                 for (TableStat.Condition condition : conditions) {
@@ -634,6 +664,7 @@ public class API {
                         key.add(ke[1]);
                         System.out.println(condition.getOperator());
 //                        System.out.println(condition.getValues().get(0).toString());
+                        System.out.println(condition.getOperator());
                         val.add(condition.getValues().get(0).toString());
                     }
                 }
@@ -692,6 +723,7 @@ public class API {
                 String tbName = sqlDropIndexStatement.getTableName().toString();
                 String ixName = sqlDropIndexStatement.getIndexName().toString();
                 IndexDelete indexDelete = new IndexDelete("MYSQLITE",tbName);
+
                 if(indexDelete.delete(ixName)){
                     System.out.println("删除成功");
                 }else {
