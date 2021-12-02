@@ -75,7 +75,7 @@ public class Test {
 //        System.out.println(table.getColumnList().get(1).getType());
 
 //        API api = new API();
-//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,7)");
+//        api.parse("INSERT INTO SC (ID,NAME,CLASS) VALUES (2,1,1)");
 
 //        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
 //        FileInputStream input = new FileInputStream(file);
@@ -102,13 +102,8 @@ public class Test {
 //        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
 
         //数据查询
-//        API api = new API();
-//<<<<<<< HEAD
-//        api.parse("SELECT * FROM SC where (ID >= 3)");
-//=======
-//        api.parse("SELECT * FROM SC WHERE (ID > 2 AND ID < 3)" );
-//>>>>>>> 819caaaf312039d6cb7c8c3b725d14cb0e653986
-
+        API api = new API();
+        api.parse("SELECT * FROM SC WHERE ID > 2");
 
         //字段更新
 //        API api = new API();
@@ -116,7 +111,7 @@ public class Test {
 
         //索引建立
 //        API api = new API();
-//        api.parse("CREATE INDEX NAME ON SC(NAME)");
+//        api.parse("CREATE INDEX ID ON SC(ID)");
 
         //索引删除
 //        API api = new API();
