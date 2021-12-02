@@ -37,6 +37,10 @@ public class API {
         commit = new Commit();
     }
 
+    public void setUserName(String _userName){
+        userName = _userName;
+    }
+
     public void AddToLog(String dbName, SQLStatement sqlStatement){
         try{
             BufferedWriter out = new BufferedWriter(new FileWriter("src/DBMS_ROOT/data/" + dbName + "/" + dbName + ".log", true));
@@ -59,6 +63,34 @@ public class API {
 
     public void setDbName(String _dbName){
         dbName = _dbName;
+    }
+
+    public boolean JudgeAuthority(){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("files/DBMSUser/UserList.txt"));
+            String line = null;
+            boolean flag = false;
+            while((line= br.readLine()) != null && !flag){
+                if(line.contains(userName)){
+                    flag = true;
+                }
+            }
+            if(!flag){
+                return flag;
+            }
+            line = br.readLine();
+            br.close();
+            if(line.contains("root")){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /**
@@ -637,78 +669,63 @@ public class API {
             if (sqlStatement instanceof SQLSelectStatement) {
                 // 转换
                 SQLSelectStatement sqlSelectStatement = (SQLSelectStatement) sqlStatement;
-//                System.out.println(sqlSelectStatement);
-
-                SQLBinaryOpExpr where = (SQLBinaryOpExpr) sqlSelectStatement.getSelect().getQueryBlock().getWhere();
-
                 MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                 sqlSelectStatement.accept(visitor1);
 
-//                System.out.println(visitor1.getTables().getClass());
-
-                
-                int needReturn = visitor1.getColumns().size() - visitor1.getConditions().size();
-                int length = visitor1.getColumns().toString().length();
-                String str = visitor1.getColumns().toString().substring(1,length-1);
-                String[] sList = str.split(",");
+                //需要查询的表名
                 String tbName = sqlSelectStatement.getSelect().getFirstQueryBlock().getFrom().toString();
-//                System.out.println(tbName);
-                List<String> result = new ArrayList<>();
-                List<String> key = new ArrayList<>();
-                List<String> val = new ArrayList<>();
-                List<String> exp = new ArrayList<>();
-                while (where.getOperator().toString().equals("BooleanAnd")){
-                    // 条件右边
-//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
-                    val.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
-                    // 条件左边
-//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
-                    key.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
-                    exp.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
-                    where = (SQLBinaryOpExpr)where.getLeft();
-                }
-//                System.out.println(where.getRight());
-//                System.out.println(where.getLeft());
-                key.add(where.getLeft().toString());
-                exp.add(where.getOperator().getName());
-                val.add(where.getRight().toString());
-                // 获取所有的普通值限制
-                List<TableStat.Condition> conditions = visitor1.getConditions();
-                for (TableStat.Condition condition : conditions) {
-                    if (condition.getValues().size() != 0) {
-                        String[] ke = condition.getColumn().toString().split("\\.");
-//                        System.out.println(ke[1]);
-                        key.add(ke[1]);
-//                        System.out.println(condition.getValues().get(0).toString());
-                        System.out.println(condition.getOperator());
-                        val.add(condition.getValues().get(0).toString());
-                    }
-                }
-                DataSelect dataSelect = new DataSelect(dbName,tbName);
+
                 if(!commit.getState()){
                     commit.setDbName(dbName);
                     commit.setTbName(tbName);
                     commit.getTB();
                 }
-                String s = dataSelect.select(result,key,val);
-                if(!s.equals("null")){
-                    System.out.println("查询成功");
-                    return s;
-
-                }else {
-                    System.out.println("查询失败");
+                DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                // 所有要查的列
+//                System.out.println(sqlSelectStatement.getSelect().getQueryBlock().getSelectList());
+                List<String> result = new ArrayList<>();
+                for(int i = 0; i < sqlSelectStatement.getSelect().getQueryBlock().getSelectList().size();i++){
+                    result.add(sqlSelectStatement.getSelect().getQueryBlock().getSelectList().get(i).toString());
                 }
-
-//                // 连续查询两个表
-//                if (visitor1.getTables().size() > 1) {
-//                    // 两个表有连接查询
-//                    if (visitor1.getRelationships().size() > 0) {
-//                        System.out.println(visitor1.getRelationships());    //  两个表的表名.列名 = 表名.列名
-//                    }
-//                }
-
+                //根据是否存在where语句选取不同的方法
+                SQLBinaryOpExpr where = (SQLBinaryOpExpr) sqlSelectStatement.getSelect().getQueryBlock().getWhere();
+                if(where == null){
+                    System.out.println(1);
+                    String s = dataSelect.select1(result);
+                    if(!s.equals("null")){
+                        System.out.println("查询成功");
+                        return s;
+                    }else {
+                        System.out.println("查询失败");
+                    }
+                }else {
+//                    System.out.println(2);
+                    List<String> key = new ArrayList<>();
+                    List<String> val = new ArrayList<>();
+                    List<String> exp = new ArrayList<>();
+                    while (where.getOperator().toString().equals("BooleanAnd")){
+                        // 条件右边
+                        val.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
+                        // 条件左边
+                        key.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                        // 条件符号
+                        exp.add(((SQLBinaryOpExpr)where.getRight()).getOperator().getName());
+                        where = (SQLBinaryOpExpr)where.getLeft();
+                    }
+                    key.add(where.getLeft().toString());
+                    exp.add(where.getOperator().getName());
+                    val.add(where.getRight().toString());
+                    String s = dataSelect.select(result,key,val,exp);
+                    if(!s.equals("null")){
+                        System.out.println("查询成功");
+                        return s;
+                    }else {
+                        System.out.println("查询失败");
+                    }
+                }
             }
 
+            //创建索引
             if(sqlStatement instanceof SQLCreateIndexStatement){
                 SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
 ////                 选择表名
@@ -733,6 +750,7 @@ public class API {
 
             }
 
+            //删除索引
             if(sqlStatement instanceof SQLDropIndexStatement){
                 SQLDropIndexStatement sqlDropIndexStatement = (SQLDropIndexStatement) sqlStatement;
 //                System.out.println(sqlDropIndexStatement.getTableName());
@@ -746,18 +764,6 @@ public class API {
                 }else {
                     System.out.println("删除失败");
                 }
-            }
-
-            if(sqlStatement instanceof SQLCreateIndexStatement){
-                SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
-                // 选择表名
-                System.out.println(sqlCreateIndexStatement.getTableName());
-                // 索引名
-                System.out.println(sqlCreateIndexStatement.getName());
-                // 索引对应行
-                System.out.println(sqlCreateIndexStatement.getItems().get(0).getExpr());
-
-                return "true";
             }
 
         }

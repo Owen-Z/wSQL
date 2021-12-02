@@ -102,17 +102,12 @@ public class Login_Register extends JFrame{
                     	//清除账号框中的信息
                     	username.setText("");
 
-
                     	//MainInterface maininterface = new MainInterface //弹出并不存在的主界面
-
                     }*/
                     mainFrame mainFrame = new mainFrame();
                     mainFrame.showFrame();
-
-
             }
         });
-
         //Add Account键的监听
         buttonregister.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

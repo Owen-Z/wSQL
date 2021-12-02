@@ -118,11 +118,11 @@ public class datasaver {
     }
 
     //向文件中写入内容
-    static boolean StringWriteLine(String strIn,String fileUrl) {
+    static boolean StringWriteLine(String strIn,String databaseUrl) {
         boolean out = false;
-
+        databaseUrl ="files\\DatabasenTable\\DatabasenTable.txt";
         try {
-            FileWriter fw = new FileWriter(fileUrl,true);
+            FileWriter fw = new FileWriter(databaseUrl,true);
 
             fw.write("\n"+strIn);				//写入内容
             fw.close();

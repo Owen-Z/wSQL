@@ -3,6 +3,7 @@ import API.*;
 import com.com.*;
 import tools.Tools;
 import javax.swing.*;
+import javax.swing.text.Document;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -97,31 +98,11 @@ class mainFrame{
 	{
 
 	}
+
 	//实例化level1
-//	public void setmenubar()
-//	{
-//
-//	}
-//	public void setbase(String baseFileName)
-//	{
-//
-//	}
-//	public ArrayList gettablist()
-//	{
-//		ArrayList tableName = new ArrayList();
-//		try {
-//			//getTableFile();
-//			Scanner sc = new Scanner(new FileReader("D:\\Users\\Desktop\\Desktop\\wSQL\\src\\data\\database\\tableTry.txt"));
-//			while(sc.hasNextLine())
-//			{
-//				tableName.add(sc.nextLine());
-//				//
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return tableName;
-//	}
+	//todo.........
+
+
 	public void fileTreeBaseListen(DefaultMutableTreeNode node){
 		//创建库文件右键选项
 		JPopupMenu baseMenu = new JPopupMenu();
@@ -182,8 +163,7 @@ class mainFrame{
 			JMenuItem createTable= new JMenuItem("create table");
 			JMenuItem addTable= new JMenuItem("add table");
 			JMenuItem dropSchame= new JMenuItem("drop schame");
-//				JMenuItem = new JMenuItem("");
-//				JMenuItem = new JMenuItem("");
+
 			baseMenu.add(createSchame);
 			baseMenu.add(createTable);
 			baseMenu.add(addTable);
@@ -264,31 +244,31 @@ class mainFrame{
 		JTree FileTree;
 
 		//level2 button
-		JButton PaHeadBtnAddSqlE = new JButton("AddSqlE");//create a new sql tab for executing querise
-		JButton PaHeadBtnOpenSql = new JButton("penSql");//open a sql script file in a new query tab
-		JButton PaHeadBtnOpenIns = new JButton("OpenIns"); //open inspector for seleting object
-		JButton PaHeadBtnCreaSch = new JButton("CreaSch"); //create a new schema in the connected server
-		JButton PaHeadBtnCreaTab = new JButton("CreaTab"); //create a new table in the active schema in the connect server
-		JButton PaHeadBtnCreaVie = new JButton("CreaVie"); //create a new view int the active schema in the connect server
-		JButton PaHeadBtnCreaStP = new JButton("CreaStP"); //create a new stored procedure in the active schema in the connect server
-		JButton PaHeadBtnCreaFun = new JButton("CreaFun"); //create a new function in the active schema in the connect server
-		JButton PaHeadBtnSearTaT = new JButton("SearTaT"); //serach table text for object selected in the connect server
-		JButton PaHeadBtnReconne = new JButton("Reconne"); //reconnect to DBMS
+//		JButton PaHeadBtnAddSqlE = new JButton("AddSqlE");//create a new sql tab for executing querise
+//		JButton PaHeadBtnOpenSql = new JButton("penSql");//open a sql script file in a new query tab
+//		JButton PaHeadBtnOpenIns = new JButton("OpenIns"); //open inspector for seleting object
+//		JButton PaHeadBtnCreaSch = new JButton("CreaSch"); //create a new schema in the connected server
+//		JButton PaHeadBtnCreaTab = new JButton("CreaTab"); //create a new table in the active schema in the connect server
+//		JButton PaHeadBtnCreaVie = new JButton("CreaVie"); //create a new view int the active schema in the connect server
+//		JButton PaHeadBtnCreaStP = new JButton("CreaStP"); //create a new stored procedure in the active schema in the connect server
+//		JButton PaHeadBtnCreaFun = new JButton("CreaFun"); //create a new function in the active schema in the connect server
+//		JButton PaHeadBtnSearTaT = new JButton("SearTaT"); //serach table text for object selected in the connect server
+//		JButton PaHeadBtnReconne = new JButton("Reconne"); //reconnect to DBMS
 		mainFrame test_frame = new mainFrame();
 		//创建实例
 		//level1
 		//menubar
-		JMenuBar menuBar = new JMenuBar();
+//		JMenuBar menuBar = new JMenuBar();
 		//menu
-		JMenu menuEdit = new JMenu("EDIT");
-		JMenu menuFile = new JMenu("FILE");
-		JMenu menuView = new JMenu("View");
-		JMenu menuQuery = new JMenu("Query");
-		JMenu menuDatabase = new JMenu("Database");
-		JMenu menuServer = new JMenu("Server");
-		JMenu menuTools = new JMenu("Tools");
-		JMenu menuScripting = new JMenu("Scripting");
-		JMenu menuHelp = new JMenu("Help");
+//		JMenu menuEdit = new JMenu("EDIT");
+//		JMenu menuFile = new JMenu("FILE");
+//		JMenu menuView = new JMenu("View");
+//		JMenu menuQuery = new JMenu("Query");
+//		JMenu menuDatabase = new JMenu("Database");
+//		JMenu menuServer = new JMenu("Server");
+//		JMenu menuTools = new JMenu("Tools");
+//		JMenu menuScripting = new JMenu("Scripting");
+//		JMenu menuHelp = new JMenu("Help");
 		//menuitem
 //		JMenuItem = new JMenuItem("");
 		//add menu item of File
@@ -325,26 +305,26 @@ class mainFrame{
 		mainPaHead.add(mainPaHeadL1,BorderLayout.NORTH);
 		mainPaHead.add(mainPaHeadL2,BorderLayout.SOUTH);
 		//level1 添加菜单
-		mainPaHeadL1.add(menuFile);
-		mainPaHeadL1.add(menuEdit);
-		mainPaHeadL1.add(menuView);
-		mainPaHeadL1.add(menuQuery);
-		mainPaHeadL1.add(menuDatabase);
-		mainPaHeadL1.add(menuServer);
-		mainPaHeadL1.add(menuTools);
-		mainPaHeadL1.add(menuScripting);
-		mainPaHeadL1.add(menuHelp);
+//		mainPaHeadL1.add(menuFile);
+//		mainPaHeadL1.add(menuEdit);
+//		mainPaHeadL1.add(menuView);
+//		mainPaHeadL1.add(menuQuery);
+//		mainPaHeadL1.add(menuDatabase);
+//		mainPaHeadL1.add(menuServer);
+//		mainPaHeadL1.add(menuTools);
+//		mainPaHeadL1.add(menuScripting);
+//		mainPaHeadL1.add(menuHelp);
 		//level2
-		mainPaHeadL2.add(PaHeadBtnAddSqlE);
-		mainPaHeadL2.add(PaHeadBtnOpenSql);
-		mainPaHeadL2.add(PaHeadBtnOpenIns);
-		mainPaHeadL2.add(PaHeadBtnCreaSch);
-		mainPaHeadL2.add(PaHeadBtnCreaTab);
-		mainPaHeadL2.add(PaHeadBtnCreaVie);
-		mainPaHeadL2.add(PaHeadBtnCreaStP);
-		mainPaHeadL2.add(PaHeadBtnCreaFun);
-		mainPaHeadL2.add(PaHeadBtnSearTaT);
-		mainPaHeadL2.add(PaHeadBtnReconne);
+//		mainPaHeadL2.add(PaHeadBtnAddSqlE);
+//		mainPaHeadL2.add(PaHeadBtnOpenSql);
+//		mainPaHeadL2.add(PaHeadBtnOpenIns);
+//		mainPaHeadL2.add(PaHeadBtnCreaSch);
+//		mainPaHeadL2.add(PaHeadBtnCreaTab);
+//		mainPaHeadL2.add(PaHeadBtnCreaVie);
+//		mainPaHeadL2.add(PaHeadBtnCreaStP);
+//		mainPaHeadL2.add(PaHeadBtnCreaFun);
+//		mainPaHeadL2.add(PaHeadBtnSearTaT);
+//		mainPaHeadL2.add(PaHeadBtnReconne);
 
 		//level1添加菜单项
 
@@ -368,6 +348,8 @@ class mainFrame{
 		//sqlText部件添加元素
 //		sqlText.setLineWrap(true);
 		JTextPane sqlText = new JTextPane();
+		Font f = new Font("仿宋",Font.BOLD,20);
+		sqlText.setFont(f);
 		JScrollPane scrollPane1 = new JScrollPane(sqlText);
 		scrollPane1.setPreferredSize(new Dimension((int)(mainPaMidM.getWidth()),(int)(mainFr.getHeight() * 0.7)));
 		mainPaMidM.setLayout(new BorderLayout());
@@ -380,6 +362,7 @@ class mainFrame{
 			public void actionPerformed(ActionEvent e) {
 				//获取文本的信息
 				String realSen = sqlText.getText().trim();
+				startWsql.parse(realSen);
 			}
 		});
 		JButton sqlCancel = new JButton("CANCEL");
@@ -389,9 +372,36 @@ class mainFrame{
 				sqlText.setText("");
 			}
 		});
+		JButton reflash = new JButton("reflash");
+		reflash.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				mainFr.remove(mainPaMidL);
+//				JPanel mainPaMidL = new JPanel();
+//				DefaultMutableTreeNode root = new DefaultMutableTreeNode("all   the   database");
+//				ArrayList<DefaultMutableTreeNode> treeList= test_frame.initFileTree();
+//				for (int i = 0;i < treeList.size();i++)
+//				{
+//					root.add(treeList.get(i));
+//				}
+//				JTree jTree = new JTree(root);
+//				//为文件树加滚动条
+//
+//				JScrollPane scrollPane = new JScrollPane(mainPaMidL);
+//				scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//				mainPaMidL.add(jTree);
+//				mainPaMidL.revalidate();
+//				mainPaMidL.repaint();
+//				mainFr.add(scrollPane,BorderLayout.WEST);
+				mainFr.dispose();
+				mainFrame mainf = new mainFrame();
+				mainf.showFrame();
+			}
+		});
 		JPanel operation = new JPanel();
 		operation.add(sqlAppply);
 		operation.add(sqlCancel);
+		operation.add(reflash);
 		mainPaMidM.add(operation,BorderLayout.SOUTH);
 		//底部文本框显示操作状态
 		JTextPane bottomText = new JTextPane();
@@ -405,6 +415,14 @@ class mainFrame{
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				TreePath selPath;
+				if(e.getSource() == jTree && e.getClickCount() == 1)
+				{
+					selPath = jTree.getPathForLocation(e.getX(),e.getY());
+					DefaultMutableTreeNode node = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+					String strBaseName = node.toString();
+					System.out.println(strBaseName);
+					startWsql.setDbName(strBaseName);
+				}
 				if (e.getSource() == jTree && e.getClickCount() == 2){
 					//节点路径
 					selPath = jTree.getPathForLocation(e.getX(),e.getY());
@@ -426,9 +444,13 @@ class mainFrame{
 //									startWsql.parse(sqlSentence);
 							String sqlSentence  = "SELECT * FROM" + " " +strTbName;
 							System.out.println(sqlSentence);
-							String output = startWsql.parse(sqlSentence);
-							System.out.println(output);
+							System.out.println(startWsql.parse(sqlSentence));
 							//append() JTEXTPANE sqlTEXT
+							if (startWsql.parse(sqlSentence) != "true" || startWsql.parse(sqlSentence) != "false")
+							{
+								sqlText.setText(startWsql.parse(sqlSentence));
+//								Document document = ("selecting     " + strTbName+ "       successful........................" + "\n");
+							}
 						}
 					}
 				}
@@ -440,9 +462,17 @@ class mainFrame{
 					{
 						if(selPath.getPathCount() == 2)//说明在库文件右击
 						{
+							DefaultMutableTreeNode node1 = (DefaultMutableTreeNode) selPath.getLastPathComponent();
 							//创建库文件右键选项
 							JPopupMenu baseMenu = new JPopupMenu();
 							JMenuItem createSchame= new JMenuItem("create schame");
+							createSchame.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									String strBsae = "log.create database" + " "+ node1.toString();
+									System.out.println(strBsae);
+								}
+							});
 							JMenuItem createTable= new JMenuItem("create table");
 							JMenuItem addTable= new JMenuItem("add table");
 							JMenuItem dropSchame= new JMenuItem("drop schame");
@@ -464,33 +494,42 @@ class mainFrame{
 							//创建表文件右键菜单
 							JPopupMenu tableMenu = new JPopupMenu();
 							JMenuItem selectRow = new JMenuItem("select rows");
-							JMenuItem tabInspetor = new JMenuItem("Table Inspetor");
+//							JMenuItem tabInspetor = new JMenuItem("Table Inspetor");
 							JMenuItem dropTable= new JMenuItem("drop tables");
 							dropTable.addActionListener(new ActionListener() {
 								@Override
 								public void actionPerformed(ActionEvent e) {
 //									System.out.println(node.toString());
 									String strTbName = node.toString();
-									String sqlsentence = "DROP TABLE" + strTbName;
+									String sqlsentence = "DROP TABLE" + " " + strTbName;
 									startWsql.parse(sqlsentence);
 								}
 							});
 							JMenuItem alterTable= new JMenuItem("alter tables");
+							alterTable.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+//									String strAlterSen = ""
+								}
+							});
 							JMenuItem createTables= new JMenuItem("create table");
 							createTables.addActionListener(new ActionListener() {
 								@Override
 								public void actionPerformed(ActionEvent e) {
 									//弹出创建表的表格，可直接编辑
+//									CreateTableUI createTableUI = new CreateTableUI();
+//									createTableUI.showCtableUI();
+
 								}
 							});
 							JMenuItem TruncateTable= new JMenuItem("truncate table");
 
 							tableMenu.add(selectRow);
-							tableMenu.add(tabInspetor);
+//							tableMenu.add(tabInspetor);
 							tableMenu.add(dropTable);
 							tableMenu.add(alterTable);
 							tableMenu.add(createTables);
-							tableMenu.add(TruncateTable);
+//							tableMenu.add(TruncateTable);
 
 							tableMenu.show(e.getComponent(),e.getX(),e.getY());
 							//添加表右击的监听事件

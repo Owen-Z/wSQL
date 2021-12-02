@@ -3,7 +3,6 @@ package GUI;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 

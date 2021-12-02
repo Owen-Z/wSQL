@@ -74,6 +74,7 @@ public class parser_test {
 
 //        api.parse("CREATE INDEX index_name ON table_name (column_list)");
 //        }
-
+        api.setUserName("User1");
+        System.out.println(api.JudgeAuthority());
     }
 }
