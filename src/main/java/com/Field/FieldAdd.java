@@ -71,7 +71,7 @@ public class FieldAdd {
                 List<String> strings = new ArrayList<>();
                 for (int i = 0; i < len;i++){
                     if(Column.getDefault().equals("null")){
-                        String s = null;
+                        String s = "null";
                         strings.add(s);
                     } else {
                         strings.add(Column.getDefault());

@@ -1,9 +1,13 @@
 package API;
+import com.Data.DataDelete;
 import com.Data.DataInsert;
+import com.Data.DataSelect;
+import com.Data.DataUpdate;
 import com.Database.DatabaseCreate;
 import com.Database.DatabaseDelete;
 import com.Field.FieldAdd;
 import com.Field.FieldDelete;
+import com.Field.FieldModify;
 import com.Table.TableCreate;
 import com.Table.TableDelete;
 import com.alibaba.druid.sql.SQLUtils;
@@ -406,15 +410,37 @@ public class API {
 //                        System.out.println("foreignKey:" + foreignKey);
 
                     }else if(element instanceof MySqlAlterTableModifyColumn){
+                        HashMap<String,String> map = new HashMap<>();
                         // 获取要修改的列名
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getName());
                         String name = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getName().toString();
+                        map.put("name",name);
                         // 获取要修改的字段属性
 //                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType());
                         String type = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDataType().toString();
-                        // 所有约束
-                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().isAutoIncrement());
-                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints());
+
+                        map.put("type",type);
+                        // 默认值
+                        String def = "null";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr() != null){
+                            def = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr().toString();
+                        }
+                        map.put("def",def);
+//                        System.out.println(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getDefaultExpr());
+                        //自增
+                        String auto = "false";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().isAutoIncrement()){
+                            auto = "true";
+                        }
+                        auto = "true";
+                        map.put("auto",auto);
+                        //备注
+                        String comment = "null";
+                        if(((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getComment() != null){
+                            comment = ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getComment().toString();
+                        }
+                        map.put("comment",comment);
+
                         String primaryKey = "false";
                         String notNUll = "false";
                         String check = "null";
@@ -422,6 +448,7 @@ public class API {
                         String unique = "false";
                         List<SQLColumnConstraint> list =
                                 ((MySqlAlterTableModifyColumn) element).getNewColumnDefinition().getConstraints();
+
                         for (SQLColumnConstraint cons : list) {
                             if (cons instanceof SQLNotNullConstraint) {
                                 notNUll = "true";
@@ -436,16 +463,27 @@ public class API {
                                 unique = "true";
                             }
                         }
-                        System.out.println("name:" + name);
-                        System.out.println("type:" + type);
+                        map.put("notNUll", notNUll);
+                        map.put("primaryKey", primaryKey);
+                        map.put("check", check);
+                        map.put("foreignKey", foreignKey);
+                        map.put("unique", unique);
+//                        System.out.println("name:" + name);
+//                        System.out.println("type:" + type);
 //                        System.out.println("def:" + def);
 //                        System.out.println("comment:" + comment);
 //                        System.out.println("auto:" + auto);
-                        System.out.println("primaryKey:" + primaryKey);
-                        System.out.println("notNUll:" + notNUll);
-                        System.out.println("check:" + check);
-                        System.out.println("unique:" + unique);
-                        System.out.println("foreignKey:" + foreignKey);
+//                        System.out.println("primaryKey:" + primaryKey);
+//                        System.out.println("notNUll:" + notNUll);
+//                        System.out.println("check:" + check);
+//                        System.out.println("unique:" + unique);
+//                        System.out.println("foreignKey:" + foreignKey);
+                        FieldModify fieldModify = new FieldModify("MYSQLITE",tbName);
+                        if(fieldModify.check(map)){
+                            System.out.println("字段更新失败");
+                        }else {
+                            System.out.println("字段更新成功");
+                        }
                     }
                 }
             }
@@ -456,47 +494,78 @@ public class API {
                 SQLDeleteStatement sqlDeleteStatement = (SQLDeleteStatement) sqlStatement;
 
                 // 需要删除字段的表名
-                System.out.println(sqlDeleteStatement.getTableName());
+//                System.out.println(sqlDeleteStatement.getTableName());
 
                 // 获取where的查询条件
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlDeleteStatement.getWhere();
 
+                List<String> fields = new ArrayList<>();
+                List<String> vals = new ArrayList<>();
+
                 while (where.getOperator().toString().equals("BooleanAnd")){
                     // 条件右边
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
                     // 条件左边
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-                System.out.println(where.getRight());
-                System.out.println(where.getLeft());
+//                System.out.println(where.getRight());
+//                System.out.println(where.getLeft());
+                fields.add(where.getLeft().toString());
+                vals.add(where.getRight().toString());
+                DataDelete dataDelete = new DataDelete("MYSQLITE",sqlDeleteStatement.getTableName().toString());
+                if(dataDelete.delete(fields,vals)){
+                    System.out.println("删除成功");
+                }else {
+                    System.out.println("删除失败");
+                }
             }
 
             // 更新数据表数据
             if(sqlStatement instanceof SQLUpdateStatement){
-                System.out.println(6666);
                 SQLUpdateStatement sqlUpdateStatement = (SQLUpdateStatement) sqlStatement;
                 // 字段需要变成什么样
-                System.out.println(sqlUpdateStatement.getTableSource().toString());
+
+//                System.out.println(sqlUpdateStatement.getTableSource().toString());
+                String tbName = sqlUpdateStatement.getTableSource().toString();
+                String key = "";
+                String val = "";
                 for(SQLUpdateSetItem item : sqlUpdateStatement.getItems()){
                     // e.g. student.id = 19
-                    // 需要设置的字段-
-                    System.out.println(item.getColumn());   //student.id
+                    // 需要设置的字段
+//                    System.out.println(item.getColumn());   //student.id
+                    key = item.getColumn().toString();
                     // 字段需要设置成的值
-                    System.out.println(item.getValue());    //19
+//                    System.out.println(item.getValue());    //19
+                    val = item.getValue().toString();
                 }
 
-
                 // where条件
+                List<String> fields = new ArrayList<>();
+                List<String> vals = new ArrayList<>();
                 SQLBinaryOpExpr where= (SQLBinaryOpExpr) sqlUpdateStatement.getWhere();
 
                 while (where.getOperator().toString().equals("BooleanAnd")){
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
-                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getRight());
+//                    System.out.println(((SQLBinaryOpExpr)where.getRight()).getLeft());
+                    fields.add(((SQLBinaryOpExpr)where.getRight()).getLeft().toString());
+                    vals.add(((SQLBinaryOpExpr)where.getRight()).getRight().toString());
                     where = (SQLBinaryOpExpr)where.getLeft();
                 }
-                System.out.println(where.getRight());
-                System.out.println(where.getLeft());
+//                System.out.println(where.getRight());
+//                System.out.println(where.getLeft());
+                fields.add(where.getLeft().toString());
+                vals.add(where.getRight().toString());
+                DataUpdate dataUpdate = new DataUpdate("MYSQLITE",tbName);
+
+                if(dataUpdate.update(key,val,fields,vals)){
+                    System.out.println("更新成功");
+                }else {
+                    System.out.println("更新失败");
+                }
+
 //                while (where.getOperator() instanceof SQLBinaryOpExpr)
 //                System.out.println(sqlUpdateStatement.getWhere());
             }
@@ -532,7 +601,12 @@ public class API {
                     map.put(columnsName.get(i),dataList.get(i));
                 }
 
-
+                if(dataInsert.DateCheck(map)){
+                    dataInsert.DataSave(map);
+                    System.out.println("插入成功");
+                }else {
+                    System.out.println("插入失败");
+                }
             }
 
             //查询指令
@@ -541,45 +615,64 @@ public class API {
                 SQLSelectStatement sqlSelectStatement = (SQLSelectStatement) sqlStatement;
 //                System.out.println(sqlSelectStatement);
 
-
-                MySqlASTVisitor visitor = new MySqlASTVisitorAdapter();
                 MySqlSchemaStatVisitor visitor1 = new MySqlSchemaStatVisitor();
                 sqlSelectStatement.accept(visitor1);
 
-                System.out.println(visitor1.getTables().getClass());
+//                System.out.println(visitor1.getTables().getClass());
 
                 
                 int needReturn = visitor1.getColumns().size() - visitor1.getConditions().size();
                 int length = visitor1.getColumns().toString().length();
                 String str = visitor1.getColumns().toString().substring(1,length-1);
                 String[] sList = str.split(",");
+                String tbName = sqlSelectStatement.getSelect().getFirstQueryBlock().getFrom().toString();
+//                System.out.println(tbName);
+                List<String> result = new ArrayList<>();
+                List<String> key = new ArrayList<>();
+                List<String> val = new ArrayList<>();
                 for(int i = 0; i < needReturn; i++){
-
-                    System.out.println(sList[i]);
+                    String[] keys = sList[i].split(" ");
+//                    System.out.println(keys[keys.length-1]);
+                    String[] ke = keys[keys.length-1].split("\\.");
+//                    System.out.println(ke[1]);
+                    result.add(ke[1]);
                 }
                 // 获取所有的普通值限制
                 List<TableStat.Condition> conditions = visitor1.getConditions();
                 for (TableStat.Condition condition : conditions) {
                     if (condition.getValues().size() != 0) {
-                        System.out.println(condition.getColumn());  // 需要查的表名+列名
-                        System.out.println(condition.getValues().get(0));   // 对应的值
+                        String[] ke = condition.getColumn().toString().split("\\.");
+//                        System.out.println(ke[1]);
+                        key.add(ke[1]);
+//                        System.out.println(condition.getValues().get(0).toString());
+                        val.add(condition.getValues().get(0).toString());
                     }
                 }
-
-                // 连续查询两个表
-                if (visitor1.getTables().size() > 1) {
-                    // 两个表有连接查询
-                    if (visitor1.getRelationships().size() > 0) {
-                        System.out.println(visitor1.getRelationships());    //  两个表的表名.列名 = 表名.列名
-                    }
+                DataSelect dataSelect = new DataSelect("MYSQLITE",tbName);
+                if(dataSelect.select(result,key,val)){
+                    System.out.println("查询成功");
+                }else {
+                    System.out.println("查询失败");
                 }
 
+//                // 连续查询两个表
+//                if (visitor1.getTables().size() > 1) {
+//                    // 两个表有连接查询
+//                    if (visitor1.getRelationships().size() > 0) {
+//                        System.out.println(visitor1.getRelationships());    //  两个表的表名.列名 = 表名.列名
+//                    }
+//                }
 
-//                MySqlSchemaStatVisitor visitor = new MySqlSchemaStatVisitor();
-                sqlSelectStatement.accept(visitor);
-//                System.out.println(visitor.visit(sqlSelectStatement));
-                SQLSelectQuery sqlSelectQuery = sqlSelectStatement.getSelect().getQuery();
+            }
 
+            if(sqlStatement instanceof SQLCreateIndexStatement){
+                SQLCreateIndexStatement sqlCreateIndexStatement = (SQLCreateIndexStatement) sqlStatement;
+                // 选择表名
+                System.out.println(sqlCreateIndexStatement.getTableName());
+                // 索引名
+                System.out.println(sqlCreateIndexStatement.getName());
+                // 索引对应行
+                System.out.println(sqlCreateIndexStatement.getItems().get(0).getExpr());
             }
 
             if(sqlStatement instanceof SQLCreateIndexStatement){

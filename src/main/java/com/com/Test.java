@@ -59,15 +59,55 @@ public class Test {
 
         //字段增加测试
 //        API api = new API();
-//        api.parse("ALTER TABLE SC ADD COLUMN NAME VARCHAR(40) DEFAULT WEF COMMENT 2233");
+//        api.parse("ALTER TABLE SC ADD COLUMN CLASS VARCHAR(40)");
 
         //字段修改测试
 //        API api = new API();
 //        api.parse("ALTER TABLE SC MODIFY COLUMN NAME INTEGER NOt NULL CHECK(NAME > 10)");
 
-        //字段修改测试
+        //数据增加测试
+//        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
+//        FileInputStream input = new FileInputStream(file);
+//        byte[] buffer = new byte[10240];
+//        input.read(buffer);
+//        input.close();
+//        DBMS.Table table = SerializationUtils.deserialize(buffer);
+//        System.out.println(table.getColumnList().get(1).getType());
+
+//        API api = new API();
+//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,3)");
+
+//        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
+//        FileInputStream input = new FileInputStream(file);
+//        byte[] buffer = new byte[10240];
+//        input.read(buffer);
+//        input.close();
+//        DBMS.Table table = SerializationUtils.deserialize(buffer);
+//        System.out.println(table.getColumnList().get(1).getValList().get(2));
+
+        //数据更新测试
+//        API api = new API();
+//        api.parse("UPDATE SC SET CLASS = 3 WHERE ID = 1");
+//
+//        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
+//        FileInputStream input = new FileInputStream(file);
+//        byte[] buffer = new byte[10240];
+//        input.read(buffer);
+//        input.close();
+//        DBMS.Table table = SerializationUtils.deserialize(buffer);
+//        System.out.println(table.getColumnList().get(1).getValList().get(0));
+
+        //数据删除测试
+//        API api = new API();
+//        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
+
+        //数据查询
+//        API api = new API();
+//        api.parse("SELECT * FROM SC WHERE (ID = 1)");
+
+        //字段更新
         API api = new API();
-        api.parse("INSERT INTO SC (ID,NAME) VALUES (1,2)");
+        api.parse("ALTER TABLE SC MODIFY COLUMN CLASS VARCHAR(20) ");
 
 
     }

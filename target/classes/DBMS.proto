@@ -57,12 +57,13 @@ message TBMessage{
 
 message Index{
   message IX{
-    string name = 1;
+    string dbName = 1;
+    string tbName = 2;
     message Map{
       string key = 1;
       repeated int32 val = 2;
     }
-    repeated Map map = 2;
+    repeated Map map = 3;
   }
   repeated IX ix = 1;
 }

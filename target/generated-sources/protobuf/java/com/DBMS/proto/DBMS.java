@@ -6596,35 +6596,45 @@ public final class DBMS {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string dbName = 1;</code>
        */
-      java.lang.String getName();
+      java.lang.String getDbName();
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string dbName = 1;</code>
        */
       com.google.protobuf.ByteString
-          getNameBytes();
+          getDbNameBytes();
 
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>optional string tbName = 2;</code>
+       */
+      java.lang.String getTbName();
+      /**
+       * <code>optional string tbName = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getTbNameBytes();
+
+      /**
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> 
           getMapList();
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       com.DBMS.proto.DBMS.Index.IX.Map getMap(int index);
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       int getMapCount();
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
           getMapOrBuilderList();
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
           int index);
@@ -6641,7 +6651,8 @@ public final class DBMS {
         super(builder);
       }
       private IX() {
-        name_ = "";
+        dbName_ = "";
+        tbName_ = "";
         map_ = java.util.Collections.emptyList();
       }
 
@@ -6673,13 +6684,19 @@ public final class DBMS {
               case 10: {
                 java.lang.String s = input.readStringRequireUtf8();
 
-                name_ = s;
+                dbName_ = s;
                 break;
               }
               case 18: {
-                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                tbName_ = s;
+                break;
+              }
+              case 26: {
+                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                   map_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX.Map>();
-                  mutable_bitField0_ |= 0x00000002;
+                  mutable_bitField0_ |= 0x00000004;
                 }
                 map_.add(
                     input.readMessage(com.DBMS.proto.DBMS.Index.IX.Map.parser(), extensionRegistry));
@@ -6693,7 +6710,7 @@ public final class DBMS {
           throw new com.google.protobuf.InvalidProtocolBufferException(
               e).setUnfinishedMessage(this);
         } finally {
-          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
             map_ = java.util.Collections.unmodifiableList(map_);
           }
           makeExtensionsImmutable();
@@ -7392,69 +7409,103 @@ public final class DBMS {
       }
 
       private int bitField0_;
-      public static final int NAME_FIELD_NUMBER = 1;
-      private volatile java.lang.Object name_;
+      public static final int DBNAME_FIELD_NUMBER = 1;
+      private volatile java.lang.Object dbName_;
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string dbName = 1;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getDbName() {
+        java.lang.Object ref = dbName_;
         if (ref instanceof java.lang.String) {
           return (java.lang.String) ref;
         } else {
           com.google.protobuf.ByteString bs = 
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          dbName_ = s;
           return s;
         }
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string dbName = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getDbNameBytes() {
+        java.lang.Object ref = dbName_;
         if (ref instanceof java.lang.String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          dbName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
 
-      public static final int MAP_FIELD_NUMBER = 2;
+      public static final int TBNAME_FIELD_NUMBER = 2;
+      private volatile java.lang.Object tbName_;
+      /**
+       * <code>optional string tbName = 2;</code>
+       */
+      public java.lang.String getTbName() {
+        java.lang.Object ref = tbName_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          tbName_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string tbName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTbNameBytes() {
+        java.lang.Object ref = tbName_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tbName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int MAP_FIELD_NUMBER = 3;
       private java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> map_;
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> getMapList() {
         return map_;
       }
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       public java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
           getMapOrBuilderList() {
         return map_;
       }
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       public int getMapCount() {
         return map_.size();
       }
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       public com.DBMS.proto.DBMS.Index.IX.Map getMap(int index) {
         return map_.get(index);
       }
       /**
-       * <code>repeated .Index.IX.Map map = 2;</code>
+       * <code>repeated .Index.IX.Map map = 3;</code>
        */
       public com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
           int index) {
@@ -7473,11 +7524,14 @@ public final class DBMS {
 
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
-        if (!getNameBytes().isEmpty()) {
-          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+        if (!getDbNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, dbName_);
+        }
+        if (!getTbNameBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 2, tbName_);
         }
         for (int i = 0; i < map_.size(); i++) {
-          output.writeMessage(2, map_.get(i));
+          output.writeMessage(3, map_.get(i));
         }
       }
 
@@ -7486,12 +7540,15 @@ public final class DBMS {
         if (size != -1) return size;
 
         size = 0;
-        if (!getNameBytes().isEmpty()) {
-          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+        if (!getDbNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, dbName_);
+        }
+        if (!getTbNameBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, tbName_);
         }
         for (int i = 0; i < map_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(2, map_.get(i));
+            .computeMessageSize(3, map_.get(i));
         }
         memoizedSize = size;
         return size;
@@ -7509,8 +7566,10 @@ public final class DBMS {
         com.DBMS.proto.DBMS.Index.IX other = (com.DBMS.proto.DBMS.Index.IX) obj;
 
         boolean result = true;
-        result = result && getName()
-            .equals(other.getName());
+        result = result && getDbName()
+            .equals(other.getDbName());
+        result = result && getTbName()
+            .equals(other.getTbName());
         result = result && getMapList()
             .equals(other.getMapList());
         return result;
@@ -7523,8 +7582,10 @@ public final class DBMS {
         }
         int hash = 41;
         hash = (19 * hash) + getDescriptorForType().hashCode();
-        hash = (37 * hash) + NAME_FIELD_NUMBER;
-        hash = (53 * hash) + getName().hashCode();
+        hash = (37 * hash) + DBNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getDbName().hashCode();
+        hash = (37 * hash) + TBNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getTbName().hashCode();
         if (getMapCount() > 0) {
           hash = (37 * hash) + MAP_FIELD_NUMBER;
           hash = (53 * hash) + getMapList().hashCode();
@@ -7648,11 +7709,13 @@ public final class DBMS {
         }
         public Builder clear() {
           super.clear();
-          name_ = "";
+          dbName_ = "";
+
+          tbName_ = "";
 
           if (mapBuilder_ == null) {
             map_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             mapBuilder_.clear();
           }
@@ -7680,11 +7743,12 @@ public final class DBMS {
           com.DBMS.proto.DBMS.Index.IX result = new com.DBMS.proto.DBMS.Index.IX(this);
           int from_bitField0_ = bitField0_;
           int to_bitField0_ = 0;
-          result.name_ = name_;
+          result.dbName_ = dbName_;
+          result.tbName_ = tbName_;
           if (mapBuilder_ == null) {
-            if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            if (((bitField0_ & 0x00000004) == 0x00000004)) {
               map_ = java.util.Collections.unmodifiableList(map_);
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             }
             result.map_ = map_;
           } else {
@@ -7732,15 +7796,19 @@ public final class DBMS {
 
         public Builder mergeFrom(com.DBMS.proto.DBMS.Index.IX other) {
           if (other == com.DBMS.proto.DBMS.Index.IX.getDefaultInstance()) return this;
-          if (!other.getName().isEmpty()) {
-            name_ = other.name_;
+          if (!other.getDbName().isEmpty()) {
+            dbName_ = other.dbName_;
+            onChanged();
+          }
+          if (!other.getTbName().isEmpty()) {
+            tbName_ = other.tbName_;
             onChanged();
           }
           if (mapBuilder_ == null) {
             if (!other.map_.isEmpty()) {
               if (map_.isEmpty()) {
                 map_ = other.map_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
               } else {
                 ensureMapIsMutable();
                 map_.addAll(other.map_);
@@ -7753,7 +7821,7 @@ public final class DBMS {
                 mapBuilder_.dispose();
                 mapBuilder_ = null;
                 map_ = other.map_;
-                bitField0_ = (bitField0_ & ~0x00000002);
+                bitField0_ = (bitField0_ & ~0x00000004);
                 mapBuilder_ = 
                   com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                      getMapFieldBuilder() : null;
@@ -7789,71 +7857,140 @@ public final class DBMS {
         }
         private int bitField0_;
 
-        private java.lang.Object name_ = "";
+        private java.lang.Object dbName_ = "";
         /**
-         * <code>optional string name = 1;</code>
+         * <code>optional string dbName = 1;</code>
          */
-        public java.lang.String getName() {
-          java.lang.Object ref = name_;
+        public java.lang.String getDbName() {
+          java.lang.Object ref = dbName_;
           if (!(ref instanceof java.lang.String)) {
             com.google.protobuf.ByteString bs =
                 (com.google.protobuf.ByteString) ref;
             java.lang.String s = bs.toStringUtf8();
-            name_ = s;
+            dbName_ = s;
             return s;
           } else {
             return (java.lang.String) ref;
           }
         }
         /**
-         * <code>optional string name = 1;</code>
+         * <code>optional string dbName = 1;</code>
          */
         public com.google.protobuf.ByteString
-            getNameBytes() {
-          java.lang.Object ref = name_;
+            getDbNameBytes() {
+          java.lang.Object ref = dbName_;
           if (ref instanceof String) {
             com.google.protobuf.ByteString b = 
                 com.google.protobuf.ByteString.copyFromUtf8(
                     (java.lang.String) ref);
-            name_ = b;
+            dbName_ = b;
             return b;
           } else {
             return (com.google.protobuf.ByteString) ref;
           }
         }
         /**
-         * <code>optional string name = 1;</code>
+         * <code>optional string dbName = 1;</code>
          */
-        public Builder setName(
+        public Builder setDbName(
             java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
   
-          name_ = value;
+          dbName_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>optional string name = 1;</code>
+         * <code>optional string dbName = 1;</code>
          */
-        public Builder clearName() {
+        public Builder clearDbName() {
           
-          name_ = getDefaultInstance().getName();
+          dbName_ = getDefaultInstance().getDbName();
           onChanged();
           return this;
         }
         /**
-         * <code>optional string name = 1;</code>
+         * <code>optional string dbName = 1;</code>
          */
-        public Builder setNameBytes(
+        public Builder setDbNameBytes(
             com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
           
-          name_ = value;
+          dbName_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object tbName_ = "";
+        /**
+         * <code>optional string tbName = 2;</code>
+         */
+        public java.lang.String getTbName() {
+          java.lang.Object ref = tbName_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            tbName_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string tbName = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getTbNameBytes() {
+          java.lang.Object ref = tbName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            tbName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string tbName = 2;</code>
+         */
+        public Builder setTbName(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          tbName_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string tbName = 2;</code>
+         */
+        public Builder clearTbName() {
+          
+          tbName_ = getDefaultInstance().getTbName();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string tbName = 2;</code>
+         */
+        public Builder setTbNameBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          tbName_ = value;
           onChanged();
           return this;
         }
@@ -7861,9 +7998,9 @@ public final class DBMS {
         private java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> map_ =
           java.util.Collections.emptyList();
         private void ensureMapIsMutable() {
-          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
             map_ = new java.util.ArrayList<com.DBMS.proto.DBMS.Index.IX.Map>(map_);
-            bitField0_ |= 0x00000002;
+            bitField0_ |= 0x00000004;
            }
         }
 
@@ -7871,7 +8008,7 @@ public final class DBMS {
             com.DBMS.proto.DBMS.Index.IX.Map, com.DBMS.proto.DBMS.Index.IX.Map.Builder, com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> mapBuilder_;
 
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map> getMapList() {
           if (mapBuilder_ == null) {
@@ -7881,7 +8018,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public int getMapCount() {
           if (mapBuilder_ == null) {
@@ -7891,7 +8028,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public com.DBMS.proto.DBMS.Index.IX.Map getMap(int index) {
           if (mapBuilder_ == null) {
@@ -7901,7 +8038,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder setMap(
             int index, com.DBMS.proto.DBMS.Index.IX.Map value) {
@@ -7918,7 +8055,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder setMap(
             int index, com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
@@ -7932,7 +8069,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder addMap(com.DBMS.proto.DBMS.Index.IX.Map value) {
           if (mapBuilder_ == null) {
@@ -7948,7 +8085,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder addMap(
             int index, com.DBMS.proto.DBMS.Index.IX.Map value) {
@@ -7965,7 +8102,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder addMap(
             com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
@@ -7979,7 +8116,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder addMap(
             int index, com.DBMS.proto.DBMS.Index.IX.Map.Builder builderForValue) {
@@ -7993,7 +8130,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder addAllMap(
             java.lang.Iterable<? extends com.DBMS.proto.DBMS.Index.IX.Map> values) {
@@ -8008,12 +8145,12 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder clearMap() {
           if (mapBuilder_ == null) {
             map_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
             onChanged();
           } else {
             mapBuilder_.clear();
@@ -8021,7 +8158,7 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public Builder removeMap(int index) {
           if (mapBuilder_ == null) {
@@ -8034,14 +8171,14 @@ public final class DBMS {
           return this;
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public com.DBMS.proto.DBMS.Index.IX.Map.Builder getMapBuilder(
             int index) {
           return getMapFieldBuilder().getBuilder(index);
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public com.DBMS.proto.DBMS.Index.IX.MapOrBuilder getMapOrBuilder(
             int index) {
@@ -8051,7 +8188,7 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public java.util.List<? extends com.DBMS.proto.DBMS.Index.IX.MapOrBuilder> 
              getMapOrBuilderList() {
@@ -8062,14 +8199,14 @@ public final class DBMS {
           }
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public com.DBMS.proto.DBMS.Index.IX.Map.Builder addMapBuilder() {
           return getMapFieldBuilder().addBuilder(
               com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance());
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public com.DBMS.proto.DBMS.Index.IX.Map.Builder addMapBuilder(
             int index) {
@@ -8077,7 +8214,7 @@ public final class DBMS {
               index, com.DBMS.proto.DBMS.Index.IX.Map.getDefaultInstance());
         }
         /**
-         * <code>repeated .Index.IX.Map map = 2;</code>
+         * <code>repeated .Index.IX.Map map = 3;</code>
          */
         public java.util.List<com.DBMS.proto.DBMS.Index.IX.Map.Builder> 
              getMapBuilderList() {
@@ -8090,7 +8227,7 @@ public final class DBMS {
             mapBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
                 com.DBMS.proto.DBMS.Index.IX.Map, com.DBMS.proto.DBMS.Index.IX.Map.Builder, com.DBMS.proto.DBMS.Index.IX.MapOrBuilder>(
                     map_,
-                    ((bitField0_ & 0x00000002) == 0x00000002),
+                    ((bitField0_ & 0x00000004) == 0x00000004),
                     getParentForChildren(),
                     isClean());
             map_ = null;
@@ -8843,11 +8980,12 @@ public final class DBMS {
       "DB\032F\n\002DB\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\020\n\010" +
       "filePath\030\003 \001(\t\022\022\n\ncreateDate\030\004 \001(\t\"P\n\tTB",
       "Message\022\031\n\002tb\030\001 \003(\0132\r.TBMessage.TB\032(\n\002TB" +
-      "\022\016\n\006TBName\030\001 \001(\t\022\022\n\ncreateDate\030\002 \001(\t\"o\n\005" +
-      "Index\022\025\n\002ix\030\001 \003(\0132\t.Index.IX\032O\n\002IX\022\014\n\004na" +
-      "me\030\001 \001(\t\022\032\n\003map\030\002 \003(\0132\r.Index.IX.Map\032\037\n\003" +
-      "Map\022\013\n\003key\030\001 \001(\t\022\013\n\003val\030\002 \003(\005B\030\n\016com.DBM" +
-      "S.protoB\004DBMSP\000b\006proto3"
+      "\022\016\n\006TBName\030\001 \001(\t\022\022\n\ncreateDate\030\002 \001(\t\"\201\001\n" +
+      "\005Index\022\025\n\002ix\030\001 \003(\0132\t.Index.IX\032a\n\002IX\022\016\n\006d" +
+      "bName\030\001 \001(\t\022\016\n\006tbName\030\002 \001(\t\022\032\n\003map\030\003 \003(\013" +
+      "2\r.Index.IX.Map\032\037\n\003Map\022\013\n\003key\030\001 \001(\t\022\013\n\003v" +
+      "al\030\002 \003(\005B\030\n\016com.DBMS.protoB\004DBMSP\000b\006prot" +
+      "o3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8908,7 +9046,7 @@ public final class DBMS {
     internal_static_Index_IX_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Index_IX_descriptor,
-        new java.lang.String[] { "Name", "Map", });
+        new java.lang.String[] { "DbName", "TbName", "Map", });
     internal_static_Index_IX_Map_descriptor =
       internal_static_Index_IX_descriptor.getNestedTypes().get(0);
     internal_static_Index_IX_Map_fieldAccessorTable = new
