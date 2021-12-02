@@ -72,7 +72,7 @@ public class parser_test {
 //        api.parse("select name, classname from student a , class b where (a.id = b.id OR a.name = b.name AND A.ID = 10) ");
 //        api.parse("select * from student a where (id = 10) ");
 
-        api.parse("CREATE INDEX index_name ON table_name (column_list)");
+//        api.parse("CREATE INDEX index_name ON table_name (column_list)");
 //        }
 
     }

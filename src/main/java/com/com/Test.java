@@ -51,13 +51,13 @@ public class Test {
 
         //表删除
 //        API api = new API();
-//        api.parse("DROP TABLE runoob_tbl");
+//        api.parse("DROP TABLE SC");
 
         //字段删除测试
 //        API api = new API();
 //        api.parse("ALTER TABLE SC DROP COLUMN NAME");
 
-        //字段增加测试
+//        字段增加测试
 //        API api = new API();
 //        api.parse("ALTER TABLE SC ADD COLUMN CLASS VARCHAR(40)");
 
@@ -75,7 +75,7 @@ public class Test {
 //        System.out.println(table.getColumnList().get(1).getType());
 
 //        API api = new API();
-//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,3)");
+//        api.parse("INSERT INTO SC (ID,NAME) VALUES (3,7)");
 
 //        File file = new File("src\\DBMS_ROOT\\data\\MYSQLITE\\SC.ibd");
 //        FileInputStream input = new FileInputStream(file);
@@ -102,12 +102,12 @@ public class Test {
 //        api.parse("DELETE FROM SC WHERE ID = 2 AND ID = 3");
 
         //数据查询
-//        API api = new API();
-//        api.parse("SELECT * FROM SC WHERE (ID = 1)");
+        API api = new API();
+        api.parse("SELECT * FROM SC WHERE (ID = 3)");
 
         //字段更新
-        API api = new API();
-        api.parse("ALTER TABLE SC MODIFY COLUMN CLASS VARCHAR(20) ");
+//        API api = new API();
+//        api.parse("ALTER TABLE SC MODIFY COLUMN CLASS VARCHAR(20) ");
 
 
     }

@@ -136,10 +136,10 @@ public class DataInsert {
                     columnList1.add(column1);
                 }else {
                     List<String> val = new ArrayList<>(column.getValList());
-                    if (column.getDefault().equals("null"))
+                    if (!column.getDefault().equals("null"))
                         val.add(map.get(column.getDefault()));
                     else {
-                        String s = null;
+                        String s = "null";
                         val.add(s);
                     }
                     DBMS.Table.Column column1 = DBMS.Table.Column

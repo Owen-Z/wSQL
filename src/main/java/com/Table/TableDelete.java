@@ -50,7 +50,7 @@ public class TableDelete {
                 List<DBMS.TBMessage.TB> tbs = new ArrayList<>(tbMessage.getTbList());
                 int j = 0;
                 for (int i = 0; i < tbs.size();i++){
-                    if (tbs.get(i).getTBName().equals(dbName))
+                    if (tbs.get(i).getTBName().equals(tbName))
                         j = i;
                 }
                 tbs.remove(j);
@@ -66,6 +66,8 @@ public class TableDelete {
                 fileOutputStream.close();
 
                 file = new File("src\\DBMS_ROOT\\data\\"+ dbName +"\\"+tbName+".ibd");
+                file.delete();
+                file = new File("src\\DBMS_ROOT\\data\\"+ dbName +"\\"+tbName+".index");
                 file.delete();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
