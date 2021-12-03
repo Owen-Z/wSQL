@@ -1,6 +1,7 @@
 package com.Transaction;
 
 import com.DBMS.proto.DBMS;
+import com.Index.IndexUpdate;
 import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.File;
@@ -63,6 +64,11 @@ public class Commit {
 
     public boolean change(String name){
         return tbName.equals(name);
+    }
+
+    public void updateIndex(){
+        IndexUpdate indexUpdate = new IndexUpdate(tbName,dbName);
+        indexUpdate.update();
     }
 
     public void commit(){

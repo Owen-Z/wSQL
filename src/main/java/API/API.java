@@ -159,6 +159,7 @@ public class API {
             }
         }else if(statement.equals("COMMIT")){
             try {
+                commit.updateIndex();
                 commit.commit();
                 System.out.println("commit");
                 return "true";
